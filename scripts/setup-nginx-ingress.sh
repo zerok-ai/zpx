@@ -13,7 +13,10 @@ then
     kubectl create clusterrolebinding cluster-admin-binding \
         --clusterrole cluster-admin \
         --user $(gcloud config get-value account)
-    kubectl apply -f $SCRIPTS_DIR/yamls/nginx-ingress.yaml
+    URL=https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
+    curl $URL --output $SCRIPTS_DIR/yamls/nginx-ingress/nginx-ingress.yaml
+    kubectl apply -k $SCRIPTS_DIR/yamls/nginx-ingress-overlays/
+    # kubectl apply -f $SCRIPTS_DIR/yamls/nginx-ingress.yaml
 
     echo "Waiting for the nginx-ingress service to come up... (wait time $SETUP_NGINX_INGRESS_WAIT_TIME seconds)"
     spinner sleep $SETUP_NGINX_INGRESS_WAIT_TIME
