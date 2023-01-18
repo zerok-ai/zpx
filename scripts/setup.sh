@@ -39,10 +39,16 @@ $SCRIPTS_DIR/setup-cluster.sh $CLUSTER_NAME
 $SCRIPTS_DIR/setup-pixie-repo.sh
 
 ##Nginx Ingress setup
+# if [ "$SAME_CLUSTER_SETUP" == '0' ]
+# then
 $SCRIPTS_DIR/setup-nginx-ingress.sh
+# fi
 
 ##DNS setup
-$SCRIPTS_DIR/setup-dns.sh
+if [ "$SAME_CLUSTER_SETUP" == '0' ]
+then
+     $SCRIPTS_DIR/setup-dns.sh
+fi
 
 ##DOMAIN setup
 $SCRIPTS_DIR/setup-domain.sh
@@ -51,14 +57,40 @@ $SCRIPTS_DIR/setup-domain.sh
 $SCRIPTS_DIR/setup-px-namespace.sh
 
 ##CERT-MANAGER
-$SCRIPTS_DIR/setup-cert-manager.sh
+if [ "$SAME_CLUSTER_SETUP" == '0' ]
+then
+     $SCRIPTS_DIR/setup-cert-manager.sh
+fi
 
 ##Secrets Setup
-$SCRIPTS_DIR/setup-secrets.sh
+if [ "$SAME_CLUSTER_SETUP" == '0' ]
+then
+     $SCRIPTS_DIR/setup-secrets.sh
+fi
 
 ##INGRESS setup
+# if [ "$SAME_CLUSTER_SETUP" == '0' ]
+# then
 $SCRIPTS_DIR/setup-ingress.sh
+# fi
 
 ##PIXIE Remaining setup
-$SCRIPTS_DIR/setup-remainingpxhost.sh
+$SCRIPTS_DIR/setup-remaining-pxhost.sh
+
+##PIXIE Remaining setup
+if [ "$SAME_CLUSTER_SETUP" == '1' ]
+then
+     echo ''
+     echo '-----------------SETTING-UP-ETC-HOSTS-----------------'
+
+     getUserInput "Do you want to add the nginx the /etc/hosts record?" ""
+     retval=$?
+     ETC_HOSTS_SETUP=$retval
+
+     if [ "$ETC_HOSTS_SETUP" == '1' ]
+     then
+          echo 'This requires sudo password as we will modify the /etc/hosts.'
+          sudo $SCRIPTS_DIR/setup-etc-hosts.sh
+     fi
+fi
 
