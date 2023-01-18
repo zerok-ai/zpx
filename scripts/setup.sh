@@ -7,9 +7,7 @@ helpFunction()
    echo ""
    echo 'Usage: $0 [options]
          Options are listed below:
-         -i {command | instance-name} \t\t\t\t\t//instances
-         -r \t\t\t\t\t//start client replay
-         -k \t\t\t\t\t//kills the egress replay'
+         -i {command | instance-name} \t\t\t\t\t//instances'
 
    exit 1 # Exit script after printing help
 }
@@ -42,7 +40,6 @@ $SCRIPTS_DIR/setup-pixie-repo.sh
 
 ##Nginx Ingress setup
 $SCRIPTS_DIR/setup-nginx-ingress.sh
-#TODO: Use kustomize to pickup nginx-ingress from nginx and add relevant aerguments
 
 ##DNS setup
 $SCRIPTS_DIR/setup-dns.sh
