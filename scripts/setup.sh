@@ -46,11 +46,9 @@ $SCRIPTS_DIR/setup-dns.sh
 
 ##DOMAIN setup
 $SCRIPTS_DIR/setup-domain.sh
-#TODO: Use kustomize
 
-kubectl create namespace plc
-$PIXIE_DIR/scripts/create_cloud_secrets.sh
-# TODO: Create PR for self-hosted-pixie setup
+##Create px namespace
+$SCRIPTS_DIR/setup-px-namespace.sh
 
 ##CERT-MANAGER
 $SCRIPTS_DIR/setup-cert-manager.sh
@@ -62,7 +60,5 @@ $SCRIPTS_DIR/setup-secrets.sh
 $SCRIPTS_DIR/setup-ingress.sh
 
 ##PIXIE Remaining setup
-$SCRIPTS_DIR/setup-remaining.sh
-
-
+$SCRIPTS_DIR/setup-remainingpxhost.sh
 
