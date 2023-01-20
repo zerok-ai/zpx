@@ -54,6 +54,8 @@ then
                         # envsubst < $SCRIPTS_DIR/originals/cloud_ingress_template.yaml >> $SCRIPTS_DIR/modified/cloud_ingress_deploy.yaml
                 fi
 
+                sed -i '' -e "s/\"4444\"/\"\"/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
+
                 rm $SCRIPTS_DIR/modified/cloud_ingress_*.yaml
                 rm $SCRIPTS_DIR/modified/certificate_*.yaml
                 envsubst < $SCRIPTS_DIR/originals/certificate_cloud_proxy_tls_certs.yaml >> $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs.yaml

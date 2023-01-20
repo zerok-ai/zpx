@@ -94,3 +94,9 @@ then
      fi
 fi
 
+## PX Operator setup
+if [ "$SAME_CLUSTER_SETUP" == '1' ]
+then
+     $OPERATOR_SCRIPTS_DIR/setup-px-operator.sh
+fi
+

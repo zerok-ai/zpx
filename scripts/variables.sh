@@ -21,8 +21,11 @@ else
     export PX_DOMAIN=pxtest2.getanton.com
 fi
 
+export PL_CLOUD_ADDR=$PX_DOMAIN
+
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 export SCRIPTS_DIR=$THIS_DIR
+export OPERATOR_SCRIPTS_DIR=$THIS_DIR/operator
 export ZPX_DIR="$(dirname "$SCRIPTS_DIR")"
 export PIXIE_DIR=$ZPX_DIR/build/pixie
 
