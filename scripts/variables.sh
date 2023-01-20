@@ -5,7 +5,7 @@ export SAME_CLUSTER_SETUP=1
 
 #Basic cluster parameters
 export ZONE=us-west1-b
-export CLUSTER_NAME=testpxsetup3
+export CLUSTER_NAME=testpxsetup4
 export CLUSTER_NUM_NODES=2
 export CLUSTER_INSTANCE_TYPE=e2-standard-4
 
@@ -16,7 +16,7 @@ export NGINX_INGRESS_CONTROLLER_SERVICE_URL=cloud-proxy-service.plc.svc.cluster.
 # Port forward
 if [ "$SAME_CLUSTER_SETUP" == '1' ]
 then
-    export PX_DOMAIN=dev.withpixie.dev
+    export PX_DOMAIN=abc.testdomain.com
 else
     export PX_DOMAIN=pxtest2.getanton.com
 fi
