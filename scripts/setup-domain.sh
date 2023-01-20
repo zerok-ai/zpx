@@ -25,45 +25,11 @@ then
                 if [ "$SAME_CLUSTER_SETUP" == '0' ]
                 then
                         sed -i '' -e '94,107 s/^/#/' $PIXIE_DIR/scripts/create_cloud_secrets.sh
-                        # cd $PIXIE_DIR
-                        # git checkout ./k8s/cloud/public/proxy_envoy.yaml
-                        # git checkout ./k8s/cloud/public/domain_config.yaml
-                        # git checkout ./scripts/create_cloud_secrets.sh
-                        # cd $ZPX_DIR
-
-                        # sed -i '' -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-                        # sed -i '' -e "s/*.dev.withpixie.dev/*.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-                        # sed -i '' -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-
-                        # sed -i '' -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                        # sed -i '' -e "s/*.dev.withpixie.dev/*.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                        # sed -i '' -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-
-                        # sed -i '' -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
-                        # sed -i '' -e "s/*.dev.withpixie.dev/*.$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
-                        # sed -i '' -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
-
-                        # sed -i '' -e "s/\"4444\"/\"\"/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-
-                        # rm $SCRIPTS_DIR/modified/cloud_ingress_*.yaml
-                        # rm $SCRIPTS_DIR/modified/certificate_*.yaml
-                        # envsubst < $SCRIPTS_DIR/originals/certificate_cloud_proxy_tls_certs.yaml >> $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs.yaml
-                        # envsubst < $SCRIPTS_DIR/originals/certificate_cloud_proxy_tls_certs_nginx.yaml >> $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs_nginx.yaml
-                        # export SSL_PASSTHROUGH_HTTPS=true
-                        # export SSL_PASSTHROUGH_GRPCS_OTHERS=true
-                        # export SSL_PASSTHROUGH_GRPCS_VIZIER=true
-                        # export SSL_PASSTHROUGH_GRPCS_AUTH=true
-                        # envsubst < $SCRIPTS_DIR/originals/cloud_ingress_template.yaml >> $SCRIPTS_DIR/modified/cloud_ingress_predeploy.yaml
-                        # export SSL_PASSTHROUGH_HTTPS=false
-                        # export SSL_PASSTHROUGH_GRPCS_OTHERS=true
-                        # export SSL_PASSTHROUGH_GRPCS_VIZIER=true
-                        # export SSL_PASSTHROUGH_GRPCS_AUTH=true
-                        # envsubst < $SCRIPTS_DIR/originals/cloud_ingress_template.yaml >> $SCRIPTS_DIR/modified/cloud_ingress_deploy.yaml
                 else
                         echo "kubectl create secret tls -n \"ingress-nginx\" \\" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh
-                        echo "cloud-proxy-tls-certs \\" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh
-                        echo "--cert=\"\${PROXY_CERT_FILE}\" \\" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh
-                        echo "--key=\"\${PROXY_KEY_FILE}\"" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh
+                        echo "  cloud-proxy-tls-certs \\" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh
+                        echo "  --cert=\"\${PROXY_CERT_FILE}\" \\" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh
+                        echo "  --key=\"\${PROXY_KEY_FILE}\"" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 fi
 
                 sed -i '' -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
