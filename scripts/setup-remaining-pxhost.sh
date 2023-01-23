@@ -12,7 +12,15 @@ if [ "$SETUP_REM_PX_HOST" == '1' ]
 then
     kustomize build $PIXIE_DIR/k8s/cloud_deps/base/elastic/operator | kubectl apply -f -
     kustomize build $PIXIE_DIR/k8s/cloud_deps/public | kubectl apply -f -
-    kustomize build $PIXIE_DIR/k8s/cloud/public/ | kubectl apply -f -
+    if [ "$PIXIE_DEV_MODE" == '0' ]
+    then
+        kustomize build $PIXIE_DIR/k8s/cloud/public/ | kubectl apply -f -
+    else
+        perl -pi -e "s|newTag: latest|newTag: \"\"|g" $PIXIE_DIR/k8s/cloud/public/kustomization.yaml
+        perl -pi -e "s|pixie-prod|pixie-dev|g" $PIXIE_DIR/k8s/cloud/public/kustomization.yaml
+        skaffold config set default-repo us-west1-docker.pkg.dev/zerok-dev/pixie-dev
+        skaffold run -f $PIXIE_DIR/skaffold/skaffold_cloud.yaml
+    fi
 
     # if [ "$SAME_CLUSTER_SETUP" == '1' ]
     # then

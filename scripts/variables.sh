@@ -2,6 +2,7 @@
 
 #Are we going to setup px operator in the same cluster as px host?
 export SAME_CLUSTER_SETUP=1
+export PIXIE_DEV_MODE=1
 
 #Basic cluster parameters
 export ZONE=us-west1-b
@@ -22,6 +23,13 @@ else
 fi
 
 export PL_CLOUD_ADDR=$PX_DOMAIN
+
+if [ "$PIXIE_DEV_MODE" == '1' ]
+then
+    export PL_CLOUD_ADDR=$PX_DOMAIN:443
+    export PL_TESTING_ENV=dev
+fi
+
 
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 export SCRIPTS_DIR=$THIS_DIR
