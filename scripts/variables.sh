@@ -17,7 +17,7 @@ export NGINX_INGRESS_CONTROLLER_SERVICE_URL=cloud-proxy-service.plc.svc.cluster.
 # Port forward
 if [ "$SAME_CLUSTER_SETUP" == '1' ]
 then
-    export PX_DOMAIN=abc.testdomain.com
+    export PX_DOMAIN=dev.withpixie.dev
 else
     export PX_DOMAIN=pxtest2.getanton.com
 fi
