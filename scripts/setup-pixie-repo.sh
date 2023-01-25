@@ -22,9 +22,13 @@ else
 
 	git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
 	cd $PIXIE_DIR
-	export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
-	git checkout "release/cloud/prod/${LATEST_CLOUD_RELEASE}"
-	perl -pi -e "s|newTag: latest|newTag: \"${LATEST_CLOUD_RELEASE}\"|g" k8s/cloud/public/kustomization.yaml
+
+	if [ "$PIXIE_DEV_MODE" == '0' ]
+	then
+		export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
+		git checkout "release/cloud/prod/${LATEST_CLOUD_RELEASE}"
+		perl -pi -e "s|newTag: latest|newTag: \"${LATEST_CLOUD_RELEASE}\"|g" k8s/cloud/public/kustomization.yaml
+	fi
 
 	if [ "$SAME_CLUSTER_SETUP" == '0' ]
 	then

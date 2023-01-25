@@ -18,10 +18,10 @@ then
         kustomize build $PIXIE_DIR/k8s/cloud/public/ | kubectl apply -f -
     else
         echo "PIXIE Dev Mode is enabled"
-        perl -pi -e "s|newTag: latest|newTag: \"\"|g" $PIXIE_DIR/k8s/cloud/public/kustomization.yaml
-        perl -pi -e "s|pixie-prod|pixie-dev|g" $PIXIE_DIR/k8s/cloud/public/kustomization.yaml
-        skaffold config set default-repo us-west1-docker.pkg.dev/zerok-dev/pixie-dev
-        skaffold run -f $PIXIE_DIR/skaffold/skaffold_cloud.yaml
+        # perl -pi -e "s|newTag: latest|newTag: \"\"|g" $PIXIE_DIR/k8s/cloud/public/kustomization.yaml
+        # perl -pi -e "s|pixie-prod|pixie-dev|g" $PIXIE_DIR/k8s/cloud/public/kustomization.yaml
+        # skaffold config set default-repo us-west1-docker.pkg.dev/zerok-dev/pixie-dev
+        # skaffold run -f $PIXIE_DIR/skaffold/skaffold_cloud.yaml
     fi
 
     # if [ "$SAME_CLUSTER_SETUP" == '1' ]
