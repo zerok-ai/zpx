@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "zerok-dev",
+    "private_key_id": "e44410109e868e6e1123769ec844b25dc41d722c",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC/cVr17rLdmLhZ\n7I7X6ljuBOS+pEl9z8DoLetKTOjlM6p9M/wFOmdxD1core9ImJ+WueT5vKl9g+wA\nM3UFbI3+1Dvz9KrlX/hEFhvtfDj2c7zegWP3GrzDd91rh6I0zTY0uZHV9k52vKp/\npuZa7/nPq8VDv/zi5daO1j7bs+kF68r16j77Hs9yez4K/accR9n+KzKXSjqQZ1tN\nTRpxCFBCStHncxzZqUv1GrKmaQ6L2G9dMkTcaRlcboFid0numYWcYvzoi12j/Av3\n44zkMmGPYCzj50pFrKcV0+hBqYcGQcRW5VmD4RW+cNPdz1o0t3DtfobWIIwWiN5j\nZ0bPue/XAgMBAAECggEALxHeZQBq/vwJO6bjmifW9LLEUTFQlnvpuMxtgQe27X/O\nB9mruddZzp0Qd4KIhkdsWaFcMKEX5TH16Ti9qXc+1Gx3TyyVhi8Z+hebh0EXOlVL\nl0OmAgATcFX83W7sTWI1VTJZLovQT/ZkT12IXsyJFevsZRODyH/tSJJZwygRf7BE\ng7S1jWLvB1olqG6VedgQYnxheG8PIFNRW+bxe73X/GRyptwNto1MJ+HVWW25rBDJ\nnH0CniP2dQlHT+vSjcnDeonK832Qkut5u694p/zpXHkD/l6rrb8D/LQZNcw4DQk3\nzIfUdfz4cs+AOvHk8Dt3yQ01Auc8XNg0kJgGUE5mzQKBgQDiR4hsUuYkJy2/nQoC\nYEzdUn1b4P4XQmLqVmzpNVx2abUghdHgTtctey3tvOBsL2j3pL2SMkW4y2sJWRoP\nIt4Bn1MQijtdvstpgMgU4nmBkCGk6lWokjIYCaCPskyeARN14HlebhuT8muOw6FQ\nsN0U/fiELvdBWT+hc7V3b0NElQKBgQDYlnfavgLSCeptrtr+7XoGsdjYqUb9Td4H\n4dwopKAjbqg/oaDo3sDSikHXjURdadxfTijyEYP8gBT2lWyqIdxFXSsJADIldgaY\nKvC5/MGditUAE6UwKfB2cVRuv47k4q9u4nYZ5LZuVJ7R7ZslIhN5Q2aNcVLA6nHU\n3qdt3wa7uwKBgBQvOVYgVvMmo4gSJBBuMq0TbKdDfKbqfxRUPUbYQbU2XLfX+A7A\nOaWO9Vvdm09LM1vT0C04WsvPKW8eCZsMCy2t3qT9D6qfGFoC6NYkFZ6fEsE5PgbZ\nc6p9QVtQFlGJ2wiKy4jG3aLm3v1PKhaekDoNJZv07I1hvrFSNv++Zwu5AoGAJbAp\nMvsVao8nJ+bhXLLeJQQVg74RCErgc+atdLUQ2JmM1WW+pkb8rqY4RtXiK48cNclX\n/qdlnC59d1sRCZnSxo8ryekq0LH0+82dDgAZgNyDq/u/Jt5lZXbbBlp29wUrGdR2\nUJMn25MF/+mksZV4ZgWAduRdTgx9ulj0MX45obkCgYB+L++fvG8eXXkE9a+I/sXW\nEFK7Va840S6QtqGszVoazSXuBEqCF2wFEOOHaL4h54H6Sj2lIG6PPq8rNYy3Tpth\nbVtQdeaIpcmVY5VtLr3AUH1o1yM6dipS7fdgRJH4Rz+RmSAasflQTHSoTj8lgS0B\n6FoYmUt2bFcWtY+qWJHI7w==\n-----END PRIVATE KEY-----\n",
+    "client_email": "zk-dev-instance-02@zerok-dev.iam.gserviceaccount.com",
+    "client_id": "106738140944873223333",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/zk-dev-instance-02%40zerok-dev.iam.gserviceaccount.com"
+}

@@ -74,6 +74,11 @@ fi
 $SCRIPTS_DIR/setup-ingress.sh
 # fi
 
+if [ "$PIXIE_DEV_MODE" == '1' ]
+then
+     $SCRIPTS_DIR/setup-px-dev-scripts.sh
+fi
+
 ##PIXIE Remaining setup
 $SCRIPTS_DIR/setup-remaining-pxhost.sh
 

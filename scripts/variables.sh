@@ -3,10 +3,13 @@
 #Are we going to setup px operator in the same cluster as px host?
 export SAME_CLUSTER_SETUP=1
 export PIXIE_DEV_MODE=1
+export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
 #Basic cluster parameters
 export ZONE=us-west1-b
 export CLUSTER_NAME=testpxsetup4
+export PX_CLUSTER_NAME=zkproxy-demo
+export PX_CLUSTER_PROJECT=zerok-dev
 export CLUSTER_NUM_NODES=2
 export CLUSTER_INSTANCE_TYPE=e2-standard-4
 
@@ -18,6 +21,7 @@ export NGINX_INGRESS_CONTROLLER_SERVICE_URL=cloud-proxy-service.plc.svc.cluster.
 if [ "$SAME_CLUSTER_SETUP" == '1' ]
 then
     export PX_DOMAIN=dev.withpixie.dev
+    export PX_CLUSTER_NAME=$CLUSTER_NAME
 else
     export PX_DOMAIN=pxtest2.getanton.com
 fi
