@@ -6,7 +6,9 @@ export SAME_CLUSTER_SETUP=1
 #Basic cluster parameters
 export ZONE=us-west1-b
 export CLUSTER_NAME=testpxsetup4
+export PX_CLUSTER_NAME=zkproxy-demo
 export CLUSTER_NUM_NODES=2
+export PX_CLUSTER_PROJECT=zerok-dev
 export CLUSTER_INSTANCE_TYPE=e2-standard-4
 
 #PX Domain to be used
@@ -17,6 +19,7 @@ export NGINX_INGRESS_CONTROLLER_SERVICE_URL=cloud-proxy-service.plc.svc.cluster.
 if [ "$SAME_CLUSTER_SETUP" == '1' ]
 then
     export PX_DOMAIN=abc.testdomain.com
+    export PX_CLUSTER_NAME=$CLUSTER_NAME
 else
     export PX_DOMAIN=pxtest2.getanton.com
 fi
