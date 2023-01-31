@@ -154,7 +154,6 @@ read -a my_array <<< "${my_array[1]}"
 flow=${my_array[0]}
 
 csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8=$(extractCookie $TMP_DIR/headers3.txt csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8)
-# echo "csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8==========$csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8"
 
 ## Curl 4
 curl -s "https://work.$PX_DOMAIN/oauth/kratos/self-service/login/flows?id=$flow" \
@@ -176,20 +175,11 @@ curl -s "https://work.$PX_DOMAIN/oauth/kratos/self-service/login/flows?id=$flow"
   -D $TMP_DIR/headers4.txt \
   --output $TMP_DIR/output4.txt
 
-# cat $TMP_DIR/headers4.txt
-# cat $TMP_DIR/output4.txt
-# echo ''
-# echo ''
-# cat $TMP_DIR/output4.txt | sed 's/"name"/\n"name"/g' | grep '"csrf_token"' 
-# echo ''
-# echo ''
-# cat $TMP_DIR/output4.txt | sed 's/"name"/\n"name"/g' | grep '"csrf_token"' | awk -F ',' '{print $3}'
 TMP=$(cat $TMP_DIR/output4.txt | sed 's/"name"/\n"name"/g' | grep '"csrf_token"' | sed 's/"value"/\n"value"/g' | grep '"value"' | awk -F ',' '{print $1}')
 TMP=${TMP#'"value":"'}
 TMP=${TMP%'"'}
 csrf_token=$TMP
 csrf_token_encoded=$(url_encode $csrf_token)
-# echo $csrf_token_encoded
 
 ## Curl 5
 curl -s "https://work.$PX_DOMAIN/oauth/kratos/self-service/login?flow=$flow" \
@@ -217,10 +207,8 @@ curl -s "https://work.$PX_DOMAIN/oauth/kratos/self-service/login?flow=$flow" \
   -D $TMP_DIR/headers5.txt \
   --output $TMP_DIR/output5.txt
 
-# cat $TMP_DIR/headers5.txt
 csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8=$(extractCookie $TMP_DIR/headers5.txt csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8)
 ory_kratos_session=$(extractCookie $TMP_DIR/headers5.txt ory_kratos_session)
-# echo $ory_kratos_session
 
 ## Curl 6
 curl -s "https://work.$PX_DOMAIN/api/auth/oauth/login?hydra_login_state=$hydra_login_state&login_challenge=$login_challenge" \
@@ -281,40 +269,87 @@ TMP=$(cat $TMP_DIR/headers7.txt | grep "access_token=" | sed 's/access_token=/\n
 TMP=${TMP#"access_token="}
 access_token=$TMP
 
-rm -rf $TMP_DIR
-echo $access_token
-
 ## Curl 8
-# echo 'curl 8'
-# curl -s 'https://work.$PX_DOMAIN/api/auth/login' \
-#   -H 'authority: work.$PX_DOMAIN' \
-#   -H 'accept: application/json, text/plain, */*' \
-#   -H 'accept-language: en-GB,en;q=0.9' \
-#   -H 'content-type: application/json' \
-#   -H "cookie: oauth2_authentication_csrf=$oauth2_authentication_csrf; ossidprovider=$ossidprovider; csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8=$csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8; ory_kratos_session=$ory_kratos_session; oauth2_consent_csrf=$oauth2_consent_csrf" \
-#   -H 'origin: https://work.$PX_DOMAIN' \
-#   -H 'referer: https://work.$PX_DOMAIN/auth/callback' \
-#   -H 'sec-ch-ua: "Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"' \
-#   -H 'sec-ch-ua-mobile: ?0' \
-#   -H 'sec-ch-ua-platform: "macOS"' \
-#   -H 'sec-fetch-dest: empty' \
-#   -H 'sec-fetch-mode: cors' \
-#   -H 'sec-fetch-site: same-origin' \
-#   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' \
-#   --data-raw "{\"accessToken\":\"$access_token\"}" \
-#   --compressed \
-#   --insecure \
-#   -c $TMP_DIR/cookies8.txt \
-#   -D $TMP_DIR/headers8.txt \
-#   --output $TMP_DIR/output8.txt
+curl -s "https://work.$PX_DOMAIN/api/auth/login" \
+  -H "authority: work.$PX_DOMAIN" \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: en-GB,en;q=0.9' \
+  -H 'content-type: application/json' \
+  -H "cookie: oauth2_authentication_csrf=$oauth2_authentication_csrf; ossidprovider=$ossidprovider; csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8=$csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8; ory_kratos_session=$ory_kratos_session; oauth2_consent_csrf=$oauth2_consent_csrf" \
+  -H "origin: https://work.$PX_DOMAIN" \
+  -H "referer: https://work.$PX_DOMAIN/auth/callback" \
+  -H 'sec-ch-ua: "Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' \
+  --data-raw "{\"accessToken\":\"$access_token\"}" \
+  --compressed \
+  --insecure \
+  -c $TMP_DIR/cookies8.txt \
+  -D $TMP_DIR/headers8.txt \
+  --output $TMP_DIR/output8.txt
 
-# cat $TMP_DIR/output8.txt
-# echo '-----'
+default_session5=$(extractCookie $TMP_DIR/headers8.txt default-session5)
 
-# TMP=$(cat $TMP_DIR/output8.txt | sed 's/"token"/\n"token"/g' | grep '"token"' | sed 's/,/\n/g' | grep '"token"' | sed 's/"//g' | sed 's/token://g')
-# AUTH_TOKEN=$TMP
-# echo "$AUTH_TOKEN"
+## Curl 9
+curl -s "https://work.$PX_DOMAIN/api/graphql" \
+  -H "authority: work.$PX_DOMAIN" \
+  -H 'accept: */*' \
+  -H 'accept-language: en-GB,en;q=0.9' \
+  -H 'content-type: application/json' \
+  -H "cookie: csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8=$csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8; oauth2_authentication_csrf=$oauth2_authentication_csrf; ossidprovider=$ossidprovider; ory_kratos_session=$ory_kratos_session; oauth2_consent_csrf=$oauth2_consent_csrf; default-session5=$default_session5" \
+  -H "origin: https://work.$PX_DOMAIN" \
+  -H "referer: https://work.$PX_DOMAIN/admin/api-keys" \
+  -H 'sec-ch-ua: "Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' \
+  -H 'withcredentials: true' \
+  -H 'x-csrf: undefined' \
+  --data-raw '{"operationName":"CreateAPIKeyFromAdminPage","variables":{},"query":"mutation CreateAPIKeyFromAdminPage {\n  CreateAPIKey {\n    id\n    desc\n    createdAtMs\n    __typename\n  }\n}\n"}' \
+  --compressed \
+  --insecure \
+  -c $TMP_DIR/cookies9.txt \
+  -D $TMP_DIR/headers9.txt \
+  --output $TMP_DIR/output9.txt
 
+access_key_id=$(cat $TMP_DIR/output9.txt | sed 's/"id"/\n"id"/g' | sed 's/,/\n,/g' | grep "\"id\"" | sed 's/"//g' | sed 's/id://g')
+
+##Curl 10
+curl -s "https://work.$PX_DOMAIN/api/graphql" \
+  -H "authority: work.$PX_DOMAIN" \
+  -H 'accept: */*' \
+  -H 'accept-language: en-GB,en;q=0.9' \
+  -H 'content-type: application/json' \
+  -H "cookie: csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8=$csrf_token_dc395c08d3e90de40ef4c0d97c76075e6c9c0500d9dc68488cfc94dfdfa5e5a8; oauth2_authentication_csrf=$oauth2_authentication_csrf; ossidprovider=$ossidprovider; ory_kratos_session=$ory_kratos_session; oauth2_consent_csrf=$oauth2_consent_csrf; default-session5=$default_session5" \
+  -H "origin: https://work.$PX_DOMAIN" \
+  -H "referer: https://work.$PX_DOMAIN/admin/api-keys" \
+  -H 'sec-ch-ua: "Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' \
+  -H 'withcredentials: true' \
+  -H 'x-csrf: undefined' \
+  --data-raw $"{\"operationName\":\"getAPIKey\",\"variables\":{\"id\":\"$access_key_id\"},\"query\":\"query getAPIKey(\$id: ID\u0021) {\\n  apiKey(id: \$id) {\\n    id\\n    key\\n    __typename\\n  }\\n}\\n\"}" \
+  --compressed \
+  --insecure \
+  -c $TMP_DIR/cookies10.txt \
+  -D $TMP_DIR/headers10.txt \
+  --output $TMP_DIR/output10.txt
+
+
+access_key=$(cat $TMP_DIR/output10.txt | sed 's/"key"/\n"key"/g' | sed 's/,/\n,/g' | grep "\"key\"" | sed 's/"//g' | sed 's/key://g')
+echo $access_key
+rm -rf $TMP_DIR
 
 
 
