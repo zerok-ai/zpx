@@ -30,6 +30,7 @@ export PL_CLOUD_ADDR=$PX_DOMAIN
 
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 export SCRIPTS_DIR=$THIS_DIR
+export UTILS_DIR=$THIS_DIR/utils
 export OPERATOR_SCRIPTS_DIR=$THIS_DIR/operator
 export ZPX_DIR="$(dirname "$SCRIPTS_DIR")"
 export PIXIE_DIR=$ZPX_DIR/build/pixie
@@ -60,3 +61,9 @@ function spinner(){
     $SCRIPTS_DIR/spinner.sh $@
 }
 export -f spinner
+
+function extract_auth_token(){
+    ABC=$($UTILS_DIR/extract-auth-token.sh $@)
+    echo $ABC
+}
+export -f extract_auth_token
