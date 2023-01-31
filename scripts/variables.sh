@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #Are we going to setup px operator in the same cluster as px host?
-export SAME_CLUSTER_SETUP=1
+export SAME_CLUSTER_SETUP=0
 
 #Basic cluster parameters
 export ZONE=us-west1-b
