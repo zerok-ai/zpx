@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+export ASK_USER=1
+
 #Are we going to setup px operator in the same cluster as px host?
 export SAME_CLUSTER_SETUP=1
 
 #Basic cluster parameters
 export ZONE=us-west1-b
-export CLUSTER_NAME=testpxsetup4
+export CLUSTER_NAME=testpxsetup5
 export PX_CLUSTER_NAME=zkproxy-demo
 export CLUSTER_NUM_NODES=2
 export PX_CLUSTER_PROJECT=zerok-dev
@@ -37,12 +39,19 @@ export SETUP_SECRETS_WAIT_TIME=35
 export SETUP_CERT_MANAGER_WAIT_TIME=15
 
 getUserInput(){
-    read -p "$1 $2? [y/n]" -rn1 response
-    echo " "
-    retval=0;
-    if  [[ $response =~ ^[Yy]$ ]] ;then
-        retval=1;    
+    if [ "$ASK_USER" == '0' ]
+    then
+        retval=1;
+    else
+        read -p "$1 $2? [y/n]" -rn1 response
+        echo " "
+        retval=0;
+        if  [[ $response =~ ^[Yy]$ ]] ;then
+            retval=1;
+        fi
     fi
+    
+
     return "$retval"
 }
 export -f getUserInput
