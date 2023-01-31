@@ -76,6 +76,12 @@ then
                 perl -pi -e 's/\"\${ADMIN_URL}\/admin\/identities\"/--insecure \"\${ADMIN_URL}\/admin\/identities\"/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
                 # sed -i '' -e "s/\${URL}) -eq 200/--insecure \${URL}) -eq 200/" $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
                 # sed -i '' -e "s/\"\${ADMIN_URL}\/admin\/identities/--insecure \"\${ADMIN_URL}\/admin\/identities/" $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
+
+                # if [ "$PIXIE_DEV_MODE" == '1' ]
+                # then
+                #         perl -pi -e 's/^/#/ if $. > 93 and $. < 108' $PIXIE_DIR/scripts/create_cloud_secrets.sh
+                # fi
+
         fi
 fi
 

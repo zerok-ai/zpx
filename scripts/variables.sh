@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #Are we going to setup px operator in the same cluster as px host?
-export SAME_CLUSTER_SETUP=1
+export SAME_CLUSTER_SETUP=0
 export PIXIE_DEV_MODE=1
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
