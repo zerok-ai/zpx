@@ -7,7 +7,10 @@ PX_OPERATOR_SETUP=$retval
 
 if [ "$PX_OPERATOR_SETUP" == '1' ]
 then
-    px auth login
+    AUTH_TOKEN=$(extract_auth_token abc)
+    echo $AUTH_TOKEN | pbcopy
+    px auth login --manual
+
     if [ "$SAME_CLUSTER_SETUP" == '1' ]
     then
         px deploy --dev_cloud_namespace plc

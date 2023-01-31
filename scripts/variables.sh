@@ -63,7 +63,7 @@ function spinner(){
 export -f spinner
 
 function extract_auth_token(){
-    ABC=$($UTILS_DIR/extract-auth-token.sh $@)
+    ABC=$($UTILS_DIR/extract-auth-token.sh $PX_DOMAIN)
     echo $ABC
 }
 export -f extract_auth_token
