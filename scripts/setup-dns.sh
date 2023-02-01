@@ -30,7 +30,7 @@ then
          
          domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${domain}" --zone="anton" --type="A" --format=yaml`
 
-         if [[ -z domain_exists || domain_exists == "" ]]; then
+         # if [[ -z domain_exists || domain_exists == "" ]]; then
          if [ -z "$domain_exists" ] || [ "$domain_exists" == "" ]; then
             gcloud dns --project=$gcp_dns_project record-sets create $domain --zone=anton --type=A --rrdatas=$extip --ttl=10
          else
