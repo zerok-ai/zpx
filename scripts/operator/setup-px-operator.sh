@@ -7,7 +7,8 @@ PX_OPERATOR_SETUP=$retval
 
 if [ "$PX_OPERATOR_SETUP" == '1' ]
 then
-    API_KEY=$(extract_auth_token abc)
+    API_KEY=$(extract_auth_token)
+    API_KEY=$(extract_auth_token)
     px auth login --api_key $API_KEY
 
     if [ "$SAME_CLUSTER_SETUP" == '1' ]
