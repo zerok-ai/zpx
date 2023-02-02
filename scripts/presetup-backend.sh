@@ -53,55 +53,8 @@ fi
 ##DOMAIN setup
 $SCRIPTS_DIR/setup-domain.sh
 
-##Create px namespace
-$SCRIPTS_DIR/setup-px-namespace.sh
-
 ##CERT-MANAGER
 if [ "$SAME_CLUSTER_SETUP" == '0' ]
 then
      $SCRIPTS_DIR/setup-cert-manager.sh
 fi
-
-##Secrets Setup
-if [ "$SAME_CLUSTER_SETUP" == '0' ]
-then
-     $SCRIPTS_DIR/setup-secrets.sh
-fi
-
-##INGRESS setup
-# if [ "$SAME_CLUSTER_SETUP" == '0' ]
-# then
-$SCRIPTS_DIR/setup-ingress.sh
-# fi
-
-if [ "$PIXIE_DEV_MODE" == '1' ]
-then
-     $SCRIPTS_DIR/setup-px-dev-scripts.sh
-fi
-
-##PIXIE Remaining setup
-$SCRIPTS_DIR/setup-remaining-pxhost.sh
-
-##PIXIE Remaining setup
-if [ "$SAME_CLUSTER_SETUP" == '1' ]
-then
-     echo ''
-     echo '-----------------SETTING-UP-ETC-HOSTS-----------------'
-
-     getUserInput "Do you want to add the nginx the /etc/hosts record?" ""
-     retval=$?
-     ETC_HOSTS_SETUP=$retval
-
-     if [ "$ETC_HOSTS_SETUP" == '1' ]
-     then
-          echo 'This requires sudo password as we will modify the /etc/hosts.'
-          sudo $SCRIPTS_DIR/setup-etc-hosts.sh
-     fi
-fi
-
-## PX Operator setup
-if [ "$SAME_CLUSTER_SETUP" == '1' ]
-then
-     $OPERATOR_SCRIPTS_DIR/setup-px-operator.sh
-fi
-
