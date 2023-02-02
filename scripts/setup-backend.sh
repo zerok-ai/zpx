@@ -69,4 +69,4 @@ then
      fi
 fi
 
-spinner sleep 42
+spinner sleep 120
