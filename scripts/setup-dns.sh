@@ -24,27 +24,20 @@ then
 
    if ! [ -z "$domain" ] 
    then
-      for i in "${!services[@]}"; do
-         # if [[ ${services[i]} == "ingress-nginx-controller" ]]; then
-         extip=${ips[i]}
-         
-         domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${domain}" --zone="anton" --type="A" --format=yaml`
+      extip=$ips
 
-         # if [[ -z domain_exists || domain_exists == "" ]]; then
-         if [ -z "$domain_exists" ] || [ "$domain_exists" == "" ]; then
-            gcloud dns --project=$gcp_dns_project record-sets create $domain --zone=anton --type=A --rrdatas=$extip --ttl=10
-         else
-            gcloud dns --project=$gcp_dns_project record-sets update $domain --zone=anton --type=A --rrdatas=$extip --ttl=10
-         fi
+      domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${domain}" --zone="anton" --type="A" --format=yaml`
+      if [ -z "$domain_exists" ] || [ "$domain_exists" == "" ]; then
+         gcloud dns --project=$gcp_dns_project record-sets create $domain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      else
+         gcloud dns --project=$gcp_dns_project record-sets update $domain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      fi
 
-         work_domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${workdomain}" --zone="anton" --type="A" --format=yaml`
-         # if [[ -z work_domain_exists || work_domain_exists == "" ]]; then
-         if [ -z "$work_domain_exists" ] || [ "$work_domain_exists" == "" ]; then
-            gcloud dns --project=$gcp_dns_project record-sets create $workdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
-         else
-            gcloud dns --project=$gcp_dns_project record-sets update $workdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
-         fi
-         # fi
-      done
+      work_domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${workdomain}" --zone="anton" --type="A" --format=yaml`
+      if [ -z "$work_domain_exists" ] || [ "$work_domain_exists" == "" ]; then
+         gcloud dns --project=$gcp_dns_project record-sets create $workdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      else
+         gcloud dns --project=$gcp_dns_project record-sets update $workdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      fi
    fi
 fi
