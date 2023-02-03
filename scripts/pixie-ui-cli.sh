@@ -9,14 +9,13 @@ helpFunction()
    echo ""
    echo 'Usage: $0 [options]
          Options are listed below:
-         -d \t\t\t\t\t//domain
-         -c \t\t\t\t\t//command [cluster|apikey]
+         -c \t\t\t\t\t//command [cluster|apikey|domain]
          -l \t\t\t\t\t//debug logs'
 
    exit 1 # Exit script after printing help
 }
 
-DOMAIN=""
+DOMAIN=$PX_DOMAIN
 DEBUG_LOGS=0
 COMMAND=""
 MAX_ATTEMPTS=5
@@ -27,10 +26,10 @@ while [ $# -ne 0 ]; do
             DEBUG_LOGS=1;
             shift;
             ;;
-        -d)
-             DOMAIN=$2
-             shift; shift;
-             ;;
+        # -d)
+        #      FETCH_DOMAIN=1
+        #      shift; 
+        #      ;;
         -c)
              COMMAND=$2
              shift; shift;
@@ -50,10 +49,8 @@ while [ $# -ne 0 ]; do
     esac
 done
 
-if [ -z "$DOMAIN" ]
-then
-    DOMAIN=$PX_DOMAIN
-fi
+
+
 
 if [ -z "$COMMAND" ]
 then
@@ -61,6 +58,11 @@ then
     helpFunction
     exit 1
 fi
+
+# if [ "$FETCH_DOMAIN" == "1" ]
+# then
+#     echo $PX_DOMAIN
+# fi
 
 if [ "$COMMAND" == "apikey" ]
 then
@@ -94,6 +96,9 @@ then
         ((i++))
     done
     rm -rf $TMP_DIR
+elif [ "$COMMAND" == "domain" ]
+then
+    echo $PX_DOMAIN
 else
     echo "Invalid command passed"
     helpFunction
