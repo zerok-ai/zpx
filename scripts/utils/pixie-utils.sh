@@ -30,6 +30,27 @@ extractCookie(){
 }
 export -f extractCookie
 
+validateResponseStatus(){
+  FILE=$1
+  HTTP_LINE=$(cat $FILE | head -n 1)
+  IFS=' '
+	read -r name value value2 <<< "$HTTP_LINE"
+  # echo $name
+  # echo $value
+  # echo $value2
+  # STATUS=$(cat $FILE | head -n 1 | sed 's/HTTP\/2\ //g' | sed 's/\ //g')
+  # echo "$STATUS|"
+  if [[ "$value" == "000" ]]
+  then
+    return 0
+  elif [[ $value > 400 ]]
+  then
+    return 0
+  else
+    return 1
+  fi 
+}
+
 log(){
   MESSAGE=$1
   if [ "$ADD_DEBUG_LOGS" == "1" ]
