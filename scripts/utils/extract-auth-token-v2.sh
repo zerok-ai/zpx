@@ -113,4 +113,3 @@ echo $api_key
 
 
 sleep 1
-rm -rf $TMP_DIR

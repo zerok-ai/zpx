@@ -271,7 +271,7 @@ logcat $TMP_DIR/headers5.txt
 logcat $TMP_DIR/output5.txt
 
 # cat $TMP_DIR/headers5.txt
-CSRF_COOKIE=$(cat $TMP_DIR/headers3.txt | grep 'csrf_token' | sed 's/set-cookie: //g' | sed 's/;/\n/g' | grep 'csrf_token')
+CSRF_COOKIE=$(cat $TMP_DIR/headers5.txt | grep 'csrf_token' | sed 's/set-cookie: //g' | sed 's/;/\n/g' | grep 'csrf_token')
 csrf_token_key=$(echo $CSRF_COOKIE | awk -F'=' '{print $1}')
 csrf_token_value=$(echo $CSRF_COOKIE | sed "s/$csrf_token_key=//g")
 

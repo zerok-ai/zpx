@@ -35,4 +35,4 @@ echo $cluster_id
 
 
 sleep 1
-rm -rf $TMP_DIR
+# rm -rf $TMP_DIR
