@@ -78,6 +78,7 @@ then
         fi
         ((i++))
     done
+    rm -rf $TMP_DIR
 elif [ "$COMMAND" == "cluster" ]
 then
     i=0
@@ -93,6 +94,7 @@ then
         fi
         ((i++))
     done
+    rm -rf $TMP_DIR
 else
     echo "Invalid command passed"
     helpFunction
