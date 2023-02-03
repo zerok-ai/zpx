@@ -3,13 +3,13 @@
 export ASK_USER=0
 
 #Are we going to setup px operator in the same cluster as px host?
-export SAME_CLUSTER_SETUP=0
-export PIXIE_DEV_MODE=1
+export SAME_CLUSTER_SETUP=1
+export PIXIE_DEV_MODE=0
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
 #Basic cluster parameters
 export ZONE=us-west1-b
-export CLUSTER_NAME=testpxsetup4
+export CLUSTER_NAME=avinpx01
 export PX_CLUSTER_NAME=zkproxy-demo
 export PX_CLUSTER_PROJECT=zerok-dev
 export CLUSTER_NUM_NODES=2
@@ -73,7 +73,12 @@ function spinner(){
 export -f spinner
 
 function extract_auth_token(){
-    ABC=$($UTILS_DIR/extract-auth-token.sh $PX_DOMAIN)
+    DEBUG_LOGS=$1
+    if [ -z "$DEBUG_LOGS" ]
+    then
+        DEBUG_LOGS=0
+    fi
+    ABC=$($UTILS_DIR/extract-auth-token.sh $PX_DOMAIN $DEBUG_LOGS)
     echo $ABC
 }
 export -f extract_auth_token
