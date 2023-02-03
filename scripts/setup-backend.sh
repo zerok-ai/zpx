@@ -68,5 +68,3 @@ then
           sudo $SCRIPTS_DIR/setup-etc-hosts.sh
      fi
 fi
-
-spinner sleep 120
