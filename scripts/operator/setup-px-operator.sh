@@ -7,8 +7,13 @@ PX_OPERATOR_SETUP=$retval
 
 if [ "$PX_OPERATOR_SETUP" == '1' ]
 then
-    API_KEY=$(extract_auth_token)
-    API_KEY=$(extract_auth_token)
+    # API_KEY=$(extract_auth_token)
+    # API_KEY=$(extract_auth_token)
+    API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+    if [ -z "$API_KEY" ]
+    then
+        API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+    fi
     px auth login --api_key $API_KEY
 
     if [ "$SAME_CLUSTER_SETUP" == '1' ]
