@@ -78,11 +78,11 @@ then
                 # sed -i '' -e "s/\${URL}) -eq 200/--insecure \${URL}) -eq 200/" $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
                 # sed -i '' -e "s/\"\${ADMIN_URL}\/admin\/identities/--insecure \"\${ADMIN_URL}\/admin\/identities/" $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
 
-                if [ "$PIXIE_DEV_MODE" == '1' ]
-                then
-                        perl -pi -e 's/^/#/ if $. > 28 and $. < 39' $PIXIE_DIR/tools/docker/user_dev_image/Dockerfile
-                        perl -pi -e 'print "RUN addgroup --gid \${DOCKER_ID} docker-host\nRUN usermod -a -G sudo \${USER_NAME}\nRUN usermod -a -G docker-host \${USER_NAME}\n" if $.==39' $PIXIE_DIR/tools/docker/user_dev_image/Dockerfile
-                fi
+                # if [ "$PIXIE_DEV_MODE" == '1' ]
+                # then
+                #         perl -pi -e 's/^/#/ if $. > 28 and $. < 39' $PIXIE_DIR/tools/docker/user_dev_image/Dockerfile
+                #         perl -pi -e 'print "RUN addgroup --gid \${DOCKER_ID} docker-host\nRUN usermod -a -G sudo \${USER_NAME}\nRUN usermod -a -G docker-host \${USER_NAME}\n" if $.==39' $PIXIE_DIR/tools/docker/user_dev_image/Dockerfile
+                # fi
 
         fi
 fi

@@ -18,7 +18,8 @@ then
         kustomize build $PIXIE_DIR/k8s/cloud/public/ | kubectl apply -f -
     else
         echo "PIXIE Dev Mode is enabled"
-        sudo $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup.sh"
+        APIKEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup.sh $APIKEY"
     fi
 
     # if [ "$SAME_CLUSTER_SETUP" == '1' ]
