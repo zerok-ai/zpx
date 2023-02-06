@@ -2,8 +2,8 @@
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $THIS_DIR/variables.sh
 
-echo 'Removing ingress-nginx'
-kubectl delete namespace ingress-nginx
+# echo 'Removing ingress-nginx'
+# kubectl delete namespace ingress-nginx
 echo 'plc'
 kubectl delete namespace plc
 echo 'Removing cert-manager'

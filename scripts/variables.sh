@@ -9,7 +9,7 @@ export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
 #Basic cluster parameters
 export ZONE=us-west1-b
-export CLUSTER_NAME=avinpx02
+export CLUSTER_NAME=demo01
 export PX_CLUSTER_NAME=zkproxy-demo
 export PX_CLUSTER_PROJECT=zerok-dev
 export CLUSTER_NUM_NODES=2

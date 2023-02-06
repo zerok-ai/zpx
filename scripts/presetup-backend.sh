@@ -33,7 +33,7 @@ done
 $SCRIPTS_DIR/validate-env-variables.sh
 
 ##Cluster setup
-$SCRIPTS_DIR/setup-cluster.sh $CLUSTER_NAME
+# $SCRIPTS_DIR/setup-cluster.sh $CLUSTER_NAME
 
 ##Setting up pixie repo, if required or forced
 $SCRIPTS_DIR/setup-pixie-repo.sh
@@ -41,7 +41,7 @@ $SCRIPTS_DIR/setup-pixie-repo.sh
 ##Nginx Ingress setup
 # if [ "$SAME_CLUSTER_SETUP" == '0' ]
 # then
-$SCRIPTS_DIR/setup-nginx-ingress.sh
+# $SCRIPTS_DIR/setup-nginx-ingress.sh
 # fi
 
 ##DNS setup
