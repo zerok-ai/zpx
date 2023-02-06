@@ -4,7 +4,7 @@ THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 PIXIE_DIR="$(dirname "$${ESC}THIS_DIR")"
 
 mkdir ~/.kube
-cp $THIS_DIR/config ~/.kube/
+cp $${ESC}THIS_DIR/config ~/.kube/
 
 git config --global --add safe.directory $${ESC}PIXIE_DIR
 export PL_CLOUD_ADDR=$PX_DOMAIN:443
@@ -16,12 +16,12 @@ skaffold config set default-repo $PIXIE_REPO
 
 echo "docker login with service account"
 gcloud auth activate-service-account zk-dev-instance-02@zerok-dev.iam.gserviceaccount.com \
-   --key-file=$${ESC}PIXIE_DIR/zerok/zk-dev-instance.key
+   --key-file=$${ESC}PIXIE_DIR/zerok/zk-dev-instance.json
 gcloud auth print-access-token | docker login -u oauth2accesstoken \
    --password-stdin https://us-west1-docker.pkg.dev
 
 echo "Switching k8s context to the $PL_CLUSTER_ZEROK"
-gcloud container clusters get-credentials $PL_CLUSTER_ZEROK --zone $ZONE --project $PX_CLUSTER_PROJECT
+gcloud container clusters get-credentials $${ESC}PL_CLUSTER_ZEROK --zone $ZONE --project $PX_CLUSTER_PROJECT
 
 echo "Setting up remaining services"
 skaffold run -f $${ESC}PIXIE_DIR/skaffold/skaffold_cloud.yaml -p public
