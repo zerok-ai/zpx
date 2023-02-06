@@ -100,7 +100,7 @@ then
 fi
 
 ## PX Operator setup
-if [ "$SAME_CLUSTER_SETUP" == '1' ]
+if [ "$SAME_CLUSTER_SETUP" == '1' ] && [ "$PIXIE_DEV_MODE" == '0' ]
 then
      $OPERATOR_SCRIPTS_DIR/setup-px-operator.sh
 fi
