@@ -74,14 +74,6 @@ fi
 $SCRIPTS_DIR/setup-ingress.sh
 # fi
 
-if [ "$PIXIE_DEV_MODE" == '1' ]
-then
-     $SCRIPTS_DIR/setup-px-dev-scripts.sh
-fi
-
-##PIXIE Remaining setup
-$SCRIPTS_DIR/setup-remaining-pxhost.sh
-
 ##PIXIE Remaining setup
 if [ "$SAME_CLUSTER_SETUP" == '1' ]
 then
@@ -98,6 +90,16 @@ then
           sudo $SCRIPTS_DIR/setup-etc-hosts.sh
      fi
 fi
+
+if [ "$PIXIE_DEV_MODE" == '1' ]
+then
+     $SCRIPTS_DIR/setup-px-dev-scripts.sh
+fi
+
+##PIXIE Remaining setup
+$SCRIPTS_DIR/setup-remaining-pxhost.sh
+
+
 
 ## PX Operator setup
 if [ "$SAME_CLUSTER_SETUP" == '1' ] && [ "$PIXIE_DEV_MODE" == '0' ]

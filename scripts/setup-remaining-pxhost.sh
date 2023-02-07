@@ -18,8 +18,11 @@ then
         kustomize build $PIXIE_DIR/k8s/cloud/public/ | kubectl apply -f -
     else
         echo "PIXIE Dev Mode is enabled"
+        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup.sh"
+        echo "Waiting for the pixie services to come up (Wait time ~4 minutes)"
+	    spinner sleep 240
         APIKEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
-        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup.sh $APIKEY"
+        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-operator.sh $APIKEY"
     fi
 
     # if [ "$SAME_CLUSTER_SETUP" == '1' ]
