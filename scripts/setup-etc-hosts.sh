@@ -21,7 +21,7 @@ source $THIS_DIR/variables.sh
          # if [[ ${services[i]} == "ingress-nginx-controller" ]]; then
          extip=${ips[i]}
          
-         echo "$extip  work.$PX_DOMAIN $PX_DOMAIN" >> /etc/hosts
+          sudo $SCRIPTS_DIR/modify-etc-hosts.sh "$extip  work.$PX_DOMAIN $PX_DOMAIN"
       done
    fi
 # fi

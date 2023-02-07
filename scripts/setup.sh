@@ -87,7 +87,7 @@ then
      if [ "$ETC_HOSTS_SETUP" == '1' ]
      then
           echo 'This requires sudo password as we will modify the /etc/hosts.'
-          sudo $SCRIPTS_DIR/setup-etc-hosts.sh
+          $SCRIPTS_DIR/setup-etc-hosts.sh
      fi
 fi
 
