@@ -23,7 +23,7 @@ then
                 git checkout ./tools/docker/user_dev_image/Dockerfile
                 cd $ZPX_DIR
 
-                if [ "$SAME_CLUSTER_SETUP" == '0' ]
+                if [ "$USE_MKCERT_CA" == '0' ]
                 then
                         perl -pi -e 's/^/#/ if $. > 93 and $. < 108' $PIXIE_DIR/scripts/create_cloud_secrets.sh
                         # sed -i '' -e '94,107 s/^/#/' $PIXIE_DIR/scripts/create_cloud_secrets.sh

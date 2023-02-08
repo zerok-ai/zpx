@@ -19,16 +19,9 @@ then
     else
         echo "PIXIE Dev Mode is enabled"
         $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup.sh"
-        echo "Waiting for the pixie services to come up (Wait time ~4 minutes)"
-	    spinner sleep 240
-        APIKEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
-        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-operator.sh $APIKEY"
+        # echo "Waiting for the pixie services to come up (Wait time ~4 minutes)"
+	    # $SCRIPTS_DIR/check-and-wait-for-pods.sh plc
+        # APIKEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        # $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-operator.sh $APIKEY"
     fi
-
-    # if [ "$SAME_CLUSTER_SETUP" == '1' ]
-    # then
-    #     sudo echo "192.241.xx.xx  venus.example.com venus" >> /etc/hosts
-    #     go build $PIXIE_DIR/src/utils/dev_dns_updater/dev_dns_updater.go
-    #     $PIXIE_DIR/dev_dns_updater --domain-name="dev.withpixie.dev"  --kubeconfig=$HOME/.kube/config --n=plc &
-    # fi
 fi

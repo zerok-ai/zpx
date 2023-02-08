@@ -39,13 +39,10 @@ $SCRIPTS_DIR/setup-cluster.sh $CLUSTER_NAME
 $SCRIPTS_DIR/setup-pixie-repo.sh
 
 ##Nginx Ingress setup
-# if [ "$SAME_CLUSTER_SETUP" == '0' ]
-# then
 $SCRIPTS_DIR/setup-nginx-ingress.sh
-# fi
 
 ##DNS setup
-if [ "$SAME_CLUSTER_SETUP" == '0' ]
+if [ "$USE_MKCERT_CA" == '0' ]
 then
      $SCRIPTS_DIR/setup-dns.sh
 fi
@@ -57,25 +54,22 @@ $SCRIPTS_DIR/setup-domain.sh
 $SCRIPTS_DIR/setup-px-namespace.sh
 
 ##CERT-MANAGER
-if [ "$SAME_CLUSTER_SETUP" == '0' ]
+if [ "$USE_MKCERT_CA" == '0' ]
 then
      $SCRIPTS_DIR/setup-cert-manager.sh
 fi
 
 ##Secrets Setup
-if [ "$SAME_CLUSTER_SETUP" == '0' ]
+if [ "$USE_MKCERT_CA" == '0' ]
 then
      $SCRIPTS_DIR/setup-secrets.sh
 fi
 
 ##INGRESS setup
-# if [ "$SAME_CLUSTER_SETUP" == '0' ]
-# then
 $SCRIPTS_DIR/setup-ingress.sh
-# fi
 
 ##PIXIE Remaining setup
-if [ "$SAME_CLUSTER_SETUP" == '1' ]
+if [ "$USE_MKCERT_CA" == '1' ]
 then
      echo ''
      echo '-----------------SETTING-UP-ETC-HOSTS-----------------'
@@ -99,11 +93,6 @@ fi
 ##PIXIE Remaining setup
 $SCRIPTS_DIR/setup-remaining-pxhost.sh
 
-
-
 ## PX Operator setup
-if [ "$SAME_CLUSTER_SETUP" == '1' ] && [ "$PIXIE_DEV_MODE" == '0' ]
-then
-     $OPERATOR_SCRIPTS_DIR/setup-px-operator.sh
-fi
+$OPERATOR_SCRIPTS_DIR/setup-px-operator.sh
 

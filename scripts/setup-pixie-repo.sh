@@ -33,7 +33,7 @@ else
 		git checkout 9e93af261
 	fi
 
-	if [ "$SAME_CLUSTER_SETUP" == '0' ]
+	if [ "$USE_MKCERT_CA" == '0' ]
 	then
 		perl -pi -e 's/^/#/ if $. > 93 and $. < 108' ./scripts/create_cloud_secrets.sh
 		# sed -i '' -e '94,107 s/^/#/' ./scripts/create_cloud_secrets.sh
