@@ -70,7 +70,7 @@ then
     do
         rm -rf $TMP_DIR
         # echo "APIKEY-$i"
-        APIKEY=$($THIS_DIR/extract-auth-token-v2.sh $DOMAIN $DEBUG_LOGS)
+        APIKEY=$($THIS_DIR/extract-api-key.sh $DOMAIN $DEBUG_LOGS)
         if ! [ -z "$APIKEY" ]
         then
             echo $APIKEY

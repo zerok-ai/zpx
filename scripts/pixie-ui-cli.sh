@@ -10,7 +10,7 @@ helpFunction()
    echo -e '\tUsage: $0 [options]
          \tOptions are listed below:
          \t-d \t\t\tuse a different domain
-         \t-c \t\t\tcommand [cluster|apikey|domain]
+         \t-c \t\t\tcommand [cluster|apikey|domain|token]
          \t-l \t\t\tdebug logs'
 
    exit 1 # Exit script after printing help
@@ -69,10 +69,26 @@ then
     do
         rm -rf $TMP_DIR
         # echo "APIKEY-$i"
-        APIKEY=$($UTILS_DIR/extract-auth-token-v2.sh $DOMAIN $DEBUG_LOGS)
+        APIKEY=$($UTILS_DIR/extract-api-key.sh $DOMAIN $DEBUG_LOGS)
         if ! [ -z "$APIKEY" ]
         then
             echo $APIKEY
+            break;
+        fi
+        ((i++))
+    done
+    rm -rf $TMP_DIR
+elif [ "$COMMAND" == "token" ]
+then
+    i=0
+    until [[ $i -gt $MAX_ATTEMPTS  ]]
+    do
+        rm -rf $TMP_DIR
+        # echo "APIKEY-$i"
+        TOKEN=$($UTILS_DIR/extract-auth-token.sh $DOMAIN $DEBUG_LOGS)
+        if ! [ -z "$TOKEN" ]
+        then
+            echo $TOKEN
             break;
         fi
         ((i++))
