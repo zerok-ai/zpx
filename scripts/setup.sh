@@ -100,5 +100,8 @@ $SCRIPTS_DIR/setup-pxhost-remaining.sh
 $OPERATOR_SCRIPTS_DIR/setup-px-operator.sh
 
 ## PX Vizier setup
-$OPERATOR_SCRIPTS_DIR/setup-vizier.sh
+if [ "$PIXIE_VIZIER_DEV_MODE" == "1" ]
+then
+     $OPERATOR_SCRIPTS_DIR/setup-vizier.sh
+fi
 

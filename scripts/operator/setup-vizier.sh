@@ -1,7 +1,7 @@
 #!/bin/bash
 echo ''
 echo '-----------------SETTING-UP-PX-VIZIER-----------------'
-getUserInput "Do you want to setup the px vizier (in DEV mode) on the cluster ${PX_CLUSTER_NAME}" "" 1
+getUserInput "Do you want to setup the px vizier (in DEV mode) on the cluster ${PX_CLUSTER_NAME}" ""
 retval=$?
 PX_VIZIER_SETUP=$retval
 

@@ -4,7 +4,6 @@ export ASK_USER=1
 #Are we going to setup px operator in the same cluster as px host?
 export USE_MKCERT_CA=0
 export SAME_CLUSTER_SETUP=1
-export PIXIE_DEV_MODE=0
 export PIXIE_HOST_DEV_MODE=0
 export PIXIE_OPERATOR_DEV_MODE=0
 export PIXIE_VIZIER_DEV_MODE=0
