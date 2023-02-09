@@ -288,8 +288,18 @@ curl -s "https://work.$PX_DOMAIN/api/auth/login" \
   -D $TMP_DIR/headers8.txt \
   --output $TMP_DIR/output8.txt
 
+auth_token=$(extractKeyFromJsonFile $TMP_DIR/output8.txt token)
+auth_orgID=$(extractKeyFromJsonFile $TMP_DIR/output8.txt orgID)
+auth_orgName=$(extractKeyFromJsonFile $TMP_DIR/output8.txt orgName)
+auth_expiresAt=$(extractKeyFromJsonFile $TMP_DIR/output8.txt expiresAt)
 default_session5=$(extractCookie $TMP_DIR/headers8.txt default-session5)
 log "default_session5 = $default_session5"
+
+
+export auth_token=$auth_token
+export auth_orgID=$auth_orgID
+export auth_orgName=$auth_orgName
+export auth_expiresAt=$auth_expiresAt
 
 export login_challenge=$login_challenge
 export oauth2_authentication_csrf=$oauth2_authentication_csrf

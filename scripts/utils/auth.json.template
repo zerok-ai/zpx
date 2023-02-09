@@ -1,0 +1,1 @@
+{"token":"$auth_token","expiresAt":$auth_expiresAt,"orgName":"$auth_orgName","orgID":"$auth_orgID"}
