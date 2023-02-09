@@ -30,9 +30,13 @@ then
         $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-operator.sh $APIKEY"
     else
         API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
-        API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        if [ -z "$API_KEY" ]
+        then
+            API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        fi
+        echo "API_KEY = $API_KEY"
         px auth login --api_key $API_KEY
-        px deploy
+        px deploy --dev_cloud_namespace plc
     fi
 fi
 
