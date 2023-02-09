@@ -85,14 +85,20 @@ then
      fi
 fi
 
-if [ "$PIXIE_DEV_MODE" == '1' ]
+if [ "$PIXIE_HOST_DEV_MODE" == '1' ] || [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ] || [ "$PIXIE_VIZIER_DEV_MODE" == '1' ]
 then
      $SCRIPTS_DIR/setup-px-dev-scripts.sh
 fi
 
+##PIXIE Core setup
+$SCRIPTS_DIR/setup-pxhost-core.sh
+
 ##PIXIE Remaining setup
-$SCRIPTS_DIR/setup-remaining-pxhost.sh
+$SCRIPTS_DIR/setup-pxhost-remaining.sh
 
 ## PX Operator setup
 $OPERATOR_SCRIPTS_DIR/setup-px-operator.sh
+
+## PX Vizier setup
+$OPERATOR_SCRIPTS_DIR/setup-vizier.sh
 

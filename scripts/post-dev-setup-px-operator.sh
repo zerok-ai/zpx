@@ -37,5 +37,3 @@ gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --projec
 echo "Setting up px"
 bazel run //src/pixie_cli:px -- auth login --api_key $${ESC}APIKEY
 bazel run //src/pixie_cli:px -- deploy
-echo "Setting up vizier"
-skaffold run -f $${ESC}PIXIE_DIR/skaffold/skaffold_vizier.yaml --default-repo=$PIXIE_REPO

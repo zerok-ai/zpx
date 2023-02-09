@@ -18,6 +18,7 @@ then
     touch $PIXIE_DIR/zerok/postsetup.sh
 
     envsubst < $SCRIPTS_DIR/post-dev-setup.sh >> $PIXIE_DIR/zerok/postsetup.sh
-    envsubst < $SCRIPTS_DIR/post-dev-setup-px-operator-vizier.sh >> $PIXIE_DIR/zerok/postsetup-operator.sh
+    envsubst < $SCRIPTS_DIR/post-dev-setup-px-operator.sh >> $PIXIE_DIR/zerok/postsetup-operator.sh
+    envsubst < $SCRIPTS_DIR/post-dev-setup-vizier.sh >> $PIXIE_DIR/zerok/postsetup-vizier.sh
 fi
 

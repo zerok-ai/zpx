@@ -5,6 +5,9 @@ export ASK_USER=1
 export USE_MKCERT_CA=0
 export SAME_CLUSTER_SETUP=1
 export PIXIE_DEV_MODE=0
+export PIXIE_HOST_DEV_MODE=0
+export PIXIE_OPERATOR_DEV_MODE=0
+export PIXIE_VIZIER_DEV_MODE=0
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
 #Basic cluster parameters
@@ -35,7 +38,7 @@ fi
 
 export PL_CLOUD_ADDR=$PX_DOMAIN
 
-if [ "$PIXIE_DEV_MODE" == '1' ]
+if [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ]
 then
     export PL_CLOUD_ADDR=$PX_DOMAIN:443
     export PL_TESTING_ENV=dev

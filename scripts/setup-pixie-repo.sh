@@ -23,7 +23,7 @@ else
 	git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
 	cd $PIXIE_DIR
 
-	if [ "$PIXIE_DEV_MODE" == '0' ]
+	if [ "$PIXIE_HOST_DEV_MODE" == '1' ] || [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ] || [ "$PIXIE_VIZIER_DEV_MODE" == '1' ]
 	then
 		export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
 		git checkout "release/cloud/prod/${LATEST_CLOUD_RELEASE}"

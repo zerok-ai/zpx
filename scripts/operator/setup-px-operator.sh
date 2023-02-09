@@ -9,22 +9,15 @@ if [ "$PX_OPERATOR_SETUP" == '1' ]
 then
 
     $SCRIPTS_DIR/check-and-wait-for-pods.sh plc
-
-    PX_OPERATOR_DEV_MODE=0
-    if [ "$PIXIE_DEV_MODE" == '1' ]
-    then
-        getUserInput "Do you want to setup the px operator in DEV mode?" "" 1
-        retval=$?
-        PX_OPERATOR_DEV_MODE=$retval
-    fi
     
     if [ "$SAME_CLUSTER_SETUP" == '0' ]
     then
         echo "Switching k8s context to the $PX_CLUSTER_NAME"
         gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --project $PX_CLUSTER_PROJECT
+        DEV_CLOUD_NAMESPACE="--dev_cloud_namespace plc"
     fi
 
-    if [ "$PX_OPERATOR_DEV_MODE" == '1' ]
+    if [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ]
     then
         APIKEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
         $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-operator.sh $APIKEY"
