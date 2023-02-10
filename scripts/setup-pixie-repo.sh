@@ -20,10 +20,10 @@ else
 		rm -rf $PIXIE_DIR
 	fi
 
-	git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
+	git clone git@github.com:zerok-ai/zk-pixie.git $PIXIE_DIR
 	cd $PIXIE_DIR
 
-	if [ "$PIXIE_HOST_DEV_MODE" == '1' ] || [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ] || [ "$PIXIE_VIZIER_DEV_MODE" == '1' ]
+	if [ "$PIXIE_HOST_DEV_MODE" == '0' ] && [ "$PIXIE_OPERATOR_DEV_MODE" == '0' ] && [ "$PIXIE_VIZIER_DEV_MODE" == '0' ]
 	then
 		export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
 		git checkout "release/cloud/prod/${LATEST_CLOUD_RELEASE}"
