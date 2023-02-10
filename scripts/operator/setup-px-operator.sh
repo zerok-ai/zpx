@@ -1,7 +1,7 @@
 #!/bin/bash
 echo ''
 echo '-----------------SETTING-UP-PX-OPERATOR-----------------'
-getUserInput "Do you want to setup the px operator on the cluster ${PX_CLUSTER_NAME}" "" 1
+getUserInput "Do you want to setup the px operator on the cluster ${PX_CLUSTER_NAME}" "" $FORCE_ASK_PX_OPERATOR
 retval=$?
 PX_OPERATOR_SETUP=$retval
 

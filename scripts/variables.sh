@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 export ASK_USER=1
+export FORCE_ASK_PX_OPERATOR=0
+export SETUP_CLUSTER=0
 
 #Are we going to setup px operator in the same cluster as px host?
-export USE_MKCERT_CA=0
+export USE_MKCERT_CA=1
 export SAME_CLUSTER_SETUP=1
 export PIXIE_HOST_DEV_MODE=0
 export PIXIE_OPERATOR_DEV_MODE=0
