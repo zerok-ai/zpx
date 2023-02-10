@@ -45,7 +45,7 @@ $SCRIPTS_DIR/setup-pixie-repo.sh
 # fi
 
 ##DNS setup
-if [ "$SAME_CLUSTER_SETUP" == '0' ]
+if [ "$USE_MKCERT_CA" == '0' ]
 then
      $SCRIPTS_DIR/setup-dns.sh
 fi
@@ -54,7 +54,7 @@ fi
 $SCRIPTS_DIR/setup-domain.sh
 
 ##CERT-MANAGER
-if [ "$SAME_CLUSTER_SETUP" == '0' ]
+if [ "$USE_MKCERT_CA" == '0' ]
 then
      $SCRIPTS_DIR/setup-cert-manager.sh
 fi
