@@ -5,11 +5,6 @@ source $THIS_DIR/variables.sh
 echo ''
 echo '-----------------SETTING-UP-NGINX-INGRESS-----------------'
 
-# if [ "$SAME_CLUSTER_SETUP" == '1' ]
-# then
-#    SERVICE_URL=ingress-nginx-controller.ingress-nginx.svc.cluster.local
-# fi
-
 getUserInput "Do you want to setup the nginx-ingress dns A record?" ""
 retval=$?
 NGINX_INGRESS_DNS_SETUP=$retval

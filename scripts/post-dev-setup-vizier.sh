@@ -24,15 +24,15 @@ gcloud auth activate-service-account zk-dev-instance-02@zerok-dev.iam.gserviceac
 gcloud auth print-access-token | docker login -u oauth2accesstoken \
    --password-stdin https://us-west1-docker.pkg.dev
 
-echo "Switching k8s context to the $${ESC}CLUSTER_ZEROK_PL"
-gcloud container clusters get-credentials $${ESC}CLUSTER_ZEROK_PL --zone $ZONE --project $PX_CLUSTER_PROJECT
+# echo "Switching k8s context to the $${ESC}CLUSTER_ZEROK_PL"
+# gcloud container clusters get-credentials $${ESC}CLUSTER_ZEROK_PL --zone $ZONE --project $PX_CLUSTER_PROJECT
 
-echo "Setting up remaining services"
-skaffold run -f $${ESC}PIXIE_DIR/skaffold/skaffold_cloud.yaml -p public
-# echo "Switching k8s context to the $PX_CLUSTER_NAME"
-# gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --project $PX_CLUSTER_PROJECT
+# echo "Setting up remaining services"
+# skaffold run -f $${ESC}PIXIE_DIR/skaffold/skaffold_cloud.yaml -p public
+echo "Switching k8s context to the $PX_CLUSTER_NAME"
+gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --project $PX_CLUSTER_PROJECT
 # echo "Setting up px"
 # bazel run //src/pixie_cli:px -- auth login --api_key $${ESC}APIKEY
 # bazel run //src/pixie_cli:px -- deploy
-# echo "Setting up vizier"
-# skaffold run -f $${ESC}PIXIE_DIR/skaffold/skaffold_vizier.yaml --default-repo=$PIXIE_REPO
+echo "Setting up vizier"
+skaffold run -f $${ESC}PIXIE_DIR/skaffold/skaffold_vizier.yaml --default-repo=$PIXIE_REPO

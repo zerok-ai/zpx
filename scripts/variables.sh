@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
-
-export ASK_USER=0
+export ASK_USER=1
 
 #Are we going to setup px operator in the same cluster as px host?
+export USE_MKCERT_CA=0
 export SAME_CLUSTER_SETUP=1
-export PIXIE_DEV_MODE=0
+export PIXIE_HOST_DEV_MODE=0
+export PIXIE_OPERATOR_DEV_MODE=0
+export PIXIE_VIZIER_DEV_MODE=0
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
 #Basic cluster parameters
 export ZONE=us-west1-b
-export CLUSTER_NAME=demo01
+export CLUSTER_NAME=avinpx04
 export PX_CLUSTER_NAME=zkproxy-demo
 export PX_CLUSTER_PROJECT=zerok-dev
 export CLUSTER_NUM_NODES=2
@@ -23,15 +25,19 @@ export NGINX_INGRESS_CONTROLLER_SERVICE_URL=cloud-proxy-service.plc.svc.cluster.
 # Port forward
 if [ "$SAME_CLUSTER_SETUP" == '1' ]
 then
-    export PX_DOMAIN=$CLUSTER_NAME.testdomain.com
     export PX_CLUSTER_NAME=$CLUSTER_NAME
+fi
+
+if [ "$USE_MKCERT_CA" == '1' ]
+then
+    export PX_DOMAIN=$CLUSTER_NAME.testdomain.com
 else
-    export PX_DOMAIN=pxtest2.getanton.com
+    export PX_DOMAIN=$CLUSTER_NAME.getanton.com
 fi
 
 export PL_CLOUD_ADDR=$PX_DOMAIN
 
-if [ "$PIXIE_DEV_MODE" == '1' ]
+if [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ]
 then
     export PL_CLOUD_ADDR=$PX_DOMAIN:443
     export PL_TESTING_ENV=dev
@@ -50,7 +56,12 @@ export SETUP_SECRETS_WAIT_TIME=35
 export SETUP_CERT_MANAGER_WAIT_TIME=15
 
 getUserInput(){
-    if [ "$ASK_USER" == '0' ]
+    FORCE_ASK=$3
+    if [ -z "$FORCE_ASK" ]
+    then
+        FORCE_ASK=0
+    fi
+    if [ "$ASK_USER" == '0' ] && [ "$FORCE_ASK" == "0" ]
     then
         retval=1;
     else

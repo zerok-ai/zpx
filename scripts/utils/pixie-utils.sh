@@ -30,6 +30,16 @@ extractCookie(){
 }
 export -f extractCookie
 
+extractKeyFromJsonFile(){
+  FILE=$1
+  KEY_TO_EXTRACT=$2
+  VALUE=$(cat $FILE | sed 's/"$KEY_TO_EXTRACT"/\n"$KEY_TO_EXTRACT"/g' | sed 's/,/\n/g' | sed 's/{/\n/g' | sed 's/}/\n/g' | grep "\"$KEY_TO_EXTRACT\"" | sed 's/"//g' | sed "s/$KEY_TO_EXTRACT://g")
+
+  echo "$VALUE"
+}
+export -f extractKeyFromJsonFile
+
+
 validateResponseStatus(){
   FILE=$1
   HTTP_LINE=$(cat $FILE | head -n 1)

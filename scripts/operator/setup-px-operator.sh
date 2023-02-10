@@ -1,28 +1,35 @@
 #!/bin/bash
 echo ''
 echo '-----------------SETTING-UP-PX-OPERATOR-----------------'
-getUserInput "Do you want to setup the px operator on the same cluster ${CLUSTER_NAME}" ""
+getUserInput "Do you want to setup the px operator on the cluster ${PX_CLUSTER_NAME}" "" 1
 retval=$?
 PX_OPERATOR_SETUP=$retval
 
 if [ "$PX_OPERATOR_SETUP" == '1' ]
 then
-    # API_KEY=$(extract_auth_token)
-    # API_KEY=$(extract_auth_token)
-    API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
-    if [ -z "$API_KEY" ]
-    then
-        API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
-    fi
-    px auth login --api_key $API_KEY
 
-    if [ "$SAME_CLUSTER_SETUP" == '1' ]
+    $SCRIPTS_DIR/check-and-wait-for-pods.sh plc
+    
+    if [ "$SAME_CLUSTER_SETUP" == '0' ]
     then
-        px deploy --dev_cloud_namespace plc
-    else
         echo "Switching k8s context to the $PX_CLUSTER_NAME"
         gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --project $PX_CLUSTER_PROJECT
-        px deploy
+        DEV_CLOUD_NAMESPACE="--dev_cloud_namespace plc"
+    fi
+
+    if [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ]
+    then
+        APIKEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-operator.sh $APIKEY"
+    else
+        API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        if [ -z "$API_KEY" ]
+        then
+            API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        fi
+        echo "API_KEY = $API_KEY"
+        px auth login --api_key $API_KEY
+        px deploy --dev_cloud_namespace plc
     fi
 fi
 
