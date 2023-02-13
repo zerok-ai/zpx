@@ -21,6 +21,7 @@ then
     then
         # APIKEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
         AUTHJSON=$($SCRIPTS_DIR/pixie-ui-cli.sh -c authjson)
+        rm $PIXIE_DIR/zerok/auth.json
         echo $AUTHJSON >> $PIXIE_DIR/zerok/auth.json
         $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-operator.sh"
     else

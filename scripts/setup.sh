@@ -36,6 +36,9 @@ $SCRIPTS_DIR/setup-backend.sh
 ##Setup Operator
 $SCRIPTS_DIR/setup-operator.sh
 
+# ##Postsetup Backend
+# $SCRIPTS_DIR/postsetup-backend.sh
+
 ## PX Vizier setup
 if [ "$PIXIE_VIZIER_DEV_MODE" == "1" ]
 then

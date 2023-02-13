@@ -7,7 +7,7 @@ PIXIE_DIR=$${ESC}THIS_DIR
 echo "THIS_DIR = $${ESC}THIS_DIR"
 echo "PIXIE_DIR = $${ESC}PIXIE_DIR"
 
-mkdir ~/.kube
+mkdir -p ~/.kube
 cp $${ESC}THIS_DIR/zerok/config ~/.kube/
 
 git config --global --add safe.directory $${ESC}PIXIE_DIR

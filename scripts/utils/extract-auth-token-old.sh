@@ -1,7 +1,7 @@
 #!/bin/bash
 
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-mkdir $THIS_DIR/.tmp
+mkdir -p $THIS_DIR/.tmp
 TMP_DIR=$THIS_DIR/.tmp
 
 # PX_DOMAIN=testpxsetup7.testdomain.com

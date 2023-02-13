@@ -10,7 +10,7 @@ PIXIE_DIR=$${ESC}THIS_DIR
 echo "THIS_DIR = $${ESC}THIS_DIR"
 echo "PIXIE_DIR = $${ESC}PIXIE_DIR"
 
-mkdir ~/.kube
+mkdir -p ~/.kube
 cp $${ESC}THIS_DIR/zerok/config ~/.kube/
 
 git config --global --add safe.directory $${ESC}PIXIE_DIR
@@ -35,7 +35,8 @@ gcloud auth print-access-token | docker login -u oauth2accesstoken \
 echo "Switching k8s context to the $PX_CLUSTER_NAME"
 gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --project $PX_CLUSTER_PROJECT
 echo "Setting up px"
-mkdir ~/.pixie
+mkdir -p ~/.pixie
+rm ~/.pixie/auth.json
 cp $${ESC}THIS_DIR/zerok/auth.json ~/.pixie/
 # bazel run //src/pixie_cli:px -- auth login --api_key $${ESC}APIKEY
 bazel run //src/pixie_cli:px -- deploy
