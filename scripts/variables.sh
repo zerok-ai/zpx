@@ -50,6 +50,7 @@ THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 export SCRIPTS_DIR=$THIS_DIR
 export UTILS_DIR=$THIS_DIR/utils
 export OPERATOR_SCRIPTS_DIR=$THIS_DIR/operator
+export PATCHES_DIR=$THIS_DIR/patches
 export ZPX_DIR="$(dirname "$SCRIPTS_DIR")"
 export PIXIE_DIR=$ZPX_DIR/build/pixie
 
