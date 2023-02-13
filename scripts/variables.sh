@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 export ASK_USER=1
-export FORCE_ASK_PX_OPERATOR=0
-export SETUP_CLUSTER=0
+export FORCE_ASK_PX_OPERATOR=1
+export SETUP_CLUSTER=1
 
 #Are we going to setup px operator in the same cluster as px host?
-export USE_MKCERT_CA=1
+export USE_MKCERT_CA=0
 export SAME_CLUSTER_SETUP=1
-export PIXIE_HOST_DEV_MODE=0
+export PIXIE_HOST_DEV_MODE=1
 export PIXIE_OPERATOR_DEV_MODE=0
-export PIXIE_VIZIER_DEV_MODE=0
+export PIXIE_VIZIER_DEV_MODE=1
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
 #Basic cluster parameters
 export ZONE=us-west1-b
-export CLUSTER_NAME=avinpx04
+export CLUSTER_NAME=devpx06
 export PX_CLUSTER_NAME=zkproxy-demo
 export PX_CLUSTER_PROJECT=zerok-dev
 export CLUSTER_NUM_NODES=2

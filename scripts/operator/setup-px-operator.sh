@@ -19,16 +19,19 @@ then
 
     if [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ]
     then
-        APIKEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
-        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-operator.sh $APIKEY"
+        # APIKEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        AUTHJSON=$($SCRIPTS_DIR/pixie-ui-cli.sh -c authjson)
+        echo $AUTHJSON >> $PIXIE_DIR/zerok/auth.json
+        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-operator.sh"
     else
-        API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
-        if [ -z "$API_KEY" ]
-        then
-            API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
-        fi
-        echo "API_KEY = $API_KEY"
-        px auth login --api_key $API_KEY
+        # API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        # if [ -z "$API_KEY" ]
+        # then
+        #     API_KEY=$($SCRIPTS_DIR/pixie-ui-cli.sh -c apikey)
+        # fi
+        # echo "API_KEY = $API_KEY"
+        # px auth login --api_key $API_KEY
+        $SCRIPTS_DIR/setup-px-auth-json.sh
         px deploy --dev_cloud_namespace plc
     fi
 fi

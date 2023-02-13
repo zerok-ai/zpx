@@ -4,8 +4,8 @@ THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # PIXIE_DIR="$(dirname "$${ESC}THIS_DIR")"
 PIXIE_DIR=$${ESC}THIS_DIR
 
-APIKEY=$${ESC}1
-echo "APIKEY = $${ESC}APIKEY"
+# APIKEY=$${ESC}1
+# echo "APIKEY = $${ESC}APIKEY"
 
 echo "THIS_DIR = $${ESC}THIS_DIR"
 echo "PIXIE_DIR = $${ESC}PIXIE_DIR"
@@ -35,5 +35,7 @@ gcloud auth print-access-token | docker login -u oauth2accesstoken \
 echo "Switching k8s context to the $PX_CLUSTER_NAME"
 gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --project $PX_CLUSTER_PROJECT
 echo "Setting up px"
-bazel run //src/pixie_cli:px -- auth login --api_key $${ESC}APIKEY
+mkdir ~/.pixie
+cp $${ESC}THIS_DIR/zerok/auth.json ~/.pixie/
+# bazel run //src/pixie_cli:px -- auth login --api_key $${ESC}APIKEY
 bazel run //src/pixie_cli:px -- deploy
