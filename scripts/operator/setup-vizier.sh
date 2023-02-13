@@ -9,6 +9,8 @@ if [ "$PX_VIZIER_SETUP" == '1' ]
 then
 
     $SCRIPTS_DIR/check-and-wait-for-pods.sh pl
+
+    $SCRIPTS_DIR/setup-patches.sh
     
     if [ "$SAME_CLUSTER_SETUP" == '0' ]
     then
