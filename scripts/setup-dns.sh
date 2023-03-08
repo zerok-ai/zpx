@@ -16,6 +16,7 @@ then
    gcp_dns_project=black-scope-358204
    domain=$PX_DOMAIN
    workdomain="work.$domain"
+   kratosdomain="kratos.$domain"
 
    if ! [ -z "$domain" ] 
    then
@@ -33,6 +34,13 @@ then
          gcloud dns --project=$gcp_dns_project record-sets create $workdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
       else
          gcloud dns --project=$gcp_dns_project record-sets update $workdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      fi
+
+      kratos_domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${kratosdomain}" --zone="anton" --type="A" --format=yaml`
+      if [ -z "$kratos_domain_exists" ] || [ "$kratos_domain_exists" == "" ]; then
+         gcloud dns --project=$gcp_dns_project record-sets create $kratosdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      else
+         gcloud dns --project=$gcp_dns_project record-sets update $kratosdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
       fi
    fi
 fi

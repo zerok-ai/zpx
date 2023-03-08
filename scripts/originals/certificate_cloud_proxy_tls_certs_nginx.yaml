@@ -7,6 +7,7 @@ spec:
   dnsNames:
   - ${PX_DOMAIN}
   - work.${PX_DOMAIN}
+  - kratos.${PX_DOMAIN}
   secretName: cloud-proxy-tls-certs
   issuerRef:
     name: letsencrypt-cluster-issuer
