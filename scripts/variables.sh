@@ -6,9 +6,9 @@ export SETUP_CLUSTER=1
 #Are we going to setup px operator in the same cluster as px host?
 export USE_MKCERT_CA=0
 export SAME_CLUSTER_SETUP=0
-export PIXIE_HOST_DEV_MODE=1
+export PIXIE_HOST_DEV_MODE=0
 export PIXIE_OPERATOR_DEV_MODE=0
-export PIXIE_VIZIER_DEV_MODE=1
+export PIXIE_VIZIER_DEV_MODE=0
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
 #Basic cluster parameters
@@ -58,9 +58,9 @@ export PATCHES_DIR=$THIS_DIR/patches
 export ZPX_DIR="$(dirname "$SCRIPTS_DIR")"
 export PIXIE_DIR=$ZPX_DIR/build/pixie
 
-export SETUP_NGINX_INGRESS_WAIT_TIME=30
-export SETUP_SECRETS_WAIT_TIME=35
-export SETUP_CERT_MANAGER_WAIT_TIME=15
+export SETUP_NGINX_INGRESS_WAIT_TIME=40
+export SETUP_SECRETS_WAIT_TIME=50
+export SETUP_CERT_MANAGER_WAIT_TIME=20
 
 getUserInput(){
     FORCE_ASK=$3
