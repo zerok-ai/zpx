@@ -1,0 +1,6 @@
+- op: add
+  path: /data/large-client-header-buffers
+  value: 4 16k
+- op: add
+  path: /data/proxy-buffer-size
+  value: 16k

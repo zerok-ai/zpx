@@ -73,3 +73,6 @@ $SCRIPTS_DIR/setup-pxhost-core.sh
 
 ##PIXIE Remaining setup
 $SCRIPTS_DIR/setup-pxhost-remaining.sh
+
+##PIXIE Exposing Kratos
+$SCRIPTS_DIR/setup-expose-kratos.sh

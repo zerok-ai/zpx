@@ -9,6 +9,11 @@ patchesJson6902:
       kind: Deployment
       name: ingress-nginx-controller
     path: nginx-ingress-patch.yaml
+  - target:
+      version: v1
+      kind: ConfigMap
+      name: ingress-nginx-controller
+    path: nginx-configmap-patch.yaml
 # patchesStrategicMerge:
 #   - nginx-ingress.yaml
   

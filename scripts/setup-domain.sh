@@ -73,6 +73,9 @@ then
                 export SSL_PASSTHROUGH_GRPCS_AUTH=true
                 envsubst < $SCRIPTS_DIR/originals/cloud_ingress_template.yaml >> $SCRIPTS_DIR/modified/cloud_ingress_deploy.yaml
 
+                ## Exposing kratos
+                envsubst < $SCRIPTS_DIR/originals/expose-kratos-template.yaml >> $SCRIPTS_DIR/modified/expose-kratos.yaml
+
                 perl -pi -e 's/\${URL}\) -eq 200/--insecure \${URL}\) -eq 200/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
                 perl -pi -e 's/\"\${ADMIN_URL}\/admin\/identities\"/--insecure \"\${ADMIN_URL}\/admin\/identities\"/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
                 # sed -i '' -e "s/\${URL}) -eq 200/--insecure \${URL}) -eq 200/" $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
