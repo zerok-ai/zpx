@@ -74,6 +74,7 @@ then
                 envsubst < $SCRIPTS_DIR/originals/cloud_ingress_template.yaml >> $SCRIPTS_DIR/modified/cloud_ingress_deploy.yaml
 
                 ## Exposing kratos
+                rm $SCRIPTS_DIR/modified/expose-kratos.yaml
                 envsubst < $SCRIPTS_DIR/originals/expose-kratos-template.yaml >> $SCRIPTS_DIR/modified/expose-kratos.yaml
 
                 perl -pi -e 's/\${URL}\) -eq 200/--insecure \${URL}\) -eq 200/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
