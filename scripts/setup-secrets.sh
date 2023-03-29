@@ -37,10 +37,6 @@ then
 		if [[ ${certificates[i]} == "cloud-proxy-tls-certs" ]]; then
 			((CERTIFICATES_COUNT++))
 		fi
-
-		# if [[ ${certificates[i]} == "cloud-proxy-tls-certs-nginx" ]]; then
-		#    ((CERTIFICATES_COUNT++))
-		# fi
 	done
 
 	if [[ $ABC -lt 2 ]]
@@ -49,20 +45,6 @@ then
 		kubectl apply -f $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs_nginx.yaml
 		ADD_WAIT_TIME='1'
 	fi
-
-	# if [ "$FOUND_PLC_CERTIFICATE" == '0' ]
-	# then
-	# 	echo 'cloud-proxy-tls-certs is not present. Creating one...'
-	# 	kubectl apply -f $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs.yaml
-	# 	ADD_WAIT_TIME='1'
-	# fi
-
-	# if [ "$FOUND_NGINX_CERTIFICATE" == '0' ]
-	# then
-	# 	echo 'cloud-proxy-tls-certs-nginx is not present. Creating one...'
-	# 	kubectl apply -f $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs_nginx.yaml
-	# 	ADD_WAIT_TIME='1'
-	# fi
 
 	if [ "$ADD_WAIT_TIME" == '1' ]
 	then

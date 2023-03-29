@@ -25,7 +25,8 @@ else
 
 	if [ "$PIXIE_HOST_DEV_MODE" == '0' ] && [ "$PIXIE_OPERATOR_DEV_MODE" == '0' ] && [ "$PIXIE_VIZIER_DEV_MODE" == '0' ]
 	then
-		export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
+		export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud/prod'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
+		echo "LATEST_CLOUD_RELEASE=$LATEST_CLOUD_RELEASE"
 		git checkout "release/cloud/prod/${LATEST_CLOUD_RELEASE}"
 		perl -pi -e "s|newTag: latest|newTag: \"${LATEST_CLOUD_RELEASE}\"|g" k8s/cloud/public/kustomization.yaml
 	else
