@@ -16,6 +16,6 @@ then
         kustomize build $PIXIE_DIR/k8s/cloud/public/ | kubectl apply -f -
     else
         echo "PIXIE Dev Mode is enabled"
-        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup.sh"
+        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup.sh build"
     fi
 fi

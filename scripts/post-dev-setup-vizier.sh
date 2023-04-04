@@ -4,6 +4,13 @@ THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # PIXIE_DIR="$(dirname "$${ESC}THIS_DIR")"
 PIXIE_DIR=$${ESC}THIS_DIR
 
+COMMAND=$${ESC}1
+
+if [ -z "$COMMAND" ]
+then
+   COMMAND="build"
+fi
+
 echo "THIS_DIR = $${ESC}THIS_DIR"
 echo "PIXIE_DIR = $${ESC}PIXIE_DIR"
 
@@ -35,4 +42,4 @@ gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --projec
 # bazel run //src/pixie_cli:px -- auth login --api_key $${ESC}APIKEY
 # bazel run //src/pixie_cli:px -- deploy
 echo "Setting up vizier"
-skaffold run -f $${ESC}PIXIE_DIR/skaffold/skaffold_vizier.yaml --default-repo=$PIXIE_REPO
+skaffold $${ESC}COMMAND -f $${ESC}PIXIE_DIR/skaffold/skaffold_vizier.yaml --default-repo=$PIXIE_REPO

@@ -18,7 +18,14 @@ then
         gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --project $PX_CLUSTER_PROJECT
     fi
 
-    $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-vizier.sh"
+    if [ "$PIXIE_VIZIER_BUILD" == "1" ]
+    then
+        echo "Building vizier"
+        $PIXIE_DIR/scripts/run_docker.sh "sh ./zerok/postsetup-vizier.sh build"
+    fi
+
+    echo "Deploying Vizier"
+    kubectl apply -k $PIXIE_DIR/k8s/vizier/persistent_metadata/
 fi
 
 
