@@ -23,16 +23,16 @@ else
 	git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
 	cd $PIXIE_DIR
 
-	if [ "$PIXIE_HOST_DEV_MODE" == '0' ] && [ "$PIXIE_OPERATOR_DEV_MODE" == '0' ] && [ "$PIXIE_VIZIER_DEV_MODE" == '0' ]
-	then
+	# if [ "$PIXIE_HOST_DEV_MODE" == '0' ] && [ "$PIXIE_OPERATOR_DEV_MODE" == '0' ] && [ "$PIXIE_VIZIER_DEV_MODE" == '0' ]
+	# then
 		export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud/prod'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
 		echo "LATEST_CLOUD_RELEASE=$LATEST_CLOUD_RELEASE"
 		git checkout "release/cloud/prod/${LATEST_CLOUD_RELEASE}"
 		perl -pi -e "s|newTag: latest|newTag: \"${LATEST_CLOUD_RELEASE}\"|g" k8s/cloud/public/kustomization.yaml
-	else
-		echo 'Checkout out last known working commit 9e93af261'
-		git checkout 9e93af261
-	fi
+	# else
+	# 	echo 'Checkout out last known working commit 9e93af261'
+	# 	git checkout 9e93af261
+	# fi
 
 	if [ "$USE_MKCERT_CA" == '0' ]
 	then
