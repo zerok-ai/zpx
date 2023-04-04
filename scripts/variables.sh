@@ -10,6 +10,7 @@ export PIXIE_HOST_DEV_MODE=0
 export PIXIE_OPERATOR_DEV_MODE=0
 export PIXIE_VIZIER_DEV_MODE=1
 export PIXIE_VIZIER_BUILD=1
+export PIXIE_VIZIER_DEPLOY=1
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
 #Basic cluster parameters
