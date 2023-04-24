@@ -4,6 +4,7 @@ THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $THIS_DIR/variables.sh
 
 ## Setup pixie repo
+rm -rf $PIXIE_DIR
 git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
 cd $PIXIE_DIR
 export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud/prod'  | sort -r | head -n 1 | awk -F/ '{print $NF}')

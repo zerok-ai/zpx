@@ -5,11 +5,11 @@ export SETUP_CLUSTER=1
 
 #Are we going to setup px operator in the same cluster as px host?
 export USE_MKCERT_CA=0
-export SAME_CLUSTER_SETUP=1
+export SAME_CLUSTER_SETUP=0
 export PIXIE_HOST_DEV_MODE=0
 export PIXIE_OPERATOR_DEV_MODE=0
 export PIXIE_VIZIER_DEV_MODE=1
-export PIXIE_VIZIER_BUILD=1
+export PIXIE_VIZIER_BUILD=0
 export PIXIE_VIZIER_DEPLOY=1
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 
@@ -17,12 +17,12 @@ export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
 export ZONE=us-west1-b
 
 if [[ -z $CLUSTER_NAME ]]; then
-    export CLUSTER_NAME=testpx01
+    export CLUSTER_NAME=zkcloud02
 fi
 
-export PX_CLUSTER_NAME=testpx01
+export PX_CLUSTER_NAME=zkcloud02
 export PX_CLUSTER_PROJECT=zerok-dev
-export CLUSTER_NUM_NODES=2
+export CLUSTER_NUM_NODES=1
 export PX_CLUSTER_PROJECT=zerok-dev
 export CLUSTER_INSTANCE_TYPE=e2-standard-4
 
@@ -40,7 +40,7 @@ if [ "$USE_MKCERT_CA" == '1' ]
 then
     export PX_DOMAIN=$CLUSTER_NAME.testdomain.com
 else
-    export PX_DOMAIN=$CLUSTER_NAME.getanton.com
+    export PX_DOMAIN=px.$CLUSTER_NAME.getanton.com
 fi
 
 export PL_CLOUD_ADDR=$PX_DOMAIN

@@ -73,6 +73,7 @@ then
 
                 perl -pi -e 's/\${URL}\) -eq 200/--insecure \${URL}\) -eq 200/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
                 perl -pi -e 's/\"\${ADMIN_URL}\/admin\/identities\"/--insecure \"\${ADMIN_URL}\/admin\/identities\"/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
+                perl -pi -e 's/\"password\": \"admin\"/\"password\": \"8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918\"/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
 
                 if [ "$PIXIE_HOST_DEV_MODE" == '1' ]
                 then
@@ -80,6 +81,12 @@ then
                         git checkout ./skaffold/skaffold_cloud.yaml
                         cd $ZPX_DIR
                         perl -pi -e 's/dateTime/sha256/' $PIXIE_DIR/skaffold/skaffold_cloud.yaml
+
+                        echo "" >> $PIXIE_DIR/k8s/cloud/dev/kustomization.yaml
+                        echo "transformers:" >> $PIXIE_DIR/k8s/cloud/dev/kustomization.yaml
+                        echo "- image-prefix.yaml" >> $PIXIE_DIR/k8s/cloud/dev/kustomization.yaml
+
+                        cp $SCRIPTS_DIR/modified/image-prefix.yaml $PIXIE_DIR/k8s/cloud/dev/image-prefix.yaml
                 fi
 
                 if [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ]
@@ -88,6 +95,12 @@ then
                         git checkout ./skaffold/skaffold_operator.yaml
                         cd $ZPX_DIR
                         perl -pi -e 's/dateTime/sha256/' $PIXIE_DIR/skaffold/skaffold_operator.yaml
+
+                        echo "" >> $PIXIE_DIR/k8s/operator/deployment/base/kustomization.yaml
+                        echo "transformers:" >> $PIXIE_DIR/k8s/operator/deployment/base/kustomization.yaml
+                        echo "- image-prefix.yaml" >> $PIXIE_DIR/k8s/operator/deployment/base/kustomization.yaml
+
+                        cp $SCRIPTS_DIR/modified/image-prefix.yaml $PIXIE_DIR/k8s/operator/deployment/base/image-prefix.yaml
                 fi
 
                 if [ "$PIXIE_VIZIER_DEV_MODE" == '1' ]
