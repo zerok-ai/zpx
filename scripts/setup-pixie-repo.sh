@@ -20,7 +20,7 @@ else
 		rm -rf $PIXIE_DIR
 	fi
 
-	git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
+	git clone https://github.com/avingoyal/pixie.git $PIXIE_DIR
 	cd $PIXIE_DIR
 
 	# if [ "$PIXIE_HOST_DEV_MODE" == '0' ] && [ "$PIXIE_OPERATOR_DEV_MODE" == '0' ] && [ "$PIXIE_VIZIER_DEV_MODE" == '0' ]
