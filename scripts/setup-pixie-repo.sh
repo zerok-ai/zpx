@@ -20,19 +20,13 @@ else
 		rm -rf $PIXIE_DIR
 	fi
 
-	git clone https://github.com/avingoyal/pixie.git $PIXIE_DIR
+	git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
 	cd $PIXIE_DIR
 
-	# if [ "$PIXIE_HOST_DEV_MODE" == '0' ] && [ "$PIXIE_OPERATOR_DEV_MODE" == '0' ] && [ "$PIXIE_VIZIER_DEV_MODE" == '0' ]
-	# then
-		export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud/prod'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
-		echo "LATEST_CLOUD_RELEASE=$LATEST_CLOUD_RELEASE"
-		git checkout "release/cloud/prod/${LATEST_CLOUD_RELEASE}"
-		perl -pi -e "s|newTag: latest|newTag: \"${LATEST_CLOUD_RELEASE}\"|g" k8s/cloud/public/kustomization.yaml
-	# else
-	# 	echo 'Checkout out last known working commit 9e93af261'
-	# 	git checkout 9e93af261
-	# fi
+	# export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud/prod'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
+	# echo "LATEST_CLOUD_RELEASE=$LATEST_CLOUD_RELEASE"
+	# git checkout "release/cloud/prod/${LATEST_CLOUD_RELEASE}"
+	# perl -pi -e "s|newTag: latest|newTag: \"${LATEST_CLOUD_RELEASE}\"|g" k8s/cloud/public/kustomization.yaml
 
 	if [ "$USE_MKCERT_CA" == '0' ]
 	then
