@@ -9,18 +9,18 @@ export SAME_CLUSTER_SETUP=0
 export PIXIE_HOST_DEV_MODE=0
 export PIXIE_OPERATOR_DEV_MODE=0
 export PIXIE_VIZIER_DEV_MODE=1
-export PIXIE_VIZIER_BUILD=0
+export PIXIE_VIZIER_BUILD=1
 export PIXIE_VIZIER_DEPLOY=1
-export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
+export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-test-dev
 
 #Basic cluster parameters
 export ZONE=us-west1-b
 
 if [[ -z $CLUSTER_NAME ]]; then
-    export CLUSTER_NAME=zkcloud02
+    export CLUSTER_NAME=avinpx01
 fi
 
-export PX_CLUSTER_NAME=zkcloud02
+export PX_CLUSTER_NAME=avinpx01
 export PX_CLUSTER_PROJECT=zerok-dev
 export CLUSTER_NUM_NODES=1
 export PX_CLUSTER_PROJECT=zerok-dev
