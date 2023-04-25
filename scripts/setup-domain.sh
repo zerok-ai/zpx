@@ -17,8 +17,8 @@ then
                 echo 'Replacing domains'
 
                 cd $PIXIE_DIR
-                git checkout ./k8s/cloud/public/proxy_envoy.yaml
-                git checkout ./k8s/cloud/public/domain_config.yaml
+                git checkout ./k8s/cloud/public/base/proxy_envoy.yaml
+                git checkout ./k8s/cloud/public/base/domain_config.yaml
                 git checkout ./scripts/create_cloud_secrets.sh
                 git checkout ./tools/docker/user_dev_image/Dockerfile
                 cd $ZPX_DIR
@@ -34,19 +34,19 @@ then
                         echo "  --key=\"\${PROXY_KEY_FILE}\"" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 fi
 
-                perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-                perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-                perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
+                perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/base/proxy_envoy.yaml
+                perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/k8s/cloud/public/base/proxy_envoy.yaml
+                perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/base/proxy_envoy.yaml
 
-                perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
+                perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
+                perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
+                perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
 
                 perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
 
-                perl -pi -e 's/\"4444\"/\"\"/' $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
+                perl -pi -e 's/\"4444\"/\"\"/' $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
 
                 rm $SCRIPTS_DIR/modified/cloud_ingress_*.yaml
                 rm $SCRIPTS_DIR/modified/certificate_*.yaml
