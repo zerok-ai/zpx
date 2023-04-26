@@ -28,7 +28,7 @@ then
     VIZIER_DEPLOY_INP=$retval
     if [ "$VIZIER_DEPLOY_INP" == '1' ]
     then
-        $SCRIPTS_DIR/check-and-wait-for-pods.sh pl
+        # $SCRIPTS_DIR/check-and-wait-for-pods.sh pl
 
         if [ "$SAME_CLUSTER_SETUP" == '0' ]
         then
