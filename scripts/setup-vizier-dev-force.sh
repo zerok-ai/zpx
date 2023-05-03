@@ -10,7 +10,7 @@ getUserInput "Do you want to proceed ahead with zpixie repo checkout?" ""
 retval=$?
 ZPIXIE_REPO_CHECKOUT=$retval
 
-if [ "$DOMAIN_REPLACEMENTS_SETUP" == '1' ]
+if [ "$ZPIXIE_REPO_CHECKOUT" == '1' ]
 then
     ## Setup pixie repo
     rm -rf $PIXIE_DIR
