@@ -6,7 +6,7 @@ source $THIS_DIR/variables.sh
 ## Setup pixie repo
 rm -rf $PIXIE_DIR
 # git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
-git clone --branch feature/zk-query https://github.com/zerok-ai/zpixie.git $PIXIE_DIR
+git clone --branch feature/zk-query git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
 
 ## DOMAIN setup
 $SCRIPTS_DIR/setup-domain.sh
