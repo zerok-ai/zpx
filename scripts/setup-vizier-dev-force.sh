@@ -3,10 +3,20 @@
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $THIS_DIR/variables.sh
 
-## Setup pixie repo
-rm -rf $PIXIE_DIR
-# git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
-git clone --branch feature/zk-query git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
+echo ''
+echo '-----------------SETTING-UP-ZPIXIE-REPO-----------------'
+
+getUserInput "Do you want to proceed ahead with zpixie repo checkout?" ""
+retval=$?
+ZPIXIE_REPO_CHECKOUT=$retval
+
+if [ "$DOMAIN_REPLACEMENTS_SETUP" == '1' ]
+then
+    ## Setup pixie repo
+    rm -rf $PIXIE_DIR
+    # git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
+    git clone --branch feature/zk-query git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
+fi
 
 ## DOMAIN setup
 $SCRIPTS_DIR/setup-domain.sh
