@@ -15,7 +15,8 @@ then
     ## Setup pixie repo
     rm -rf $PIXIE_DIR
     # git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
-    git clone --branch feature/zk-query git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
+    git clone --branch refactor-submodule git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
+    git submodule update --init --recursive --remote
 fi
 
 ## DOMAIN setup
