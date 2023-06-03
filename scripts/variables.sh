@@ -1,29 +1,46 @@
 #!/usr/bin/env bash
+# Ask before running every operation
 export ASK_USER=1
+# Client: Ask before installing px operator
 export FORCE_ASK_PX_OPERATOR=1
+# Cluster setup is required or not
 export SETUP_CLUSTER=1
 
 #Are we going to setup px operator in the same cluster as px host?
+# In case SSL is not used, we use mkcert to start a local CA. Always set it to 0 for GKE clusters
 export USE_MKCERT_CA=0
-export SAME_CLUSTER_SETUP=1
+# For debugging, setup client and cloudbotyh on the same cluster. Set it to 0 for production
+export SAME_CLUSTER_SETUP=0
+# Cloud: Dev mode setup - required for local changes in pixie. Set it to 0
 export PIXIE_HOST_DEV_MODE=0
+# Client: Dev mode setup - required for local changes in pixie operator. Set it to 0
 export PIXIE_OPERATOR_DEV_MODE=0
-export PIXIE_VIZIER_DEV_MODE=1
-export PIXIE_VIZIER_BUILD=1
-export PIXIE_VIZIER_DEPLOY=1
+# Client: Dev mode setup - required for local changes in vizier. Set it to 0
+export PIXIE_VIZIER_DEV_MODE=0
+# Client: Dev mode setup - build and push vizier changes. Set it to 0
+export PIXIE_VIZIER_BUILD=0
+# Client: Dev mode setup - deploy latest vizier changes. Set it to 0
+export PIXIE_VIZIER_DEPLOY=0
+# Required for dev mode: Repo where pixie images are pushed
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-test-dev
 
 #Basic cluster parameters
+# GKE Zone
 export ZONE=us-west1-b
 
 if [[ -z $CLUSTER_NAME ]]; then
+    # Cloud: Cluster name
     export CLUSTER_NAME=avinpx04
 fi
 
+# Client: Cluster name
 export PX_CLUSTER_NAME=avinpx04
+# Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
+# Cloud: Number of nodes required to setup cluster
 export CLUSTER_NUM_NODES=2
 export PX_CLUSTER_PROJECT=zerok-dev
+# Cloud: Instance type
 export CLUSTER_INSTANCE_TYPE=e2-standard-4
 
 #PX Domain to be used
