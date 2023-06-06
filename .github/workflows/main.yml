@@ -52,5 +52,5 @@ jobs:
       - name: Deploy
         run: |-
              chmod +x ./scripts/setup.sh \
-             ./scripts/setup.sh
+             ./scripts/setup-backend.sh
                 
