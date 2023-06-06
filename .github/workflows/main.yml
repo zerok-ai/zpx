@@ -51,9 +51,9 @@ jobs:
 
       - name: Deploy
         run: |-
-             chmod +x ./scripts/setup.sh \
-             export ZONE=$GKE_ZONE \
-             export CLUSTER_NAME=$CLUSTER_NAME \
-             export PX_DOMAIN=$PX_DOMAIN \
+             chmod +x ./scripts/setup.sh 
+             export ZONE=$GKE_ZONE 
+             export CLUSTER_NAME=$CLUSTER_NAME 
+             export PX_DOMAIN=$PX_DOMAIN 
              ./scripts/setup.sh
                 
