@@ -20,7 +20,7 @@ env:
   GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
 
 jobs:
-  build:
+  setup:
     runs-on: self-hosted
     steps:
       - name: Checkout
