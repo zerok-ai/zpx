@@ -16,7 +16,7 @@ on:
             default: 'pxtest2.getanton.com'
 env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
-  GKE_CLUSTER: ${{ github.event.inputs.target-cluster }}
+  GKE_CLUSTER: ${{ github.event.inputs.CLUSTER_NAME }}
   GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
 
 jobs:
