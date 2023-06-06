@@ -55,5 +55,6 @@ jobs:
              export ZONE=$GKE_ZONE 
              export CLUSTER_NAME=$CLUSTER_NAME 
              export PX_DOMAIN=$PX_DOMAIN 
+             apt-get install gettext-base
              ./scripts/setup.sh
                 
