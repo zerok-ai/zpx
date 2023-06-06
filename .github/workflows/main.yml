@@ -49,6 +49,7 @@ jobs:
         run: |-
            curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
            chmod 700 get_helm.sh
+           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
            ./get_helm.sh
            sudo apt-get update
            sudo apt-get install gettext-base
