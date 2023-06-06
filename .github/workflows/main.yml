@@ -10,6 +10,10 @@ on:
             description: 'GKE_ZONE'
             required: true
             default: 'us-west1-b'
+        PX_DOMAIN:
+            description: 'PX_DOMAIN'
+            required: true
+            default: 'pxtest2.getanton.com'
 env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
   GKE_CLUSTER: ${{ github.event.inputs.target-cluster }}
