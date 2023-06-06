@@ -32,7 +32,10 @@ jobs:
         with:
           credentials_json: '${{ env.GKE_SA_KEY }}'
         
-
+      - uses: google-github-actions/setup-gcloud@v0
+        with:
+          version: latest
+          export_default_credentials: true
 
 
       - id: 'get-credentials'
@@ -55,6 +58,6 @@ jobs:
              export ZONE=$GKE_ZONE 
              export CLUSTER_NAME=$CLUSTER_NAME 
              export PX_DOMAIN=$PX_DOMAIN 
-             apt-get install gettext-base
+             sudo apt-get install gettext-base
              ./scripts/setup.sh
                 
