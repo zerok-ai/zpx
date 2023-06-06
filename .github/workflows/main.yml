@@ -2,10 +2,10 @@ name: DEPLOY
 on:
   workflow_dispatch:
    inputs:
-        target-cluster:
-            description: 'Target Cluster'
+        CLUSTER_NAME:
+            description: 'CLUSTER_NAME'
             required: true
-            default: 'GKE_CLUSTER'
+            default: 'zerok-c2s-poc'
         GKE_ZONE:
             description: 'GKE_ZONE'
             required: true
