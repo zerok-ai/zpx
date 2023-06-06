@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Ask before running every operation
-export ASK_USER=1
+export ASK_USER=0
 # Client: Ask before installing px operator
 export FORCE_ASK_PX_OPERATOR=1
 # Cluster setup is required or not
