@@ -1,0 +1,13 @@
+name: CICD
+on:
+  workflow_dispatch:
+env:
+  NS: "apps"
+  ENV: "poc"
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
