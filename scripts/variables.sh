@@ -27,7 +27,8 @@ export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-test-dev
 #Basic cluster parameters
 # GKE Zone
 export ZONE=us-west1-b
-
+echo "cluster_name"
+echo $CLUSTER_NAME
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
     export CLUSTER_NAME=avinpx04
