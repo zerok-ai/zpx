@@ -10,13 +10,9 @@ on:
             description: 'GKE_ZONE'
             required: true
             default: 'us-west1-b'
-        PX_DOMAIN:
-            description: 'PX_DOMAIN'
-            required: true
-            default: 'pxtest2.getanton.com'
 env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
-  GKE_CLUSTER: ${{ github.event.inputs.CLUSTER_NAME }}
+  CLUSTER_NAME: ${{ github.event.inputs.CLUSTER_NAME }}
   GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
 
 jobs:
@@ -64,6 +60,5 @@ jobs:
              chmod +x ./scripts/setup.sh 
              export ZONE=$GKE_ZONE 
              export CLUSTER_NAME=$CLUSTER_NAME 
-             export PX_DOMAIN=$PX_DOMAIN 
              ./scripts/setup.sh
                 
