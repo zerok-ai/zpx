@@ -25,23 +25,23 @@ export LC_ALL=C
 
 kubectl create secret generic -n "${namespace}" \
   cloud-auth-secrets \
-  --from-literal=jwt-signing-key="$(< /dev/urandom tr -dc 'a-zA-Z0-9')"
+  --from-literal=jwt-signing-key="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V"
 
 kubectl create secret generic -n "${namespace}" \
   pl-hydra-secrets \
-  --from-literal=SECRETS_SYSTEM="$(< /dev/urandom tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)" \
-  --from-literal=OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT="$(< /dev/urandom tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)" \
-  --from-literal=CLIENT_SECRET="$(< /dev/urandom tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+  --from-literal=SECRETS_SYSTEM="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V" \
+  --from-literal=OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V" \
+  --from-literal=CLIENT_SECRET="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V"
 
 kubectl create secret generic -n "${namespace}" \
   pl-db-secrets \
   --from-literal=PL_POSTGRES_USERNAME="pl" \
-  --from-literal=PL_POSTGRES_PASSWORD="$(< /dev/urandom tr -dc 'a-zA-Z0-9' | fold -w 24 | head -n 1)" \
-  --from-literal=database-key="$(< /dev/urandom tr -dc 'a-zA-Z0-9#$%&().' | fold -w 24 | head -n 1)"
+  --from-literal=PL_POSTGRES_PASSWORD="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V" \
+  --from-literal=database-key="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V"
 
 kubectl create secret generic -n "${namespace}" \
   cloud-session-secrets \
-  --from-literal=session-key="$(< /dev/urandom tr -dc 'a-zA-Z0-9' | fold -w 24 | head -n 1)"
+  --from-literal=session-key="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V"
 
 SERVICE_TLS_CERTS="$(mktemp -d)"
 pushd "${SERVICE_TLS_CERTS}" || exit 1
