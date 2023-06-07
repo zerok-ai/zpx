@@ -1,9 +1,8 @@
 #!/bin/bash
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
  echo "clustername - $CLUSTER_NAME \n"
-             export ZONE=$GKE_ZONE 
-             export CLUSTER_NAME=$CLUSTER_NAME 
-             export PX_DOMAIN=$PX_DOMAIN
+export ZONE=$GKE_ZONE 
+export CLUSTER_NAME=$CLUSTER_NAME 
 source $THIS_DIR/variables.sh
 
 helpFunction()
