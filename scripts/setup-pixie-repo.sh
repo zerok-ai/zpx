@@ -20,7 +20,7 @@ else
 		rm -rf $PIXIE_DIR
 	fi
 
-	# git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
+	git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
 	#git clone --branch main git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
 	cd $PIXIE_DIR
 
