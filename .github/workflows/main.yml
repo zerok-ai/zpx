@@ -57,7 +57,11 @@ jobs:
            sudo apt-get install gettext-base
            gcloud components install kubectl
   
-
+      - name: Checkout zpixie repo
+        uses: actions/checkout@v3
+        with:
+          repository: zerok-ai/zpixie
+          path: build/pixie
       - name: Deploy
         run: |-
              chmod +x ./scripts/setup.sh 
