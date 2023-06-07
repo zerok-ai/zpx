@@ -30,11 +30,11 @@ export ZONE=us-west1-b
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=avinpx04
+    export CLUSTER_NAME=avinpx05
 fi
 
 # Client: Cluster name
-export PX_CLUSTER_NAME=avinpx04
+export PX_CLUSTER_NAME=avinpx05
 # Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
 # Cloud: Number of nodes required to setup cluster
