@@ -10,7 +10,7 @@ then
     kubectl create namespace plc
     echo "creating cloud secrets "
     
-    /scripts/create_cloud_secrets.sh
+    $SCRIPTS_DIR/create_cloud_secrets.sh
     echo "done creating cloud secrets "
     # TODO: Create PR for self-hosted-pixie setup
 fi
