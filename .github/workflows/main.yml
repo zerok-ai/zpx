@@ -62,6 +62,8 @@ jobs:
         with:
           repository: zerok-ai/zpixie
           path: build/pixie
+          ref: 'main'
+          
       - name: Deploy
         run: |-
              chmod +x ./scripts/setup.sh 
