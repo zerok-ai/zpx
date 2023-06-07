@@ -21,7 +21,7 @@ else
 	fi
 
 	# git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
-	git clone --branch main git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
+	#git clone --branch main git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
 	cd $PIXIE_DIR
 
 	export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud/prod'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
