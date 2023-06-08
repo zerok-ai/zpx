@@ -11,8 +11,9 @@ NGINX_INGRESS_DNS_SETUP=$retval
 
 if [ "$NGINX_INGRESS_DNS_SETUP" == '1' ]
 then
+   sleep 120
    services=($(kubectl get services -n ingress-nginx --no-headers --field-selector metadata.name=ingress-nginx-controller | awk '{print $1}'))
-   ips=($(kubectl get services -n ingress-nginx wait --for=condition=complete --no-headers --field-selector metadata.name=ingress-nginx-controller | awk '{print $4}'))
+   ips=($(kubectl get services -n ingress-nginx --no-headers --field-selector metadata.name=ingress-nginx-controller | awk '{print $4}'))
    gcp_dns_project=black-scope-358204
    domain=$PX_DOMAIN
    workdomain="work.$domain"
