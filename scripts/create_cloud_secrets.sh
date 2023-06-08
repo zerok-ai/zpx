@@ -25,24 +25,23 @@ export LC_ALL=C
 
 kubectl create secret generic -n "${namespace}" \
   cloud-auth-secrets \
-  --from-literal=jwt-signing-key="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V"
+  --from-literal=jwt-signing-key="$(openssl rand -base64 32)"
 
 kubectl create secret generic -n "${namespace}" \
   pl-hydra-secrets \
-  --from-literal=SECRETS_SYSTEM="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V" \
-  --from-literal=OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V" \
-  --from-literal=CLIENT_SECRET="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V"
+  --from-literal=SECRETS_SYSTEM="$(openssl rand -base64 32)" \
+  --from-literal=OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT="$(openssl rand -base64 32)" \
+  --from-literal=CLIENT_SECRET="$(openssl rand -base64 32)"
 
 kubectl create secret generic -n "${namespace}" \
   pl-db-secrets \
   --from-literal=PL_POSTGRES_USERNAME="pl" \
-  --from-literal=PL_POSTGRES_PASSWORD="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V" \
-  --from-literal=database-key="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V"
+  --from-literal=PL_POSTGRES_PASSWORD="$(openssl rand -base64 16)" \
+  --from-literal=database-key="$(openssl rand -base64 32)"
 
 kubectl create secret generic -n "${namespace}" \
   cloud-session-secrets \
-  --from-literal=session-key="0wHHztRSTaEO289EenfbaaOe2FPrEV37AqztwB7cLsx04pBmfzshMcVSQ7eHrP4V"
-
+  --from-literal=session-key="$(openssl rand -base64 32)"
 SERVICE_TLS_CERTS="$(mktemp -d)"
 pushd "${SERVICE_TLS_CERTS}" || exit 1
 
