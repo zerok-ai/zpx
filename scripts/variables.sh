@@ -17,10 +17,10 @@ export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-test-dev
 export ZONE=us-west1-b
 
 if [[ -z $CLUSTER_NAME ]]; then
-    export CLUSTER_NAME=avinpx04
+    export CLUSTER_NAME=avinpx07
 fi
 
-export PX_CLUSTER_NAME=avinpx04
+export PX_CLUSTER_NAME=avinpx07
 export PX_CLUSTER_PROJECT=zerok-dev
 export CLUSTER_NUM_NODES=2
 export PX_CLUSTER_PROJECT=zerok-dev
