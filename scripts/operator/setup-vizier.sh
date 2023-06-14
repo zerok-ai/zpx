@@ -11,7 +11,8 @@ then
     if [ "$VIZIER_BUILD_INP" == '1' ]
     then
 
-        $SCRIPTS_DIR/setup-patches.sh
+        #Moving patches to zpixie repo directly, so disabling the following script for now
+        # $SCRIPTS_DIR/setup-patches.sh
         
         if [ "$PIXIE_VIZIER_BUILD" == "1" ]
         then
