@@ -23,6 +23,7 @@ export PIXIE_VIZIER_BUILD=0
 export PIXIE_VIZIER_DEPLOY=0
 # Required for dev mode: Repo where pixie images are pushed
 export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-test-dev
+export ZPIXIE_BRANCH=deploy-main
 
 #Basic cluster parameters
 # GKE Zone

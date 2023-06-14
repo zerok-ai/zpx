@@ -15,7 +15,7 @@ then
     ## Setup pixie repo
     rm -rf $PIXIE_DIR
     # git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
-    git clone --branch redis-expiry git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
+    git clone --branch $ZPIXIE_BRANCH git@github.com:zerok-ai/zpixie.git $PIXIE_DIR
     # cd $PIXIE_DIR
     # git submodule update --init --recursive --remote
     # cd $ZPX_DIR
