@@ -14,6 +14,7 @@ env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
   CLUSTER_NAME: ${{ github.event.inputs.CLUSTER_NAME }}
   GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
+  TOKEN: ${{ secrets.GITPAT }}
 
 jobs:
   setup:
@@ -21,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Configure git for private modules
+        run: git config --global url."https://$TOKEN:x-oauth-basic@github.com/".insteadOf "https://github.com/"
         
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
