@@ -20,8 +20,8 @@ else
 		rm -rf $PIXIE_DIR
 	fi
 
- 	#git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
-	git clone --branch deploy-main   https://github.com/zerok-ai/zpixie.git $PIXIE_DIR
+	# git clone --branch feature/vizier-dev-tryout https://github.com/avingoyal/pixie.git $PIXIE_DIR
+	git clone --branch deploy-main $ZPIXIE_REPO $PIXIE_DIR
 	cd $PIXIE_DIR
 
 	export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud/prod'  | sort -r | head -n 1 | awk -F/ '{print $NF}')

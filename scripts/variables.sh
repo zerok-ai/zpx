@@ -29,6 +29,13 @@ export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-test-dev
 export ZONE=us-west1-b
 echo "cluster_name"
 echo $CLUSTER_NAME
+
+if [[ -z $ZPIXIE_REPO ]]; then
+    export ZPIXIE_REPO=git@github.com:zerok-ai/zpixie.git
+fi
+
+echo "ZPIXIE_REPO==$ZPIXIE_REPO"
+
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
     export CLUSTER_NAME=avinpx05
