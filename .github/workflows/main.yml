@@ -2,6 +2,10 @@ name: DEPLOY
 on:
   workflow_dispatch:
    inputs:
+        ZPIXIE_REPO:
+            description: 'ZPIXIE_REPO'
+            required: true
+            default: 'https://github.com/zerok-ai/zpixie.git'
         CLUSTER_NAME:
             description: 'CLUSTER_NAME'
             required: true
@@ -13,6 +17,7 @@ on:
 env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
   CLUSTER_NAME: ${{ github.event.inputs.CLUSTER_NAME }}
+  ZPIXIE_REPO: ${{ github.event.inputs.ZPIXIE_REPO }}
   GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
   TOKEN: ${{ secrets.GITPAT }}
 
@@ -62,6 +67,7 @@ jobs:
         run: |-
              chmod +x ./scripts/setup.sh 
              export ZONE=$GKE_ZONE 
-             export CLUSTER_NAME=$CLUSTER_NAME 
+             export CLUSTER_NAME=$CLUSTER_NAME
+             export ZPIXIE_REPO=$ZPIXIE_REPO
              ./scripts/setup.sh
                 
