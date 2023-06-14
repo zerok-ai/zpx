@@ -16,6 +16,12 @@ export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-test-dev
 #Basic cluster parameters
 export ZONE=us-west1-b
 
+if [[ -z $ZPIXIE_REPO ]]; then
+    export ZPIXIE_REPO=git@github.com:zerok-ai/zpixie.git
+fi
+
+echo "ZPIXIE_REPO==$ZPIXIE_REPO"
+
 if [[ -z $CLUSTER_NAME ]]; then
     export CLUSTER_NAME=avinpx07
 fi
