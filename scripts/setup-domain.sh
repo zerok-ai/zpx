@@ -45,6 +45,8 @@ then
                 perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
+                perl -pi -e "s/set -e/set -x/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
+                perl -pi -e "s/< \/dev\/urandom/openssl rand -hex 256 |/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
 
                 perl -pi -e 's/\"4444\"/\"\"/' $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
 
