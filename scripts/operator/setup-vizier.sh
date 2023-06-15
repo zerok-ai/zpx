@@ -38,6 +38,7 @@ then
         fi
 
         echo "Deploying Vizier"
-        kubectl apply -k $PIXIE_DIR/k8s/vizier/persistent_metadata/
+        # kubectl apply -k $PIXIE_DIR/k8s/vizier/persistent_metadata/
+        kubectl apply -k $SCRIPTS_DIR/modified/vizier/
     fi
 fi

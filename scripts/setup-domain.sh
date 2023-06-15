@@ -66,8 +66,11 @@ then
                 envsubst < $SCRIPTS_DIR/originals/cloud_ingress_template.yaml >> $SCRIPTS_DIR/modified/cloud_ingress_deploy.yaml
 
                 ##
-                rm $SCRIPTS_DIR/modified/image-prefix.yaml
-                envsubst < $SCRIPTS_DIR/originals/image-prefix.yaml >> $SCRIPTS_DIR/modified/image-prefix.yaml
+                rm $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
+                envsubst < $SCRIPTS_DIR/originals/vizier/image-prefix.yaml >> $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
+
+                rm $SCRIPTS_DIR/modified/vizier/kustomization.yaml
+                envsubst < $SCRIPTS_DIR/originals/vizier/kustomization.yaml >> $SCRIPTS_DIR/modified/vizier/kustomization.yaml
 
                 ## Exposing kratos
                 rm $SCRIPTS_DIR/modified/expose-kratos.yaml
@@ -112,13 +115,17 @@ then
                         git checkout ./k8s/vizier/persistent_metadata/kustomization.yaml
                         
                         cd $ZPX_DIR
-                        perl -pi -e 's/dateTime/sha256/' $PIXIE_DIR/skaffold/skaffold_vizier.yaml
+                        perl -pi -e 's/dateTime: {}/envTemplate:\n      template: "{{ .VIZIER_TAG }}"/' $PIXIE_DIR/skaffold/skaffold_vizier.yaml
 
-                        echo "" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
-                        echo "transformers:" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
-                        echo "- image-prefix.yaml" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "images:" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "- name: gcr.io/pixie-oss/pixie-dev/vizier/pem_image:latest" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "  newTag: $VIZIER_TAG" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "transformers:" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "- image-prefix.yaml" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
 
-                        cp $SCRIPTS_DIR/modified/image-prefix.yaml $PIXIE_DIR/k8s/vizier/persistent_metadata/image-prefix.yaml
+                        cp $SCRIPTS_DIR/modified/vizier/image-prefix.yaml $PIXIE_DIR/k8s/vizier/persistent_metadata/vizier/image-prefix.yaml
                 fi
 
         fi
