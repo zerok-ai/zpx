@@ -21,8 +21,13 @@ export PIXIE_VIZIER_DEV_MODE=0
 export PIXIE_VIZIER_BUILD=0
 # Client: Dev mode setup - deploy latest vizier changes. Set it to 0
 export PIXIE_VIZIER_DEPLOY=0
+export VIZIER_TAG=dev0.0.1
+# GCLOUD_ARTIFACT_REPO_BASEPATH
+export GCLOUD_ARTIFACT_REPO_BASE=us-west1-docker.pkg.dev/zerok-dev
 # Required for dev mode: Repo where pixie images are pushed
-export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-test-dev
+export PIXIE_REPO=$GCLOUD_ARTIFACT_REPO_BASE/pixie-test-dev
+# Required for dev mode: Repo where pixie vizier images are pushed
+export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
 export ZPIXIE_BRANCH=deploy-main
 
 #Basic cluster parameters
