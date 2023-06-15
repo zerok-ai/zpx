@@ -16,6 +16,8 @@ then
         then
                 echo 'Replacing domains'
 
+                mkdir -p $SCRIPTS_DIR/modified/vizier
+
                 cd $PIXIE_DIR
                 git checkout ./k8s/cloud/public/base/proxy_envoy.yaml
                 git checkout ./k8s/cloud/public/base/domain_config.yaml
