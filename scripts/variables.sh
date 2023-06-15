@@ -28,6 +28,7 @@ export GCLOUD_ARTIFACT_REPO_BASE=us-west1-docker.pkg.dev/zerok-dev
 export PIXIE_REPO=$GCLOUD_ARTIFACT_REPO_BASE/pixie-test-dev
 # Required for dev mode: Repo where pixie vizier images are pushed
 export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
+# ZPixie branch used
 export ZPIXIE_BRANCH=deploy-main
 
 #Basic cluster parameters
