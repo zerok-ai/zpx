@@ -23,7 +23,7 @@ export PL_CLOUD_ADDR=$PX_DOMAIN:443
 export CLUSTER_ZEROK_PL=$CLUSTER_NAME
 perl -pi -e "s|newTag: latest|newTag: \"\"|g" $${ESC}PIXIE_DIR/k8s/cloud/public/kustomization.yaml
 perl -pi -e "s|pixie-prod|pixie-dev|g" $${ESC}PIXIE_DIR/k8s/cloud/public/kustomization.yaml
-skaffold config set default-repo $PIXIE_REPO
+skaffold config set default-repo $VIZIER_ARTIFACT_REPO
 
 echo "docker login with service account"
 gcloud auth activate-service-account zk-dev-instance-02@zerok-dev.iam.gserviceaccount.com \
@@ -43,4 +43,4 @@ gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --projec
 # bazel run //src/pixie_cli:px -- deploy
 echo "Setting up vizier"
 export VIZIER_TAG=$VIZIER_TAG
-skaffold $${ESC}COMMAND -p opt -f $${ESC}PIXIE_DIR/skaffold/skaffold_vizier.yaml --default-repo=$PIXIE_REPO
+skaffold $${ESC}COMMAND -p opt -f $${ESC}PIXIE_DIR/skaffold/skaffold_vizier.yaml --default-repo=$VIZIER_ARTIFACT_REPO

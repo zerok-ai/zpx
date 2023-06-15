@@ -3,7 +3,7 @@ kind: PrefixTransformer
 metadata:
   name: image-prefix
 
-prefix: ${PIXIE_REPO}/
+prefix: ${VIZIER_ARTIFACT_REPO}/
 
 fieldSpecs:
 - path: spec/template/spec/containers/image

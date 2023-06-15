@@ -11,8 +11,10 @@ export PIXIE_OPERATOR_DEV_MODE=0
 export PIXIE_VIZIER_DEV_MODE=1
 export PIXIE_VIZIER_BUILD=1
 export PIXIE_VIZIER_DEPLOY=1
-export VIZIER_TAG=v1.0.0
-export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-test-dev
+export VIZIER_TAG=dev0.0.1
+export GCLOUD_ARTIFACT_REPO_BASE=us-west1-docker.pkg.dev/zerok-dev
+export PIXIE_REPO=$GCLOUD_ARTIFACT_REPO_BASE/pixie-test-dev
+export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
 export ZPIXIE_BRANCH=deploy-main
 
 #Basic cluster parameters
