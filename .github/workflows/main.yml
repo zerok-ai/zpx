@@ -6,6 +6,10 @@ on:
             description: 'ZPIXIE_REPO'
             required: true
             default: 'https://github.com/zerok-ai/zpixie.git'
+        ZPIXIE_BRANCH:
+            description: 'ZPIXIE_BRANCH'
+            required: true
+            default: 'zkconfigmap'
         CLUSTER_NAME:
             description: 'CLUSTER_NAME'
             required: true
@@ -18,6 +22,7 @@ env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
   CLUSTER_NAME: ${{ github.event.inputs.CLUSTER_NAME }}
   ZPIXIE_REPO: ${{ github.event.inputs.ZPIXIE_REPO }}
+  ZPIXIE_BRANCH: ${{ github.event.inputs.ZPIXIE_BRANCH }}
   GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
   TOKEN: ${{ secrets.GITPAT }}
 
@@ -69,5 +74,6 @@ jobs:
              export ZONE=$GKE_ZONE 
              export CLUSTER_NAME=$CLUSTER_NAME
              export ZPIXIE_REPO=$ZPIXIE_REPO
+             export ZPIXIE_BRANCH=$ZPIXIE_BRANCH
              ./scripts/setup.sh
                 
