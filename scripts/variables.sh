@@ -32,20 +32,16 @@ export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
 #Basic cluster parameters
 # GKE Zone
 export ZONE=us-west1-b
-echo "cluster_name"
-echo $CLUSTER_NAME
 
 # ZPixie repo used
 if [[ -z $ZPIXIE_REPO ]]; then
     export ZPIXIE_REPO=git@github.com:zerok-ai/zpixie.git
 fi
-echo "ZPIXIE_REPO==$ZPIXIE_REPO"
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
     export ZPIXIE_BRANCH=deploy-main
 fi
-echo "ZPIXIE_BRANCH==$ZPIXIE_BRANCH"
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
