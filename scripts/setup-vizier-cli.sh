@@ -10,22 +10,18 @@ if [[ -d $PIXIE_DIR ]]; then
     git checkout .
 else
     rm -rf $PIXIE_DIR
-    git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
+    git clone --branch $ZPIXIE_BRANCH $ZPIXIE_REPO $PIXIE_DIR
+    # git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
 fi
 
-export LATEST_CLOUD_RELEASE=$(git tag | grep 'release/cloud/prod'  | sort -r | head -n 1 | awk -F/ '{print $NF}')
-echo "LATEST_CLOUD_RELEASE=$LATEST_CLOUD_RELEASE"
-git checkout "release/cloud/prod/${LATEST_CLOUD_RELEASE}"
-perl -pi -e "s|newTag: latest|newTag: \"${LATEST_CLOUD_RELEASE}\"|g" k8s/cloud/public/kustomization.yaml
+perl -pi -e 's/dateTime: {}/envTemplate:\n      template: "{{ .VIZIER_TAG }}"/' $PIXIE_DIR/skaffold/skaffold_vizier.yaml
 
 ## Modifying Vizier kustomize
-rm $SCRIPTS_DIR/modified/image-prefix.yaml
-envsubst < $SCRIPTS_DIR/originals/image-prefix.yaml >> $SCRIPTS_DIR/modified/image-prefix.yaml
-
-echo "" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
-echo "transformers:" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
-echo "- image-prefix.yaml" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
-cp $SCRIPTS_DIR/modified/image-prefix.yaml $PIXIE_DIR/k8s/vizier/persistent_metadata/image-prefix.yaml
+mkdir -p $SCRIPTS_DIR/modified/vizier
+rm -f $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
+envsubst < $SCRIPTS_DIR/originals/vizier/image-prefix.yaml >> $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
+rm -f $SCRIPTS_DIR/modified/vizier/kustomization.yaml
+envsubst < $SCRIPTS_DIR/originals/vizier/kustomization.yaml >> $SCRIPTS_DIR/modified/vizier/kustomization.yaml
 
 ## Deploy Vizier
-kubectl apply -k $PIXIE_DIR/k8s/vizier/persistent_metadata/
+kubectl apply -k $SCRIPTS_DIR/modified/vizier/

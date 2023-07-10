@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Ask before running every operation
-export ASK_USER=0
+export ASK_USER=1
 # Client: Ask before installing px operator
 export FORCE_ASK_PX_OPERATOR=1
 # Cluster setup is required or not
@@ -40,16 +40,16 @@ fi
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
-    export ZPIXIE_BRANCH=deploy-main
+    export ZPIXIE_BRANCH=zkconfigmap
 fi
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=avinpx05
+    export CLUSTER_NAME=loadclient02
 fi
 
 # Client: Cluster name
-export PX_CLUSTER_NAME=avinpx05
+export PX_CLUSTER_NAME=loadclient02
 # Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
 # Cloud: Number of nodes required to setup cluster
