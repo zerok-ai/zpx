@@ -16,7 +16,7 @@ export PIXIE_HOST_DEV_MODE=0
 # Client: Dev mode setup - required for local changes in pixie operator. Set it to 0
 export PIXIE_OPERATOR_DEV_MODE=0
 # Client: Dev mode setup - required for local changes in vizier. Set it to 0
-export PIXIE_VIZIER_DEV_MODE=0
+export PIXIE_VIZIER_DEV_MODE=1
 # Client: Dev mode setup - build and push vizier changes. Set it to 0
 export PIXIE_VIZIER_BUILD=0
 # Client: Dev mode setup - deploy latest vizier changes. Set it to 0
@@ -36,6 +36,11 @@ export ZONE=us-west1-b
 # ZPixie repo used
 if [[ -z $ZPIXIE_REPO ]]; then
     export ZPIXIE_REPO=git@github.com:zerok-ai/zpixie.git
+fi
+
+# Redis service name
+if [[ -z $REDIS_SERVICE ]]; then
+    export REDIS_SERVICE=zerok-cli-redis-master
 fi
 
 # ZPixie branch used

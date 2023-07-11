@@ -6,6 +6,8 @@ commonLabels:
   app: pl-monitoring
   component: vizier
 resources:
+- zk-client-db-configmap.yaml
+- zpixie-configmap.yaml
 - ../../../build/pixie/k8s/vizier/persistent_metadata/
 
 images:

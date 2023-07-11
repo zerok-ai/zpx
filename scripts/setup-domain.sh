@@ -52,8 +52,8 @@ then
 
                 perl -pi -e 's/\"4444\"/\"\"/' $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
 
-                rm $SCRIPTS_DIR/modified/cloud_ingress_*.yaml
-                rm $SCRIPTS_DIR/modified/certificate_*.yaml
+                rm -f $SCRIPTS_DIR/modified/cloud_ingress_*.yaml
+                rm -f $SCRIPTS_DIR/modified/certificate_*.yaml
                 envsubst < $SCRIPTS_DIR/originals/certificate_cloud_proxy_tls_certs.yaml >> $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs.yaml
                 envsubst < $SCRIPTS_DIR/originals/certificate_cloud_proxy_tls_certs_nginx.yaml >> $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs_nginx.yaml
                 export SSL_PASSTHROUGH_HTTPS=true
@@ -68,14 +68,14 @@ then
                 envsubst < $SCRIPTS_DIR/originals/cloud_ingress_template.yaml >> $SCRIPTS_DIR/modified/cloud_ingress_deploy.yaml
 
                 ##
-                rm $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
+                rm -f $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
                 envsubst < $SCRIPTS_DIR/originals/vizier/image-prefix.yaml >> $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
 
-                rm $SCRIPTS_DIR/modified/vizier/kustomization.yaml
+                rm -f $SCRIPTS_DIR/modified/vizier/kustomization.yaml
                 envsubst < $SCRIPTS_DIR/originals/vizier/kustomization.yaml >> $SCRIPTS_DIR/modified/vizier/kustomization.yaml
 
                 ## Exposing kratos
-                rm $SCRIPTS_DIR/modified/expose-kratos.yaml
+                rm -f $SCRIPTS_DIR/modified/expose-kratos.yaml
                 envsubst < $SCRIPTS_DIR/originals/expose-kratos-template.yaml >> $SCRIPTS_DIR/modified/expose-kratos.yaml
 
                 perl -pi -e 's/\${URL}\) -eq 200/--insecure \${URL}\) -eq 200/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
@@ -127,7 +127,10 @@ then
                         # echo "transformers:" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
                         # echo "- image-prefix.yaml" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
 
-                        cp $SCRIPTS_DIR/modified/vizier/image-prefix.yaml $PIXIE_DIR/k8s/vizier/persistent_metadata/vizier/image-prefix.yaml
+                        # cp $SCRIPTS_DIR/modified/vizier/image-prefix.yaml $PIXIE_DIR/k8s/vizier/persistent_metadata/vizier/image-prefix.yaml
+                        rm -f $SCRIPTS_DIR/modified/vizier/zk-client-db-configmap.yaml
+                        envsubst < $SCRIPTS_DIR/originals/vizier/zk-client-db-configmap.yaml > $SCRIPTS_DIR/modified/vizier/zk-client-db-configmap.yaml
+                        cp $SCRIPTS_DIR/originals/vizier/zpixie-configmap.yaml $SCRIPTS_DIR/modified/vizier/zpixie-configmap.yaml
                 fi
 
         fi

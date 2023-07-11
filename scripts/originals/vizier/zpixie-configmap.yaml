@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zpixie-configmap
+data: 
+  zpixie-configmap.yaml: |-
+    allowNonTraced: false

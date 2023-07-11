@@ -19,9 +19,12 @@ perl -pi -e 's/dateTime: {}/envTemplate:\n      template: "{{ .VIZIER_TAG }}"/' 
 ## Modifying Vizier kustomize
 mkdir -p $SCRIPTS_DIR/modified/vizier
 rm -f $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
-envsubst < $SCRIPTS_DIR/originals/vizier/image-prefix.yaml >> $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
+envsubst < $SCRIPTS_DIR/originals/vizier/image-prefix.yaml > $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
 rm -f $SCRIPTS_DIR/modified/vizier/kustomization.yaml
-envsubst < $SCRIPTS_DIR/originals/vizier/kustomization.yaml >> $SCRIPTS_DIR/modified/vizier/kustomization.yaml
+envsubst < $SCRIPTS_DIR/originals/vizier/kustomization.yaml > $SCRIPTS_DIR/modified/vizier/kustomization.yaml
+rm -f $SCRIPTS_DIR/modified/vizier/zk-client-db-configmap.yaml
+envsubst < $SCRIPTS_DIR/originals/vizier/zk-client-db-configmap.yaml > $SCRIPTS_DIR/modified/vizier/zk-client-db-configmap.yaml
+cp $SCRIPTS_DIR/originals/vizier/zpixie-configmap.yaml $SCRIPTS_DIR/modified/vizier/zpixie-configmap.yaml
 
 ## Deploy Vizier
 kubectl apply -k $SCRIPTS_DIR/modified/vizier/
