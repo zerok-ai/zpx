@@ -21,7 +21,6 @@ export PIXIE_VIZIER_DEV_MODE=1
 export PIXIE_VIZIER_BUILD=0
 # Client: Dev mode setup - deploy latest vizier changes. Set it to 0
 export PIXIE_VIZIER_DEPLOY=0
-export VIZIER_TAG=pgsql0.0.1
 # GCLOUD_ARTIFACT_REPO_BASEPATH
 export GCLOUD_ARTIFACT_REPO_BASE=us-west1-docker.pkg.dev/zerok-dev
 # Required for dev mode: Repo where pixie images are pushed
@@ -46,6 +45,11 @@ fi
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
     export ZPIXIE_BRANCH=feature/mysql-pgsql-support
+fi
+
+# Vizier tag used
+if [[ -z $VIZIER_TAG ]]; then
+    export VIZIER_TAG=pgsql0.0.1
 fi
 
 if [[ -z $CLUSTER_NAME ]]; then
