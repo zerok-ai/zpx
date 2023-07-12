@@ -48,7 +48,7 @@ if [[ -z $ZPIXIE_BRANCH ]]; then
 fi
 
 # Vizier tag used
-if [[ -z $VIZIER_TAG ]]; then
+if [[ -z "$VIZIER_TAG" ]]; then
     export VIZIER_TAG=pgsql0.0.1
 fi
 
