@@ -45,7 +45,7 @@ fi
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
-    export ZPIXIE_BRANCH=zkconfigmap
+    export ZPIXIE_BRANCH=feature/mysql-pgsql-support
 fi
 
 if [[ -z $CLUSTER_NAME ]]; then
