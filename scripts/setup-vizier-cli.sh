@@ -14,7 +14,8 @@ else
     # git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
 fi
 
-perl -pi -e 's/dateTime: {}/envTemplate:\n      template: "{{ .VIZIER_TAG }}"/' $PIXIE_DIR/skaffold/skaffold_vizier.yaml
+# Required at the time of building, so commenting out
+# perl -pi -e 's/dateTime: {}/envTemplate:\n      template: "{{ .VIZIER_TAG }}"/' $PIXIE_DIR/skaffold/skaffold_vizier.yaml
 
 ## Modifying Vizier kustomize
 mkdir -p $SCRIPTS_DIR/modified/vizier

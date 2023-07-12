@@ -40,7 +40,7 @@ fi
 
 # Redis service name
 if [[ -z $REDIS_SERVICE ]]; then
-    export REDIS_SERVICE=zerok-cli-redis-master
+    export REDIS_SERVICE=redis-master
 fi
 
 # ZPixie branch used
