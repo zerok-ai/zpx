@@ -18,9 +18,9 @@ export PIXIE_OPERATOR_DEV_MODE=0
 # Client: Dev mode setup - required for local changes in vizier. Set it to 0
 export PIXIE_VIZIER_DEV_MODE=1
 # Client: Dev mode setup - build and push vizier changes. Set it to 0
-export PIXIE_VIZIER_BUILD=0
+export PIXIE_VIZIER_BUILD=1
 # Client: Dev mode setup - deploy latest vizier changes. Set it to 0
-export PIXIE_VIZIER_DEPLOY=0
+export PIXIE_VIZIER_DEPLOY=1
 # GCLOUD_ARTIFACT_REPO_BASEPATH
 export GCLOUD_ARTIFACT_REPO_BASE=us-west1-docker.pkg.dev/zerok-dev
 # Required for dev mode: Repo where pixie images are pushed
@@ -44,21 +44,21 @@ fi
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
-    export ZPIXIE_BRANCH=feature/mysql-pgsql-support
+    export ZPIXIE_BRANCH=sql-control-configs
 fi
 
 # Vizier tag used
 if [[ -z "$VIZIER_TAG" ]]; then
-    export VIZIER_TAG=pgsql0.0.1
+    export VIZIER_TAG=pgsql0.0.3
 fi
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=loadclient02
+    export CLUSTER_NAME=loadclient03
 fi
 
 # Client: Cluster name
-export PX_CLUSTER_NAME=loadclient02
+export PX_CLUSTER_NAME=loadclient03
 # Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
 # Cloud: Number of nodes required to setup cluster
