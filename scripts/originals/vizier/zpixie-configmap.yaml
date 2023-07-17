@@ -5,6 +5,10 @@ metadata:
 data: 
   zpixie-configmap.yaml: |-
     allowNonTraced: false
+    http: 
+      enabled: true
+      traceEnabled: true
+      allowNonTraced: false
     mysql: 
       enabled: true
       traceEnabled: true
