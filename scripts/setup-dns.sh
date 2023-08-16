@@ -17,6 +17,8 @@ then
    domain=$PX_DOMAIN
    workdomain="work.$domain"
    kratosdomain="kratos.$domain"
+   apidomain="api.$domain"
+   dashboarddomain="dashboard.$domain"
 
    if ! [ -z "$domain" ] 
    then
@@ -41,6 +43,20 @@ then
          gcloud dns --project=$gcp_dns_project record-sets create $kratosdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
       else
          gcloud dns --project=$gcp_dns_project record-sets update $kratosdomain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      fi
+
+      dashboard_domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${dashboarddomain}" --zone="anton" --type="A" --format=yaml`
+      if [ -z "$dashboard_domain_exists" ] || [ "$dashboard_domain_exists" == "" ]; then
+         gcloud dns --project=$gcp_dns_project record-sets create $dashboarddomain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      else
+         gcloud dns --project=$gcp_dns_project record-sets update $dashboarddomain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      fi
+
+      api_domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${apidomain}" --zone="anton" --type="A" --format=yaml`
+      if [ -z "$api_domain_exists" ] || [ "$api_domain_exists" == "" ]; then
+         gcloud dns --project=$gcp_dns_project record-sets create $apidomain --zone=anton --type=A --rrdatas=$extip --ttl=10
+      else
+         gcloud dns --project=$gcp_dns_project record-sets update $apidomain --zone=anton --type=A --rrdatas=$extip --ttl=10
       fi
    fi
 fi
