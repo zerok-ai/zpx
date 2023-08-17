@@ -1,4 +1,4 @@
-name: DEPLOY [OLD]
+name: DEPLOY
 on:
   workflow_dispatch:
    inputs:
@@ -28,7 +28,7 @@ env:
 
 jobs:
   setup:
-    runs-on: self-hosted
+    runs-on: zk-self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -41,39 +41,20 @@ jobs:
         with:
           credentials_json: '${{ env.GKE_SA_KEY }}'
         
-      - uses: google-github-actions/setup-gcloud@v0
-        with:
-          version: latest
-          export_default_credentials: true
-
-
-      - id: 'get-credentials'
-        uses: 'google-github-actions/get-gke-credentials@v1'
-        with:
-           cluster_name: '${{ env.CLUSTER_NAME }}'
-           location: '${{ env.GKE_ZONE }}'
+      # - id: 'get-credentials'
+      #   uses: 'google-github-actions/get-gke-credentials@v1'
+      #   with:
+      #      cluster_name: '${{ env.CLUSTER_NAME }}'
+      #      location: '${{ env.GKE_ZONE }}'
    
-      
-      - name: Set up tools
-        run: |-
-           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-           chmod 700 get_helm.sh
-           ./get_helm.sh
-            curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
-           sudo mv kustomize /usr/local/bin/kustomize
-           sudo chmod +x  /usr/local/bin/kustomize
-           sudo apt-get update
-           sudo apt-get install gettext-base
-           gcloud components install kubectl
-  
- 
-          
       - name: Deploy
         run: |-
              chmod +x ./scripts/setup.sh 
              export ZONE=$GKE_ZONE 
              export CLUSTER_NAME=$CLUSTER_NAME
              export ZPIXIE_REPO=$ZPIXIE_REPO
+             export ASK_USER=0
+             export FORCE_DISABLE_PX_OPERATOR=1
              export ZPIXIE_BRANCH=$ZPIXIE_BRANCH
              ./scripts/setup.sh
                 

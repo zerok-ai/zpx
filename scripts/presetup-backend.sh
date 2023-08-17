@@ -42,10 +42,10 @@ fi
 $SCRIPTS_DIR/setup-pixie-repo.sh
 
 ##Nginx Ingress setup
-if [ "$SETUP_CLUSTER" == "1" ]
-then
+# if [ "$SETUP_CLUSTER" == "1" ]
+# then
      $SCRIPTS_DIR/setup-nginx-ingress.sh
-fi
+# fi
 
 ##DNS setup
 if [ "$USE_MKCERT_CA" == '0' ]

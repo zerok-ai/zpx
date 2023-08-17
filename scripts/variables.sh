@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 # Ask before running every operation
-export ASK_USER=1
+if [[ -z $ASK_USER ]]; then
+    export ASK_USER=1
+fi
 # Client: Ask before installing px operator
 export FORCE_ASK_PX_OPERATOR=1
+if [[ -z $FORCE_DISABLE_PX_OPERATOR ]]; then
+    export FORCE_DISABLE_PX_OPERATOR=1
+fi
 # Cluster setup is required or not
-export SETUP_CLUSTER=1
+if [[ -z $SETUP_CLUSTER ]]; then
+    export SETUP_CLUSTER=1
+fi
 
 #Are we going to setup px operator in the same cluster as px host?
 # In case SSL is not used, we use mkcert to start a local CA. Always set it to 0 for GKE clusters
@@ -44,21 +51,21 @@ fi
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
-    export ZPIXIE_BRANCH=sql-control-configs
+    export ZPIXIE_BRANCH=main-202308
 fi
 
 # Vizier tag used
 if [[ -z "$VIZIER_TAG" ]]; then
-    export VIZIER_TAG=pgsql0.0.3
+    export VIZIER_TAG=workloadfix0.0.1
 fi
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=loadclient03
+    export CLUSTER_NAME=devclient01
 fi
 
 # Client: Cluster name
-export PX_CLUSTER_NAME=loadclient03
+export PX_CLUSTER_NAME=devclient01
 # Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
 # Cloud: Number of nodes required to setup cluster
