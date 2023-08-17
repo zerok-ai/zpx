@@ -1,5 +1,8 @@
 #!/bin/bash
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+ echo "clustername - $CLUSTER_NAME \n"
+export ZONE=$GKE_ZONE 
+export CLUSTER_NAME=$CLUSTER_NAME 
 source $THIS_DIR/variables.sh
 
 helpFunction()
@@ -34,7 +37,10 @@ $SCRIPTS_DIR/presetup-backend.sh
 $SCRIPTS_DIR/setup-backend.sh
 
 ##Setup Operator
-$SCRIPTS_DIR/setup-operator.sh
+if [ "$FORCE_DISABLE_PX_OPERATOR" == "0" ]
+then
+     $SCRIPTS_DIR/setup-operator.sh
+fi
 
 # ##Postsetup Backend
 # $SCRIPTS_DIR/postsetup-backend.sh

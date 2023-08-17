@@ -1,4 +1,4 @@
-name: DEPLOY [OLD]
+name: DEPLOY
 on:
   workflow_dispatch:
    inputs:
@@ -18,20 +18,25 @@ on:
             description: 'GKE_ZONE'
             required: true
             default: 'us-west1-b'
+        CLUSTER_SETUP:
+          type: boolean
+          description: Cluster setup required?
 env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
   CLUSTER_NAME: ${{ github.event.inputs.CLUSTER_NAME }}
   ZPIXIE_REPO: ${{ github.event.inputs.ZPIXIE_REPO }}
   ZPIXIE_BRANCH: ${{ github.event.inputs.ZPIXIE_BRANCH }}
   GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
+  CLUSTER_SETUP : ${{ github.event.inputs.CLUSTER_SETUP }}
   TOKEN: ${{ secrets.GITPAT }}
 
 jobs:
   setup:
-    runs-on: self-hosted
+    runs-on: zk-self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Configure git for private modules
         run: git config --global url."https://$TOKEN:x-oauth-basic@github.com/".insteadOf "https://github.com/"
         
@@ -41,39 +46,34 @@ jobs:
         with:
           credentials_json: '${{ env.GKE_SA_KEY }}'
         
-      - uses: google-github-actions/setup-gcloud@v0
-        with:
-          version: latest
-          export_default_credentials: true
-
-
-      - id: 'get-credentials'
-        uses: 'google-github-actions/get-gke-credentials@v1'
-        with:
-           cluster_name: '${{ env.CLUSTER_NAME }}'
-           location: '${{ env.GKE_ZONE }}'
+      # - id: 'get-credentials'
+      #   uses: 'google-github-actions/get-gke-credentials@v1'
+      #   with:
+      #      cluster_name: '${{ env.CLUSTER_NAME }}'
+      #      location: '${{ env.GKE_ZONE }}'
    
-      
-      - name: Set up tools
-        run: |-
-           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-           chmod 700 get_helm.sh
-           ./get_helm.sh
-            curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
-           sudo mv kustomize /usr/local/bin/kustomize
-           sudo chmod +x  /usr/local/bin/kustomize
-           sudo apt-get update
-           sudo apt-get install gettext-base
-           gcloud components install kubectl
-  
- 
-          
       - name: Deploy
         run: |-
              chmod +x ./scripts/setup.sh 
              export ZONE=$GKE_ZONE 
              export CLUSTER_NAME=$CLUSTER_NAME
              export ZPIXIE_REPO=$ZPIXIE_REPO
+             export ASK_USER=0
+             if [ "$CLUSTER_SETUP" == "true" ]
+             then
+                export SETUP_CLUSTER=1
+             else 
+                export SETUP_CLUSTER=0
+             fi
+             export FORCE_DISABLE_PX_OPERATOR=1
              export ZPIXIE_BRANCH=$ZPIXIE_BRANCH
-             ./scripts/setup.sh
+             echo "ZONE=$ZONE"
+             echo "CLUSTER_NAME=$CLUSTER_NAME"
+             echo "ASK_USER=$ASK_USER"
+             echo "CLUSTER_SETUP=$CLUSTER_SETUP"
+             echo "SETUP_CLUSTER=$SETUP_CLUSTER"
+             echo "FORCE_DISABLE_PX_OPERATOR=$FORCE_DISABLE_PX_OPERATOR"
+             echo "ZPIXIE_REPO=$ZPIXIE_REPO"
+             echo "ZPIXIE_BRANCH=$ZPIXIE_BRANCH"
+            #  ./scripts/setup.sh
                 

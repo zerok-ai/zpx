@@ -16,9 +16,11 @@ then
         then
                 echo 'Replacing domains'
 
+                mkdir -p $SCRIPTS_DIR/modified/vizier
+
                 cd $PIXIE_DIR
-                git checkout ./k8s/cloud/public/proxy_envoy.yaml
-                git checkout ./k8s/cloud/public/domain_config.yaml
+                git checkout ./k8s/cloud/public/base/proxy_envoy.yaml
+                git checkout ./k8s/cloud/public/base/domain_config.yaml
                 git checkout ./scripts/create_cloud_secrets.sh
                 git checkout ./tools/docker/user_dev_image/Dockerfile
                 cd $ZPX_DIR
@@ -34,32 +36,24 @@ then
                         echo "  --key=\"\${PROXY_KEY_FILE}\"" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 fi
 
-                perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-                perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-                perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-                # sed -i '' -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-                # sed -i '' -e "s/*.dev.withpixie.dev/*.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
-                # sed -i '' -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/proxy_envoy.yaml
+                perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/base/proxy_envoy.yaml
+                perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/k8s/cloud/public/base/proxy_envoy.yaml
+                perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/base/proxy_envoy.yaml
 
-                perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                # sed -i '' -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                # sed -i '' -e "s/*.dev.withpixie.dev/*.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                # sed -i '' -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
+                perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
+                perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
+                perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
 
                 perl -pi -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 perl -pi -e "s/\Q*.dev.withpixie.dev/*.$PX_DOMAIN/g" $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 perl -pi -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
-                # sed -i '' -e "s/work.dev.withpixie.dev/work.$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
-                # sed -i '' -e "s/*.dev.withpixie.dev/*.$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
-                # sed -i '' -e "s/dev.withpixie.dev/$PX_DOMAIN/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
+                perl -pi -e "s/set -e/set -x/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
+                perl -pi -e "s/< \/dev\/urandom/openssl rand -hex 256 |/" $PIXIE_DIR/scripts/create_cloud_secrets.sh
 
-                perl -pi -e 's/\"4444\"/\"\"/' $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
-                # sed -i '' -e "s/\"4444\"/\"\"/" $PIXIE_DIR/k8s/cloud/public/domain_config.yaml
+                perl -pi -e 's/\"4444\"/\"\"/' $PIXIE_DIR/k8s/cloud/public/base/domain_config.yaml
 
-                rm $SCRIPTS_DIR/modified/cloud_ingress_*.yaml
-                rm $SCRIPTS_DIR/modified/certificate_*.yaml
+                rm -f $SCRIPTS_DIR/modified/cloud_ingress_*.yaml
+                rm -f $SCRIPTS_DIR/modified/certificate_*.yaml
                 envsubst < $SCRIPTS_DIR/originals/certificate_cloud_proxy_tls_certs.yaml >> $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs.yaml
                 envsubst < $SCRIPTS_DIR/originals/certificate_cloud_proxy_tls_certs_nginx.yaml >> $SCRIPTS_DIR/modified/certificate_cloud_proxy_tls_certs_nginx.yaml
                 export SSL_PASSTHROUGH_HTTPS=true
@@ -73,20 +67,71 @@ then
                 export SSL_PASSTHROUGH_GRPCS_AUTH=true
                 envsubst < $SCRIPTS_DIR/originals/cloud_ingress_template.yaml >> $SCRIPTS_DIR/modified/cloud_ingress_deploy.yaml
 
+                ##
+                rm -f $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
+                envsubst < $SCRIPTS_DIR/originals/vizier/image-prefix.yaml >> $SCRIPTS_DIR/modified/vizier/image-prefix.yaml
+
+                rm -f $SCRIPTS_DIR/modified/vizier/kustomization.yaml
+                envsubst < $SCRIPTS_DIR/originals/vizier/kustomization.yaml >> $SCRIPTS_DIR/modified/vizier/kustomization.yaml
+
                 ## Exposing kratos
-                rm $SCRIPTS_DIR/modified/expose-kratos.yaml
+                rm -f $SCRIPTS_DIR/modified/expose-kratos.yaml
                 envsubst < $SCRIPTS_DIR/originals/expose-kratos-template.yaml >> $SCRIPTS_DIR/modified/expose-kratos.yaml
 
                 perl -pi -e 's/\${URL}\) -eq 200/--insecure \${URL}\) -eq 200/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
                 perl -pi -e 's/\"\${ADMIN_URL}\/admin\/identities\"/--insecure \"\${ADMIN_URL}\/admin\/identities\"/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
-                # sed -i '' -e "s/\${URL}) -eq 200/--insecure \${URL}) -eq 200/" $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
-                # sed -i '' -e "s/\"\${ADMIN_URL}\/admin\/identities/--insecure \"\${ADMIN_URL}\/admin\/identities/" $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
+                perl -pi -e 's/\"password\": \"admin\"/\"password\": \"8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918\"/' $PIXIE_DIR/k8s/cloud/base/ory_auth/kratos/kratos_deployment.yaml
 
-                # if [ "$PIXIE_DEV_MODE" == '1' ]
-                # then
-                #         perl -pi -e 's/^/#/ if $. > 28 and $. < 39' $PIXIE_DIR/tools/docker/user_dev_image/Dockerfile
-                #         perl -pi -e 'print "RUN addgroup --gid \${DOCKER_ID} docker-host\nRUN usermod -a -G sudo \${USER_NAME}\nRUN usermod -a -G docker-host \${USER_NAME}\n" if $.==39' $PIXIE_DIR/tools/docker/user_dev_image/Dockerfile
-                # fi
+                if [ "$PIXIE_HOST_DEV_MODE" == '1' ]
+                then
+                        cd $PIXIE_DIR
+                        git checkout ./skaffold/skaffold_cloud.yaml
+                        cd $ZPX_DIR
+                        perl -pi -e 's/dateTime/sha256/' $PIXIE_DIR/skaffold/skaffold_cloud.yaml
+
+                        echo "" >> $PIXIE_DIR/k8s/cloud/dev/kustomization.yaml
+                        echo "transformers:" >> $PIXIE_DIR/k8s/cloud/dev/kustomization.yaml
+                        echo "- image-prefix.yaml" >> $PIXIE_DIR/k8s/cloud/dev/kustomization.yaml
+
+                        cp $SCRIPTS_DIR/modified/image-prefix.yaml $PIXIE_DIR/k8s/cloud/dev/image-prefix.yaml
+                fi
+
+                if [ "$PIXIE_OPERATOR_DEV_MODE" == '1' ]
+                then
+                        cd $PIXIE_DIR
+                        git checkout ./skaffold/skaffold_operator.yaml
+                        cd $ZPX_DIR
+                        perl -pi -e 's/dateTime/sha256/' $PIXIE_DIR/skaffold/skaffold_operator.yaml
+
+                        echo "" >> $PIXIE_DIR/k8s/operator/deployment/base/kustomization.yaml
+                        echo "transformers:" >> $PIXIE_DIR/k8s/operator/deployment/base/kustomization.yaml
+                        echo "- image-prefix.yaml" >> $PIXIE_DIR/k8s/operator/deployment/base/kustomization.yaml
+
+                        cp $SCRIPTS_DIR/modified/image-prefix.yaml $PIXIE_DIR/k8s/operator/deployment/base/image-prefix.yaml
+                fi
+
+                if [ "$PIXIE_VIZIER_DEV_MODE" == '1' ]
+                then
+                        cd $PIXIE_DIR
+                        git checkout ./skaffold/skaffold_vizier.yaml
+                        git checkout ./k8s/vizier/persistent_metadata/kustomization.yaml
+                        
+                        cd $ZPX_DIR
+                        perl -pi -e 's/dateTime: {}/envTemplate:\n      template: "{{ .VIZIER_TAG }}"/' $PIXIE_DIR/skaffold/skaffold_vizier.yaml
+
+                        # echo "" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "images:" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "- name: gcr.io/pixie-oss/pixie-dev/vizier/pem_image:latest" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "  newTag: $VIZIER_TAG" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "transformers:" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+                        # echo "- image-prefix.yaml" >> $PIXIE_DIR/k8s/vizier/persistent_metadata/kustomization.yaml
+
+                        # cp $SCRIPTS_DIR/modified/vizier/image-prefix.yaml $PIXIE_DIR/k8s/vizier/persistent_metadata/vizier/image-prefix.yaml
+                        rm -f $SCRIPTS_DIR/modified/vizier/zk-client-db-configmap.yaml
+                        envsubst < $SCRIPTS_DIR/originals/vizier/zk-client-db-configmap.yaml > $SCRIPTS_DIR/modified/vizier/zk-client-db-configmap.yaml
+                        cp $SCRIPTS_DIR/originals/vizier/zpixie-configmap.yaml $SCRIPTS_DIR/modified/vizier/zpixie-configmap.yaml
+                fi
 
         fi
 fi

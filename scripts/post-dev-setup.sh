@@ -3,7 +3,12 @@ export DOLLAR='$'
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # PIXIE_DIR="$(dirname "$${ESC}THIS_DIR")"
 PIXIE_DIR=$${ESC}THIS_DIR
+COMMAND=$${ESC}1
 
+if [ -z "$COMMAND" ]
+then
+   COMMAND="build"
+fi
 echo "THIS_DIR = $${ESC}THIS_DIR"
 echo "PIXIE_DIR = $${ESC}PIXIE_DIR"
 
@@ -28,7 +33,7 @@ echo "Switching k8s context to the $${ESC}CLUSTER_ZEROK_PL"
 gcloud container clusters get-credentials $${ESC}CLUSTER_ZEROK_PL --zone $ZONE --project $PX_CLUSTER_PROJECT
 
 echo "Setting up remaining services"
-skaffold run -f $${ESC}PIXIE_DIR/skaffold/skaffold_cloud.yaml -p public
+skaffold $${ESC}COMMAND -f $${ESC}PIXIE_DIR/skaffold/skaffold_cloud.yaml -p public
 # echo "Switching k8s context to the $PX_CLUSTER_NAME"
 # gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --project $PX_CLUSTER_PROJECT
 # echo "Setting up px"

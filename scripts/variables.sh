@@ -1,27 +1,80 @@
 #!/usr/bin/env bash
-export ASK_USER=0
+# Ask before running every operation
+if [[ -z $ASK_USER ]]; then
+    export ASK_USER=1
+fi
+# Client: Ask before installing px operator
 export FORCE_ASK_PX_OPERATOR=1
-export SETUP_CLUSTER=1
-
-#Are we going to setup px operator in the same cluster as px host?
-export USE_MKCERT_CA=0
-export SAME_CLUSTER_SETUP=0
-export PIXIE_HOST_DEV_MODE=0
-export PIXIE_OPERATOR_DEV_MODE=0
-export PIXIE_VIZIER_DEV_MODE=0
-export PIXIE_REPO=us-west1-docker.pkg.dev/zerok-dev/pixie-dev
-
-#Basic cluster parameters
-export ZONE=us-west1-b
-
-if [[ -z $CLUSTER_NAME ]]; then
-    export CLUSTER_NAME=zkcloud01
+if [[ -z $FORCE_DISABLE_PX_OPERATOR ]]; then
+    export FORCE_DISABLE_PX_OPERATOR=1
+fi
+# Cluster setup is required or not
+if [[ -z $SETUP_CLUSTER ]]; then
+    export SETUP_CLUSTER=1
 fi
 
-export PX_CLUSTER_NAME=zkproxy-demo
+#Are we going to setup px operator in the same cluster as px host?
+# In case SSL is not used, we use mkcert to start a local CA. Always set it to 0 for GKE clusters
+export USE_MKCERT_CA=0
+# For debugging, setup client and cloudbotyh on the same cluster. Set it to 0 for production
+export SAME_CLUSTER_SETUP=0
+# Cloud: Dev mode setup - required for local changes in pixie. Set it to 0
+export PIXIE_HOST_DEV_MODE=0
+# Client: Dev mode setup - required for local changes in pixie operator. Set it to 0
+export PIXIE_OPERATOR_DEV_MODE=0
+# Client: Dev mode setup - required for local changes in vizier. Set it to 0
+export PIXIE_VIZIER_DEV_MODE=1
+# Client: Dev mode setup - build and push vizier changes. Set it to 0
+export PIXIE_VIZIER_BUILD=1
+# Client: Dev mode setup - deploy latest vizier changes. Set it to 0
+export PIXIE_VIZIER_DEPLOY=1
+# GCLOUD_ARTIFACT_REPO_BASEPATH
+export GCLOUD_ARTIFACT_REPO_BASE=us-west1-docker.pkg.dev/zerok-dev
+# Required for dev mode: Repo where pixie images are pushed
+export PIXIE_REPO=$GCLOUD_ARTIFACT_REPO_BASE/pixie-test-dev
+# Required for dev mode: Repo where pixie vizier images are pushed
+export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
+
+#Basic cluster parameters
+# GKE Zone
+export ZONE=us-west1-b
+export DOMAIN=zerok.dev
+
+# ZPixie repo used
+if [[ -z $ZPIXIE_REPO ]]; then
+    export ZPIXIE_REPO=git@github.com:zerok-ai/zpixie.git
+fi
+
+# Redis service name
+if [[ -z $REDIS_SERVICE ]]; then
+    export REDIS_SERVICE=redis-master
+fi
+
+# ZPixie branch used
+if [[ -z $ZPIXIE_BRANCH ]]; then
+    export ZPIXIE_BRANCH=feature/int-fix
+fi
+
+# Vizier tag used
+if [[ -z "$VIZIER_TAG" ]]; then
+    export VIZIER_TAG=workloadfix0.0.1
+fi
+
+if [[ -z $CLUSTER_NAME ]]; then
+    # Cloud: Cluster name
+    export CLUSTER_NAME=sandbox
+fi
+
+export CLUSTER_DOMAIN=$CLUSTER_NAME.$DOMAIN
+
+# Client: Cluster name
+export PX_CLUSTER_NAME=sandbox
+# Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
+# Cloud: Number of nodes required to setup cluster
 export CLUSTER_NUM_NODES=2
 export PX_CLUSTER_PROJECT=zerok-dev
+# Cloud: Instance type
 export CLUSTER_INSTANCE_TYPE=e2-standard-4
 
 #PX Domain to be used
@@ -38,7 +91,7 @@ if [ "$USE_MKCERT_CA" == '1' ]
 then
     export PX_DOMAIN=$CLUSTER_NAME.testdomain.com
 else
-    export PX_DOMAIN=$CLUSTER_NAME.getanton.com
+    export PX_DOMAIN=px.$CLUSTER_DOMAIN
 fi
 
 export PL_CLOUD_ADDR=$PX_DOMAIN
@@ -51,6 +104,7 @@ fi
 
 
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+#THIS_DIR="/runner/_work/zpx/zpx/scripts/"
 export SCRIPTS_DIR=$THIS_DIR
 export UTILS_DIR=$THIS_DIR/utils
 export OPERATOR_SCRIPTS_DIR=$THIS_DIR/operator

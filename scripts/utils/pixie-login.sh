@@ -177,7 +177,7 @@ curl -s "https://work.$PX_DOMAIN/oauth/kratos/self-service/login?flow=$flow" \
   -H 'sec-fetch-user: ?1' \
   -H 'upgrade-insecure-requests: 1' \
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' \
-  --data-raw "csrf_token=$csrf_token_encoded&identifier=admin%40default.com&password=admin&method=password" \
+  --data-raw "csrf_token=$csrf_token_encoded&identifier=admin%40default.com&password=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918&method=password" \
   --compressed \
   --insecure \
   -c $TMP_DIR/cookies5.txt \

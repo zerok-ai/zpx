@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zpixie-configmap
+data: 
+  zpixie-configmap.yaml: |-
+    allowNonTraced: false
+    http: 
+      enabled: true
+      traceEnabled: true
+      allowNonTraced: false
+    mysql: 
+      enabled: true
+      traceEnabled: true
+      allowNonTraced: false
+    pgsql: 
+      enabled: true
+      traceEnabled: true
+      allowNonTraced: false

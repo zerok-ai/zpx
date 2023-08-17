@@ -1,0 +1,28 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: pl
+commonLabels:
+  app: pl-monitoring
+  component: vizier
+resources:
+- zk-client-db-configmap.yaml
+- zpixie-configmap.yaml
+- ../../../build/pixie/k8s/vizier/persistent_metadata/
+
+images:
+  - name: gcr.io/pixie-oss/pixie-dev/vizier/pem_image:latest
+    newTag: $VIZIER_TAG
+  - name: gcr.io/pixie-oss/pixie-dev/vizier/kelvin_image:latest
+    newTag: $VIZIER_TAG
+  - name: gcr.io/pixie-oss/pixie-dev/vizier/cert_provisioner_image:latest
+    newTag: $VIZIER_TAG
+  - name: gcr.io/pixie-oss/pixie-dev/vizier/cloud_connector_server_image:latest
+    newTag: $VIZIER_TAG
+  - name: gcr.io/pixie-oss/pixie-dev/vizier/metadata_server_image:latest
+    newTag: $VIZIER_TAG
+  - name: gcr.io/pixie-oss/pixie-dev/vizier/query_broker_server_image:latest
+    newTag: $VIZIER_TAG
+
+transformers:
+- image-prefix.yaml
