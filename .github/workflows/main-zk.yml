@@ -76,4 +76,5 @@ jobs:
              echo "ZPIXIE_REPO=$ZPIXIE_REPO"
              echo "ZPIXIE_BRANCH=$ZPIXIE_BRANCH"
              ./scripts/setup-nginx-ingress.sh
+             ./scripts/setup-dns.sh
                 
