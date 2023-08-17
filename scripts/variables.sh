@@ -31,6 +31,7 @@ export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
 #Basic cluster parameters
 # GKE Zone
 export ZONE=us-west1-b
+export DOMAIN=zerok.dev
 
 # ZPixie repo used
 if [[ -z $ZPIXIE_REPO ]]; then
@@ -44,7 +45,7 @@ fi
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
-    export ZPIXIE_BRANCH=sql-control-configs
+    export ZPIXIE_BRANCH=feature/int-fix
 fi
 
 # Vizier tag used
@@ -54,11 +55,13 @@ fi
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=loadclient03
+    export CLUSTER_NAME=sandbox
 fi
 
+export CLUSTER_DOMAIN=$CLUSTER_NAME.$DOMAIN
+
 # Client: Cluster name
-export PX_CLUSTER_NAME=loadclient03
+export PX_CLUSTER_NAME=sandbox
 # Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
 # Cloud: Number of nodes required to setup cluster
@@ -81,7 +84,7 @@ if [ "$USE_MKCERT_CA" == '1' ]
 then
     export PX_DOMAIN=$CLUSTER_NAME.testdomain.com
 else
-    export PX_DOMAIN=px.$CLUSTER_NAME.getanton.com
+    export PX_DOMAIN=px.$CLUSTER_DOMAIN
 fi
 
 export PL_CLOUD_ADDR=$PX_DOMAIN
