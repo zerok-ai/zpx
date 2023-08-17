@@ -37,7 +37,7 @@ $SCRIPTS_DIR/presetup-backend.sh
 $SCRIPTS_DIR/setup-backend.sh
 
 ##Setup Operator
-if [ "$FORCE_DISABLE_PX_OPERATOR" == "1" ]
+if [ "$FORCE_DISABLE_PX_OPERATOR" == "0" ]
 then
      $SCRIPTS_DIR/setup-operator.sh
 fi
