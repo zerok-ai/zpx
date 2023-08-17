@@ -75,5 +75,5 @@ jobs:
              echo "FORCE_DISABLE_PX_OPERATOR=$FORCE_DISABLE_PX_OPERATOR"
              echo "ZPIXIE_REPO=$ZPIXIE_REPO"
              echo "ZPIXIE_BRANCH=$ZPIXIE_BRANCH"
-             ./scripts/setup.sh
+             ./scripts/setup-nginx-ingress.sh
                 

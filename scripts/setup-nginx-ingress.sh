@@ -20,7 +20,7 @@ then
    
     echo "Waiting for the nginx-ingress service to come up... (wait time $SETUP_NGINX_INGRESS_WAIT_TIME seconds)"
     echo $(date +%s)
-    spinner sleep $SETUP_NGINX_INGRESS_WAIT_TIME
+    spinner sleep 70
     echo $(date +%s)
     kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
 
