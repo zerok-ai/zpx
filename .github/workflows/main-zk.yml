@@ -9,11 +9,11 @@ on:
         ZPIXIE_BRANCH:
             description: 'ZPIXIE_BRANCH'
             required: true
-            default: 'zkconfigmap'
+            default: 'feature/int-fix'
         CLUSTER_NAME:
             description: 'CLUSTER_NAME'
             required: true
-            default: 'zerok-c2s-poc'
+            default: 'testpx01'
         GKE_ZONE:
             description: 'GKE_ZONE'
             required: true
