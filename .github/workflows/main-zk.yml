@@ -46,11 +46,11 @@ jobs:
         with:
           credentials_json: '${{ env.GKE_SA_KEY }}'
         
-      # - id: 'get-credentials'
-      #   uses: 'google-github-actions/get-gke-credentials@v1'
-      #   with:
-      #      cluster_name: '${{ env.CLUSTER_NAME }}'
-      #      location: '${{ env.GKE_ZONE }}'
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
+           cluster_name: '${{ env.CLUSTER_NAME }}'
+           location: '${{ env.GKE_ZONE }}'
    
       - name: Deploy
         run: |-
@@ -75,5 +75,5 @@ jobs:
              echo "FORCE_DISABLE_PX_OPERATOR=$FORCE_DISABLE_PX_OPERATOR"
              echo "ZPIXIE_REPO=$ZPIXIE_REPO"
              echo "ZPIXIE_BRANCH=$ZPIXIE_BRANCH"
-             ./scripts/setup.sh
+            #  ./scripts/setup.sh
                 
