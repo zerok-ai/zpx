@@ -104,4 +104,4 @@ kubectl create secret generic -n "${namespace}" \
 #kubectl create secret tls -n "${namespace}" \
 #  cloud-proxy-tls-certs \
 #  --cert="${PROXY_CERT_FILE}" \
-  --key="${PROXY_KEY_FILE}"
+#  --key="${PROXY_KEY_FILE}"
