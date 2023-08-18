@@ -38,10 +38,17 @@ export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
 #Basic cluster parameters
 # GKE Zone
 export ZONE=us-west1-b
-export DOMAIN=zerok.dev
-# export DOMAIN=getanton.com
-export DNS_ZONE=zerok-dev
-# export DNS_ZONE=anton
+if [[ -z $DNS_ZONE ]]; then
+    export DNS_ZONE=zerok-dev
+    # export DNS_ZONE=anton
+fi
+
+if [ "$DNS_ZONE" == "zerok-dev" ]
+then
+    export DOMAIN=zerok.dev
+else
+    export DOMAIN=getanton.com
+fi
 
 # ZPixie repo used
 if [[ -z $ZPIXIE_REPO ]]; then
