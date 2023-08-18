@@ -31,7 +31,7 @@ else
 
 	if [ "$USE_MKCERT_CA" == '0' ]
 	then
-		perl -pi -e 's/^/#/ if $. > 93 and $. < 108' ./scripts/create_cloud_secrets.sh
+		perl -pi -e 's/^/#/ if $. > 93 and $. < 109' ./scripts/create_cloud_secrets.sh
 		# sed -i '' -e '94,107 s/^/#/' ./scripts/create_cloud_secrets.sh
 		
 	fi
