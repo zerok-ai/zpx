@@ -19,9 +19,7 @@ then
     # kubectl apply -f $SCRIPTS_DIR/yamls/nginx-ingress.yaml
    
     echo "Waiting for the nginx-ingress service to come up... (wait time $SETUP_NGINX_INGRESS_WAIT_TIME seconds)"
-    echo $(date +%s)
-    spinner sleep 70
-    echo $(date +%s)
+    spinner sleep $SETUP_NGINX_INGRESS_WAIT_TIME
     kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
 
 fi

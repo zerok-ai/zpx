@@ -39,6 +39,7 @@ export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
 # GKE Zone
 export ZONE=us-west1-b
 export DOMAIN=zerok.dev
+export DNS_ZONE=zerok-dev
 
 # ZPixie repo used
 if [[ -z $ZPIXIE_REPO ]]; then
@@ -112,10 +113,10 @@ export PATCHES_DIR=$THIS_DIR/patches
 export ZPX_DIR="$(dirname "$SCRIPTS_DIR")"
 export PIXIE_DIR=$ZPX_DIR/build/pixie
 
-export SETUP_NGINX_INGRESS_WAIT_TIME=40
+export SETUP_NGINX_INGRESS_WAIT_TIME=45
 export EXPOSE_KRATOS_WAIT_TIME=40
-export SETUP_SECRETS_WAIT_TIME=50
-export SETUP_CERT_MANAGER_WAIT_TIME=20
+export SETUP_SECRETS_WAIT_TIME=55
+export SETUP_CERT_MANAGER_WAIT_TIME=25
 
 getUserInput(){
     FORCE_ASK=$3
