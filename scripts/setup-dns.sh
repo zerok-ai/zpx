@@ -32,6 +32,13 @@ then
          gcloud dns --project=$gcp_dns_project record-sets update $domain --zone=$DNS_ZONE --type=A --rrdatas=$extip --ttl=10
       fi
 
+      cluster_domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${clusterDomain}" --zone="${DNS_ZONE}" --type="A" --format=yaml`
+      if [ -z "$cluster_domain_exists" ] || [ "$cluster_domain_exists" == "" ]; then
+         gcloud dns --project=$gcp_dns_project record-sets create $clusterDomain --zone=$DNS_ZONE --type=A --rrdatas=$extip --ttl=10
+      else
+         gcloud dns --project=$gcp_dns_project record-sets update $clusterDomain --zone=$DNS_ZONE --type=A --rrdatas=$extip --ttl=10
+      fi
+
       work_domain_exists=`gcloud dns --project="${gcp_dns_project}" record-sets list --name "${workdomain}" --zone="${DNS_ZONE}" --type="A" --format=yaml`
       if [ -z "$work_domain_exists" ] || [ "$work_domain_exists" == "" ]; then
          gcloud dns --project=$gcp_dns_project record-sets create $workdomain --zone=$DNS_ZONE --type=A --rrdatas=$extip --ttl=10
