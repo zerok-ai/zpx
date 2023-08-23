@@ -62,7 +62,7 @@ fi
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
-    export ZPIXIE_BRANCH=feature/int-fix
+    export ZPIXIE_BRANCH=feature/add-truncate-rows-cols
 fi
 
 # Vizier tag used
