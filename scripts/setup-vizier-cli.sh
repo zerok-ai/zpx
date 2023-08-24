@@ -5,14 +5,13 @@ source $THIS_DIR/variables.sh
 
 
 ## Setup pixie repo
-cd $PIXIE_DIR
-if [[ -d $PIXIE_DIR ]]; then
-    git checkout .
-else
+# cd $PIXIE_DIR
+# if [[ -d $PIXIE_DIR ]]; then
+#     git checkout .
+# else
     rm -rf $PIXIE_DIR
     git clone --branch $ZPIXIE_BRANCH $ZPIXIE_REPO $PIXIE_DIR
-    # git clone https://github.com/pixie-io/pixie.git $PIXIE_DIR
-fi
+# fi
 
 # Required at the time of building, so commenting out
 # perl -pi -e 's/dateTime: {}/envTemplate:\n      template: "{{ .VIZIER_TAG }}"/' $PIXIE_DIR/skaffold/skaffold_vizier.yaml
