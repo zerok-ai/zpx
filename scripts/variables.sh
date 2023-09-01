@@ -57,7 +57,7 @@ fi
 
 # Redis service name
 if [[ -z $REDIS_SERVICE ]]; then
-    export REDIS_SERVICE=redis-master
+    export REDIS_SERVICE=redis
 fi
 
 # ZPixie branch used
