@@ -39,8 +39,8 @@ export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
 # GKE Zone
 export ZONE=us-west1-b
 if [[ -z $DNS_ZONE ]]; then
-    export DNS_ZONE=zerok-dev
-    # export DNS_ZONE=anton
+    # export DNS_ZONE=zerok-dev
+    export DNS_ZONE=anton
 fi
 
 if [ "$DNS_ZONE" == "zerok-dev" ]
@@ -62,23 +62,23 @@ fi
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
-    export ZPIXIE_BRANCH=feature/add-truncate-rows-cols
+    export ZPIXIE_BRANCH=feature/redis-password
 fi
 
 # Vizier tag used
 if [[ -z "$VIZIER_TAG" ]]; then
-    export VIZIER_TAG=workloadfix0.0.1
+    export VIZIER_TAG=0.1.0-redisp
 fi
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=sandbox
+    export CLUSTER_NAME=devcloud01
 fi
 
 export CLUSTER_DOMAIN=$CLUSTER_NAME.$DOMAIN
 
 # Client: Cluster name
-export PX_CLUSTER_NAME=sandbox
+export PX_CLUSTER_NAME=devclient03
 # Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
 # Cloud: Number of nodes required to setup cluster
