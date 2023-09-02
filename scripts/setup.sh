@@ -46,8 +46,8 @@ fi
 # $SCRIPTS_DIR/postsetup-backend.sh
 
 ## PX Vizier setup
-if [ "$PIXIE_VIZIER_DEV_MODE" == "1" ]
-then
-     $OPERATOR_SCRIPTS_DIR/setup-vizier.sh
-fi
+# if [ "$PIXIE_VIZIER_DEV_MODE" == "1" ]
+# then
+#      $OPERATOR_SCRIPTS_DIR/setup-vizier.sh
+# fi
 

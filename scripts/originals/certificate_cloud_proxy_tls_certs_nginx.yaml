@@ -5,7 +5,6 @@ metadata:
   namespace: ingress-nginx
 spec:
   dnsNames:
-  - ${CLUSTER_DOMAIN}
   - ${PX_DOMAIN}
   - work.${PX_DOMAIN}
   - kratos.${PX_DOMAIN}

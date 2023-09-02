@@ -38,7 +38,17 @@ export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
 #Basic cluster parameters
 # GKE Zone
 export ZONE=us-west1-b
-export DOMAIN=zerok.dev
+if [[ -z $DNS_ZONE ]]; then
+    # export DNS_ZONE=zerok-dev
+    export DNS_ZONE=anton
+fi
+
+if [ "$DNS_ZONE" == "zerok-dev" ]
+then
+    export DOMAIN=zerok.dev
+else
+    export DOMAIN=getanton.com
+fi
 
 # ZPixie repo used
 if [[ -z $ZPIXIE_REPO ]]; then
@@ -47,28 +57,28 @@ fi
 
 # Redis service name
 if [[ -z $REDIS_SERVICE ]]; then
-    export REDIS_SERVICE=redis-master
+    export REDIS_SERVICE=redis
 fi
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
-    export ZPIXIE_BRANCH=feature/int-fix
+    export ZPIXIE_BRANCH=feature/redis-password
 fi
 
 # Vizier tag used
 if [[ -z "$VIZIER_TAG" ]]; then
-    export VIZIER_TAG=workloadfix0.0.1
+    export VIZIER_TAG=0.1.0-redisp
 fi
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=sandbox
+    export CLUSTER_NAME=devcloud01
 fi
 
 export CLUSTER_DOMAIN=$CLUSTER_NAME.$DOMAIN
 
 # Client: Cluster name
-export PX_CLUSTER_NAME=sandbox
+export PX_CLUSTER_NAME=devclient03
 # Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
 # Cloud: Number of nodes required to setup cluster
@@ -112,10 +122,10 @@ export PATCHES_DIR=$THIS_DIR/patches
 export ZPX_DIR="$(dirname "$SCRIPTS_DIR")"
 export PIXIE_DIR=$ZPX_DIR/build/pixie
 
-export SETUP_NGINX_INGRESS_WAIT_TIME=40
+export SETUP_NGINX_INGRESS_WAIT_TIME=45
 export EXPOSE_KRATOS_WAIT_TIME=40
-export SETUP_SECRETS_WAIT_TIME=50
-export SETUP_CERT_MANAGER_WAIT_TIME=20
+export SETUP_SECRETS_WAIT_TIME=55
+export SETUP_CERT_MANAGER_WAIT_TIME=25
 
 getUserInput(){
     FORCE_ASK=$3

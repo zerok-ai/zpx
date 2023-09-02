@@ -27,4 +27,5 @@ envsubst < $SCRIPTS_DIR/originals/vizier/zk-client-db-configmap.yaml > $SCRIPTS_
 cp $SCRIPTS_DIR/originals/vizier/zpixie-configmap.yaml $SCRIPTS_DIR/modified/vizier/zpixie-configmap.yaml
 
 ## Deploy Vizier
-kubectl apply -k $SCRIPTS_DIR/modified/vizier/
+# kubectl apply -k $SCRIPTS_DIR/modified/vizier/
+kustomize build $SCRIPTS_DIR/modified/vizier/ > $SCRIPTS_DIR/modified/vizier/exported-vizier.yaml

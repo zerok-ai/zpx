@@ -27,7 +27,7 @@ then
 
                 if [ "$USE_MKCERT_CA" == '0' ]
                 then
-                        perl -pi -e 's/^/#/ if $. > 93 and $. < 108' $PIXIE_DIR/scripts/create_cloud_secrets.sh
+                        perl -pi -e 's/^/#/ if $. > 93 and $. < 109' $PIXIE_DIR/scripts/create_cloud_secrets.sh
                         # sed -i '' -e '94,107 s/^/#/' $PIXIE_DIR/scripts/create_cloud_secrets.sh
                 else
                         echo "kubectl create secret tls -n \"ingress-nginx\" \\" >> $PIXIE_DIR/scripts/create_cloud_secrets.sh

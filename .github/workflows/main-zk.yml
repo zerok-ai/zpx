@@ -9,24 +9,32 @@ on:
         ZPIXIE_BRANCH:
             description: 'ZPIXIE_BRANCH'
             required: true
-            default: 'zkconfigmap'
+            default: 'feature/int-fix'
         CLUSTER_NAME:
             description: 'CLUSTER_NAME'
             required: true
-            default: 'zerok-c2s-poc'
+            default: 'testpx01'
         GKE_ZONE:
             description: 'GKE_ZONE'
             required: true
             default: 'us-west1-b'
+        DNS_ZONE:
+            type: choice
+            required: true
+            description: 'DNS Zone for this cluster'
+            options:
+              - zerok-dev
+              - anton
         CLUSTER_SETUP:
           type: boolean
-          description: Cluster setup required?
+          description: Cluster setup required (not working)?
 env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
   CLUSTER_NAME: ${{ github.event.inputs.CLUSTER_NAME }}
   ZPIXIE_REPO: ${{ github.event.inputs.ZPIXIE_REPO }}
   ZPIXIE_BRANCH: ${{ github.event.inputs.ZPIXIE_BRANCH }}
   GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
+  DNS_ZONE : ${{ github.event.inputs.DNS_ZONE }}
   CLUSTER_SETUP : ${{ github.event.inputs.CLUSTER_SETUP }}
   TOKEN: ${{ secrets.GITPAT }}
 
@@ -46,11 +54,11 @@ jobs:
         with:
           credentials_json: '${{ env.GKE_SA_KEY }}'
         
-      # - id: 'get-credentials'
-      #   uses: 'google-github-actions/get-gke-credentials@v1'
-      #   with:
-      #      cluster_name: '${{ env.CLUSTER_NAME }}'
-      #      location: '${{ env.GKE_ZONE }}'
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
+           cluster_name: '${{ env.CLUSTER_NAME }}'
+           location: '${{ env.GKE_ZONE }}'
    
       - name: Deploy
         run: |-
@@ -61,12 +69,13 @@ jobs:
              export ASK_USER=0
              if [ "$CLUSTER_SETUP" == "true" ]
              then
-                export SETUP_CLUSTER=1
+                export SETUP_CLUSTER=0
              else 
                 export SETUP_CLUSTER=0
              fi
              export FORCE_DISABLE_PX_OPERATOR=1
              export ZPIXIE_BRANCH=$ZPIXIE_BRANCH
+             export DNS_ZONE=$DNS_ZONE
              echo "ZONE=$ZONE"
              echo "CLUSTER_NAME=$CLUSTER_NAME"
              echo "ASK_USER=$ASK_USER"
@@ -75,5 +84,6 @@ jobs:
              echo "FORCE_DISABLE_PX_OPERATOR=$FORCE_DISABLE_PX_OPERATOR"
              echo "ZPIXIE_REPO=$ZPIXIE_REPO"
              echo "ZPIXIE_BRANCH=$ZPIXIE_BRANCH"
-            #  ./scripts/setup.sh
+             echo "DNS_ZONE=$DNS_ZONE"
+             ./scripts/setup.sh
                 
