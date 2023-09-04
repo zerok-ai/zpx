@@ -29,3 +29,4 @@ cp $SCRIPTS_DIR/originals/vizier/zpixie-configmap.yaml $SCRIPTS_DIR/modified/viz
 ## Deploy Vizier
 # kubectl apply -k $SCRIPTS_DIR/modified/vizier/
 kustomize build $SCRIPTS_DIR/modified/vizier/ > $SCRIPTS_DIR/modified/vizier/exported-vizier.yaml
+yq eval-all 'select(.kind == "DaemonSet")' $SCRIPTS_DIR/modified/vizier/exported-vizier.yaml  > $SCRIPTS_DIR/modified/vizier/exported-vizier-pem.yaml
