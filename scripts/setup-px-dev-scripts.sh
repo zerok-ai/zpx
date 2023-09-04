@@ -13,7 +13,12 @@ if [ "$PX_DEV_SCRIPTS_SETUP" == '1' ]
 then
     rm -rf $PIXIE_DIR/zerok
     mkdir -p $PIXIE_DIR/zerok
-    cp $SCRIPTS_DIR/keys/zk-dev-instance.json $PIXIE_DIR/zerok/
+    if [ "$ZK_PROD" == '0' ]
+    then
+        cp $SCRIPTS_DIR/keys/zk-dev-instance.json $PIXIE_DIR/zerok/
+    else
+        cp $SCRIPTS_DIR/keys/zk-dev-instance-prod.json $PIXIE_DIR/zerok/zk-dev-instance.json
+    fi
     cp ~/.kube/config $PIXIE_DIR/zerok/
     touch $PIXIE_DIR/zerok/postsetup.sh
 

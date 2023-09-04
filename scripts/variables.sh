@@ -28,12 +28,28 @@ export PIXIE_VIZIER_DEV_MODE=1
 export PIXIE_VIZIER_BUILD=1
 # Client: Dev mode setup - deploy latest vizier changes. Set it to 0
 export PIXIE_VIZIER_DEPLOY=1
-# GCLOUD_ARTIFACT_REPO_BASEPATH
-export GCLOUD_ARTIFACT_REPO_BASE=us-west1-docker.pkg.dev/zerok-dev
-# Required for dev mode: Repo where pixie images are pushed
-export PIXIE_REPO=$GCLOUD_ARTIFACT_REPO_BASE/pixie-test-dev
-# Required for dev mode: Repo where pixie vizier images are pushed
-export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-scriber
+
+if [[ -z $ZK_PROD ]]; then
+    export ZK_PROD=0
+fi
+
+if [ "$ZK_PROD" == '0' ]
+then
+    # GCLOUD_ARTIFACT_REPO_BASEPATH
+    export GCLOUD_ARTIFACT_REPO_BASE=us-west1-docker.pkg.dev/zerok-dev
+    # Required for dev mode: Repo where pixie images are pushed
+    export PIXIE_REPO=$GCLOUD_ARTIFACT_REPO_BASE/pixie-test-dev
+    # Required for dev mode: Repo where pixie vizier images are pushed
+    export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-client
+else
+    # GCLOUD_ARTIFACT_REPO_BASEPATH
+    export GCLOUD_ARTIFACT_REPO_BASE=https://us-west1-docker.pkg.dev/black-scope-358204
+    # Required for dev mode: Repo where pixie images are pushed
+    export PIXIE_REPO=$GCLOUD_ARTIFACT_REPO_BASE/pixie-test-dev
+    # Required for dev mode: Repo where pixie vizier images are pushed
+    export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-client
+fi
+
 
 #Basic cluster parameters
 # GKE Zone
