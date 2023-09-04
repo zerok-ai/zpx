@@ -41,6 +41,7 @@ then
     export PIXIE_REPO=$GCLOUD_ARTIFACT_REPO_BASE/pixie-test-dev
     # Required for dev mode: Repo where pixie vizier images are pushed
     export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-client
+    export GCLOUD_SERVICE_ACCOUNT=zk-dev-instance-02@zerok-dev.iam.gserviceaccount.com
 else
     # GCLOUD_ARTIFACT_REPO_BASEPATH
     export GCLOUD_ARTIFACT_REPO_BASE=us-west1-docker.pkg.dev/black-scope-358204
@@ -48,6 +49,7 @@ else
     export PIXIE_REPO=$GCLOUD_ARTIFACT_REPO_BASE/pixie-test-dev
     # Required for dev mode: Repo where pixie vizier images are pushed
     export VIZIER_ARTIFACT_REPO=$GCLOUD_ARTIFACT_REPO_BASE/zk-client
+    export GCLOUD_SERVICE_ACCOUNT=zk-dev-instance-prod@black-scope-358204.iam.gserviceaccount.com
 fi
 
 

@@ -26,7 +26,7 @@ perl -pi -e "s|pixie-prod|pixie-dev|g" $${ESC}PIXIE_DIR/k8s/cloud/public/kustomi
 skaffold config set default-repo $VIZIER_ARTIFACT_REPO
 
 echo "docker login with service account"
-gcloud auth activate-service-account zk-dev-instance-02@zerok-dev.iam.gserviceaccount.com \
+gcloud auth activate-service-account $GCLOUD_SERVICE_ACCOUNT \
    --key-file=$${ESC}PIXIE_DIR/zerok/zk-dev-instance.json
 gcloud auth print-access-token | docker login -u oauth2accesstoken \
    --password-stdin https://us-west1-docker.pkg.dev
