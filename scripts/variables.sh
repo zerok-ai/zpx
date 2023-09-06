@@ -30,7 +30,7 @@ export PIXIE_VIZIER_BUILD=1
 export PIXIE_VIZIER_DEPLOY=1
 
 if [[ -z $ZK_PROD ]]; then
-    export ZK_PROD=0
+    export ZK_PROD=1
 fi
 
 if [ "$ZK_PROD" == '0' ]
@@ -80,12 +80,12 @@ fi
 
 # ZPixie branch used
 if [[ -z $ZPIXIE_BRANCH ]]; then
-    export ZPIXIE_BRANCH=feature/redis-password
+    export ZPIXIE_BRANCH=redis-host
 fi
 
 # Vizier tag used
 if [[ -z "$VIZIER_TAG" ]]; then
-    export VIZIER_TAG=0.1.0-redisp
+    export VIZIER_TAG=0.1.0-redishost
 fi
 
 if [[ -z $CLUSTER_NAME ]]; then
