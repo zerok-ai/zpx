@@ -5,7 +5,6 @@ metadata:
 data: 
   zk-client-db-configmap.yaml: |-
     redis:
-      host: ${REDIS_SERVICE}.zk-client.svc.cluster.local
       port: 6379
       readTimeout: 20
 
