@@ -57,8 +57,8 @@ fi
 # GKE Zone
 export ZONE=us-west1-b
 if [[ -z $DNS_ZONE ]]; then
-    # export DNS_ZONE=zerok-dev
-    export DNS_ZONE=anton
+    export DNS_ZONE=zerok-dev
+    # export DNS_ZONE=anton
 fi
 
 if [ "$DNS_ZONE" == "zerok-dev" ]
@@ -90,13 +90,13 @@ fi
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=devcloud01
+    export CLUSTER_NAME=democlient
 fi
 
 export CLUSTER_DOMAIN=$CLUSTER_NAME.$DOMAIN
 
 # Client: Cluster name
-export PX_CLUSTER_NAME=devclient03
+export PX_CLUSTER_NAME=democlient
 # Client: GKE project name
 export PX_CLUSTER_PROJECT=zerok-dev
 # Cloud: Number of nodes required to setup cluster

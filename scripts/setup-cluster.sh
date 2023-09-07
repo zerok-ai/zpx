@@ -7,7 +7,7 @@ CLUSTER_SETUP=$retval
 
 if [ "$CLUSTER_SETUP" == '1' ]
 then
-     gcloud container clusters create $1 --num-nodes=$CLUSTER_NUM_NODES --machine-type=$CLUSTER_INSTANCE_TYPE --zone=$ZONE
+     gcloud container clusters create $1 --num-nodes=$CLUSTER_NUM_NODES --machine-type=$CLUSTER_INSTANCE_TYPE --zone=$ZONE --no-enable-cloud-logging --no-enable-cloud-monitoring
 fi
 
 
