@@ -56,6 +56,9 @@ fi
 #Basic cluster parameters
 # GKE Zone
 export ZONE=us-west1-b
+export GRAVITON_ZONE=us-central1-a
+
+
 if [[ -z $DNS_ZONE ]]; then
     export DNS_ZONE=zerok-dev
     # export DNS_ZONE=anton
@@ -90,7 +93,7 @@ fi
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=democlient
+    export CLUSTER_NAME=armtest01
 fi
 
 export CLUSTER_DOMAIN=$CLUSTER_NAME.$DOMAIN
@@ -104,6 +107,7 @@ export CLUSTER_NUM_NODES=2
 export PX_CLUSTER_PROJECT=zerok-dev
 # Cloud: Instance type
 export CLUSTER_INSTANCE_TYPE=e2-standard-4
+export CLUSTER_GRAVITON_INSTANCE_TYPE=t2a-standard-4
 
 #PX Domain to be used
 # export NGINX_INGRESS_CONTROLLER_SERVICE_URL=ingress-nginx-controller.ingress-nginx.svc.cluster.local

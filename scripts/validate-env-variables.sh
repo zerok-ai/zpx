@@ -7,6 +7,7 @@ echo '-----------------VALIDATING-ENV-VARIABLES-----------------'
 
 echo 'Env variables set'
 echo '-----------------'
+echo "CLUSTER_DOMAIN is $CLUSTER_DOMAIN"
 echo "PX_DOMAIN is $PX_DOMAIN"
 echo "USE_MKCERT_CA is $USE_MKCERT_CA"
 echo "SAME_CLUSTER_SETUP is $SAME_CLUSTER_SETUP"
