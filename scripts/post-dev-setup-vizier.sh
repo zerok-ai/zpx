@@ -43,4 +43,4 @@ gcloud container clusters get-credentials $PX_CLUSTER_NAME --zone $ZONE --projec
 # bazel run //src/pixie_cli:px -- deploy
 echo "Setting up vizier"
 export VIZIER_TAG=$VIZIER_TAG
-skaffold $${ESC}COMMAND -p opt -f $${ESC}PIXIE_DIR/skaffold/skaffold_vizier.yaml --default-repo=$VIZIER_ARTIFACT_REPO
+skaffold $${ESC}COMMAND -p opt -p aarch64_sysroot -f $${ESC}PIXIE_DIR/skaffold/skaffold_vizier.yaml --default-repo=$VIZIER_ARTIFACT_REPO
