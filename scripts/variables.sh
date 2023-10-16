@@ -59,9 +59,14 @@ export ZONE=us-west1-b
 export GRAVITON_ZONE=us-central1-a
 
 
+if [[ -z $ASK_GRAVITON ]]; then
+    # export DNS_ZONE=zerok-dev
+    export ASK_GRAVITON=1
+fi
+
 if [[ -z $DNS_ZONE ]]; then
-    export DNS_ZONE=zerok-dev
-    # export DNS_ZONE=anton
+    # export DNS_ZONE=zerok-dev
+    export DNS_ZONE=anton
 fi
 
 if [ "$DNS_ZONE" == "zerok-dev" ]
@@ -93,7 +98,7 @@ fi
 
 if [[ -z $CLUSTER_NAME ]]; then
     # Cloud: Cluster name
-    export CLUSTER_NAME=armtest01
+    export CLUSTER_NAME=devclient05
 fi
 
 export CLUSTER_DOMAIN=$CLUSTER_NAME.$DOMAIN

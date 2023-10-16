@@ -5,9 +5,14 @@ getUserInput "Do you want to setup the cluster ${CLUSTER_NAME}" ""
 retval=$?
 CLUSTER_SETUP=$retval
 
-getUserInput "Graviton Cluster?" ""
-retval=$?
-GRAVITON_CLUSTER=$retval
+if [ "$ASK_GRAVITON" == '1' ]
+then
+     getUserInput "Graviton Cluster?" ""
+     retval=$?
+     GRAVITON_CLUSTER=$retval
+else
+     GRAVITON_CLUSTER=0
+fi
 
 baseInstanceType=$CLUSTER_INSTANCE_TYPE
 resolvedZone=$ZONE

@@ -25,6 +25,9 @@ on:
             options:
               - zerok-dev
               - anton
+        GRAVITON:
+          type: boolean
+          description: Graviton required?
         CLUSTER_SETUP:
           type: boolean
           description: Cluster setup required (not working)?
@@ -36,6 +39,7 @@ env:
   GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
   DNS_ZONE : ${{ github.event.inputs.DNS_ZONE }}
   CLUSTER_SETUP : ${{ github.event.inputs.CLUSTER_SETUP }}
+  GRAVITON : ${{ github.event.inputs.GRAVITON }}
   TOKEN: ${{ secrets.GITPAT }}
 
 jobs:
@@ -73,12 +77,19 @@ jobs:
              else 
                 export SETUP_CLUSTER=0
              fi
+             if [ "$GRAVITON" == "true" ]
+             then
+                export ASK_GRAVITON=1
+             else 
+                export ASK_GRAVITON=0
+             fi
              export FORCE_DISABLE_PX_OPERATOR=1
              export ZPIXIE_BRANCH=$ZPIXIE_BRANCH
              export DNS_ZONE=$DNS_ZONE
              echo "ZONE=$ZONE"
              echo "CLUSTER_NAME=$CLUSTER_NAME"
              echo "ASK_USER=$ASK_USER"
+             echo "ASK_GRAVITON=$ASK_GRAVITON"
              echo "CLUSTER_SETUP=$CLUSTER_SETUP"
              echo "SETUP_CLUSTER=$SETUP_CLUSTER"
              echo "FORCE_DISABLE_PX_OPERATOR=$FORCE_DISABLE_PX_OPERATOR"
