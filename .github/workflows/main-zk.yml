@@ -9,11 +9,11 @@ on:
         ZPIXIE_BRANCH:
             description: 'ZPIXIE_BRANCH'
             required: true
-            default: 'feature/int-fix'
+            default: 'logless'
         CLUSTER_NAME:
             description: 'CLUSTER_NAME'
             required: true
-            default: 'testpx01'
+            default: 'loadtest01'
         GKE_ZONE:
             description: 'GKE_ZONE'
             required: true
