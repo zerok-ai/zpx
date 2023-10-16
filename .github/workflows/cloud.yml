@@ -1,0 +1,89 @@
+name: CLOUD
+on:
+  workflow_dispatch:
+   inputs:
+        ZPIXIE_REPO:
+            description: 'ZPIXIE_REPO'
+            required: true
+            default: 'https://github.com/zerok-ai/zpixie.git'
+        ZPIXIE_BRANCH:
+            description: 'ZPIXIE_BRANCH'
+            required: true
+            default: 'feature/int-fix'
+        CLUSTER_NAME:
+            description: 'CLUSTER_NAME'
+            required: true
+            default: 'testpx01'
+        GKE_ZONE:
+            description: 'GKE_ZONE'
+            required: true
+            default: 'us-west1-b'
+        DNS_ZONE:
+            type: choice
+            required: true
+            description: 'DNS Zone for this cluster'
+            options:
+              - zerok-dev
+              - anton
+        CLUSTER_SETUP:
+          type: boolean
+          description: Cluster setup required (not working)?
+env:
+  GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
+  CLUSTER_NAME: ${{ github.event.inputs.CLUSTER_NAME }}
+  ZPIXIE_REPO: ${{ github.event.inputs.ZPIXIE_REPO }}
+  ZPIXIE_BRANCH: ${{ github.event.inputs.ZPIXIE_BRANCH }}
+  GKE_ZONE : ${{ github.event.inputs.GKE_ZONE }}
+  DNS_ZONE : ${{ github.event.inputs.DNS_ZONE }}
+  CLUSTER_SETUP : ${{ github.event.inputs.CLUSTER_SETUP }}
+  TOKEN: ${{ secrets.GITPAT }}
+
+jobs:
+  setup:
+    runs-on: zk-self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure git for private modules
+        run: git config --global url."https://$TOKEN:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+        
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ env.GKE_SA_KEY }}'
+        
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
+           cluster_name: '${{ env.CLUSTER_NAME }}'
+           location: '${{ env.GKE_ZONE }}'
+   
+      - name: Deploy
+        run: |-
+             chmod +x ./scripts/setup.sh 
+             export ZONE=$GKE_ZONE 
+             export CLUSTER_NAME=$CLUSTER_NAME
+             export ZPIXIE_REPO=$ZPIXIE_REPO
+             export ASK_USER=0
+             if [ "$CLUSTER_SETUP" == "true" ]
+             then
+                export SETUP_CLUSTER=1
+             else 
+                export SETUP_CLUSTER=0
+             fi
+             export FORCE_DISABLE_PX_OPERATOR=1
+             export ZPIXIE_BRANCH=$ZPIXIE_BRANCH
+             export DNS_ZONE=$DNS_ZONE
+             echo "ZONE=$ZONE"
+             echo "CLUSTER_NAME=$CLUSTER_NAME"
+             echo "ASK_USER=$ASK_USER"
+             echo "CLUSTER_SETUP=$CLUSTER_SETUP"
+             echo "SETUP_CLUSTER=$SETUP_CLUSTER"
+             echo "FORCE_DISABLE_PX_OPERATOR=$FORCE_DISABLE_PX_OPERATOR"
+             echo "ZPIXIE_REPO=$ZPIXIE_REPO"
+             echo "ZPIXIE_BRANCH=$ZPIXIE_BRANCH"
+             echo "DNS_ZONE=$DNS_ZONE"
+             ./scripts/setup.sh
+                
