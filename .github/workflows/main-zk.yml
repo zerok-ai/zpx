@@ -73,7 +73,7 @@ jobs:
              export ASK_USER=0
              if [ "$CLUSTER_SETUP" == "true" ]
              then
-                export SETUP_CLUSTER=0
+                export SETUP_CLUSTER=1
              else 
                 export SETUP_CLUSTER=0
              fi
