@@ -32,7 +32,7 @@ on:
           type: boolean
           description: Cluster setup required (not working)?
 env:
-  GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
+  GKE_SA_KEY: ${{ secrets.GKE_SA_KEY_DEV }}
   CLUSTER_NAME: ${{ github.event.inputs.CLUSTER_NAME }}
   ZPIXIE_REPO: ${{ github.event.inputs.ZPIXIE_REPO }}
   ZPIXIE_BRANCH: ${{ github.event.inputs.ZPIXIE_BRANCH }}
