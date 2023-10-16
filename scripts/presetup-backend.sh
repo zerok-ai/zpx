@@ -38,26 +38,26 @@ then
      $SCRIPTS_DIR/setup-cluster.sh $CLUSTER_NAME
 fi
 
-##Setting up pixie repo, if required or forced
-$SCRIPTS_DIR/setup-pixie-repo.sh
+# ##Setting up pixie repo, if required or forced
+# $SCRIPTS_DIR/setup-pixie-repo.sh
 
-##Nginx Ingress setup
-# if [ "$SETUP_CLUSTER" == "1" ]
+# ##Nginx Ingress setup
+# # if [ "$SETUP_CLUSTER" == "1" ]
+# # then
+#      $SCRIPTS_DIR/setup-nginx-ingress.sh
+# # fi
+
+# ##DNS setup
+# if [ "$USE_MKCERT_CA" == '0' ]
 # then
-     $SCRIPTS_DIR/setup-nginx-ingress.sh
+#      $SCRIPTS_DIR/setup-dns.sh
 # fi
 
-##DNS setup
-if [ "$USE_MKCERT_CA" == '0' ]
-then
-     $SCRIPTS_DIR/setup-dns.sh
-fi
+# ##DOMAIN setup
+# $SCRIPTS_DIR/setup-domain.sh
 
-##DOMAIN setup
-$SCRIPTS_DIR/setup-domain.sh
-
-##CERT-MANAGER
-if [ "$USE_MKCERT_CA" == '0' ]
-then
-     $SCRIPTS_DIR/setup-cert-manager.sh
-fi
+# ##CERT-MANAGER
+# if [ "$USE_MKCERT_CA" == '0' ]
+# then
+#      $SCRIPTS_DIR/setup-cert-manager.sh
+# fi
