@@ -1,4 +1,6 @@
 #!/bin/bash
+THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source $THIS_DIR/variables.sh
 echo ''
 echo '-----------------SETTING-UP-CLUSTER-----------------'
 getUserInput "Do you want to setup the cluster ${CLUSTER_NAME}" ""
@@ -22,10 +24,18 @@ then
      resolvedZone=$GRAVITON_ZONE
 fi
 
+CLUSTER_TOBE_CREATED=$CLUSTER_NAME
+if [ -z $1 ]
+then
+     CLUSTER_TOBE_CREATED=$CLUSTER_NAME
+else
+     CLUSTER_TOBE_CREATED=$1
+fi
+
 if [ "$CLUSTER_SETUP" == '1' ]
 then
 
-     gcloud container clusters create $1 --num-nodes=$CLUSTER_NUM_NODES --machine-type=$baseInstanceType --zone=$resolvedZone --no-enable-cloud-logging --no-enable-cloud-monitoring
+     gcloud container clusters create $CLUSTER_TOBE_CREATED --num-nodes=$CLUSTER_NUM_NODES --machine-type=$baseInstanceType --zone=$resolvedZone --no-enable-cloud-logging --no-enable-cloud-monitoring
      if [ "$GRAVITON_CLUSTER" == '1' ]
      then
           gcloud container node-pools create x86-node-pool --cluster=$1 --num-nodes=1 --machine-type=$CLUSTER_INSTANCE_TYPE --zone=$resolvedZone
