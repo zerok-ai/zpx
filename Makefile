@@ -9,22 +9,23 @@ setup-cloud:
 	./scripts/setup.sh
 
 setup-cluster:
-	CLUSTER_NAME=testacloud01 \
-	ASK_USER=1 \
+	CLUSTER_NAME=devclient03 \
+	ASK_USER=0 \
 	SETUP_CLUSTER=1 \
 	ASK_GRAVITON=0 \
 	DNS_ZONE=anton \
+	SPOT=1 \
 	./scripts/setup-cluster.sh
 
 setup-nginx:
-	CLUSTER_NAME=testacloud01 \
-	ASK_USER=1 \
+	CLUSTER_NAME=devclient03 \
+	ASK_USER=0 \
 	DNS_ZONE=anton \
 	./scripts/setup-nginx-ingress.sh
 
 setup-cert-manager:
-	CLUSTER_NAME=testacloud01 \
-	ASK_USER=1 \
+	CLUSTER_NAME=devclient03 \
+	ASK_USER=0 \
 	DNS_ZONE=anton \
 	./scripts/setup-cert-manager.sh
 

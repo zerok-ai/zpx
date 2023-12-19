@@ -12,6 +12,10 @@ fi
 if [[ -z $SETUP_CLUSTER ]]; then
     export SETUP_CLUSTER=1
 fi
+# Spot instance is required or not
+if [[ -z $SPOT ]]; then
+    export SPOT=0
+fi
 
 #Are we going to setup px operator in the same cluster as px host?
 # In case SSL is not used, we use mkcert to start a local CA. Always set it to 0 for GKE clusters

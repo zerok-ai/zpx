@@ -32,10 +32,16 @@ else
      CLUSTER_TOBE_CREATED=$1
 fi
 
+SPOT_COMMAND=""
+if [ "$SPOT" == '1' ]
+then
+     SPOT_COMMAND="--preemptible"
+fi
+
 if [ "$CLUSTER_SETUP" == '1' ]
 then
 
-     gcloud container clusters create $CLUSTER_TOBE_CREATED --num-nodes=$CLUSTER_NUM_NODES --machine-type=$baseInstanceType --zone=$resolvedZone --no-enable-cloud-logging --no-enable-cloud-monitoring
+     gcloud container clusters create $CLUSTER_TOBE_CREATED $SPOT_COMMAND --num-nodes=$CLUSTER_NUM_NODES --machine-type=$baseInstanceType --zone=$resolvedZone --no-enable-cloud-logging --no-enable-cloud-monitoring
      if [ "$GRAVITON_CLUSTER" == '1' ]
      then
           gcloud container node-pools create x86-node-pool --cluster=$1 --num-nodes=1 --machine-type=$CLUSTER_INSTANCE_TYPE --zone=$resolvedZone
