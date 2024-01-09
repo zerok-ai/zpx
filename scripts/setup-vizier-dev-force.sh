@@ -3,6 +3,21 @@
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $THIS_DIR/variables.sh
 
+echo ''
+echo ''
+echo '-----------------SETTING-UP-CONFIGURATIONS-----------------'
+ZPIXIE_BRANCH_LOCAL=$(getUserTextInput "ZPIXIE_BRANCH is set to $ZPIXIE_BRANCH." "Want to change it")
+if [ "$ZPIXIE_BRANCH_LOCAL" != "" ]
+then
+    ZPIXIE_BRANCH=$ZPIXIE_BRANCH_LOCAL
+fi
+echo ""
+VIZIER_TAG_LOCAL=$(getUserTextInput "VIZIER_TAG is set to $VIZIER_TAG." "Want to change it")
+if [ "$VIZIER_TAG_LOCAL" != "" ]
+then
+    VIZIER_TAG=$VIZIER_TAG_LOCAL
+fi
+
 $SCRIPTS_DIR/validate-env-variables.sh
 
 echo ''

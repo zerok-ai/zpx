@@ -1,5 +1,5 @@
 setup-cloud:
-	CLUSTER_NAME=testacloud01 \
+	CLUSTER_NAME=onlyclient01 \
 	ASK_USER=1 \
 	SETUP_CLUSTER=1 \
 	ASK_GRAVITON=0 \
@@ -9,8 +9,8 @@ setup-cloud:
 	./scripts/setup.sh
 
 setup-cluster:
-	CLUSTER_NAME=devclient03 \
-	ASK_USER=0 \
+	CLUSTER_NAME=onlyclient01 \
+	ASK_USER=1 \
 	SETUP_CLUSTER=1 \
 	ASK_GRAVITON=0 \
 	DNS_ZONE=anton \
@@ -18,14 +18,14 @@ setup-cluster:
 	./scripts/setup-cluster.sh
 
 setup-nginx:
-	CLUSTER_NAME=devclient03 \
-	ASK_USER=0 \
+	CLUSTER_NAME=onlyclient01 \
+	ASK_USER=1 \
 	DNS_ZONE=anton \
 	./scripts/setup-nginx-ingress.sh
 
 setup-cert-manager:
-	CLUSTER_NAME=devclient03 \
-	ASK_USER=0 \
+	CLUSTER_NAME=onlyclient01 \
+	ASK_USER=1 \
 	DNS_ZONE=anton \
 	./scripts/setup-cert-manager.sh
 

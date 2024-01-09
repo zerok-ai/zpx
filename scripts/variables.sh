@@ -181,6 +181,13 @@ getUserInput(){
 }
 export -f getUserInput
 
+getUserTextInput(){
+    read -p "$1 $2? " response
+    retval=$response;
+    echo "$retval"
+}
+export -f getUserTextInput
+
 function spinner(){
     $SCRIPTS_DIR/spinner.sh $@
 }
